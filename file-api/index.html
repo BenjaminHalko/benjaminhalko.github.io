@@ -1,10 +1,14 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<title>Untitled Document</title>
-</head>
-
 <body>
+
+<p id="text"></p>
+
+<script>
+const params = new URLSearchParams(window.location.q);
+const q = params.get("repo");
+document.getElementById("text").innerHTML = q;
+</script>
+
 </body>
-</html>
+</html> 
