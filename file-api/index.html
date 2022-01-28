@@ -1,17 +1,10 @@
 <!doctype html>
 <html>
-
-<p id="text"></p>
 	
 <script>
-function GetURLParameter(sParam)
-{
-    const params = new URLSearchParams(document.location.search);
-	const data = params.get(sParam);
-	return data
-}​	
-
-console.info(GetURLParameter("repo"));
+const params = new URLSearchParams(document.location.search);
+const data = params.get(sParam);
+console.info(data);
 </script>
 	
 
