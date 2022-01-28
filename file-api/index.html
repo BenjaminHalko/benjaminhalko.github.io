@@ -19,6 +19,7 @@ function GetFiles(url)
 	const data = GetData(url).tree;
 	for (file in data)
 	{
+		console.info(file.type);
 		if(file.type == "tree")
 			GetFiles(file.url);
 		else
