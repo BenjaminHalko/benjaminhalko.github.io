@@ -6,8 +6,8 @@
 
 <script>
 const params = new URLSearchParams(window.location.q);
-const q = params.get("repo");
-document.getElementById("text").innerHTML = q;
+const q = params.get("q");
+document.getElementById("text").value = q;
 </script>
 
 </body>
