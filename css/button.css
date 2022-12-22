@@ -40,6 +40,15 @@
     height: 34px;
     margin-right: 10px;
     fill: white;
+	transition: 0.5s;
+}
+
+.btn:hover a {
+	color: black;
+}
+
+.btn:hover svg {
+	fill: black;
 }
 
 .btn a::before {
