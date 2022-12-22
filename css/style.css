@@ -13,6 +13,7 @@ body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
     min-height: 100vh;
+    background-attachment: fixed;
 }
 
 html {
@@ -48,11 +49,8 @@ header {
     width: calc(100% - 20px);
 }
 
-
 header .nav-link {
     align-items: center;
-    background-color: var(--back-color);
-    border-radius: 30px;
     color: white;
     cursor: pointer;
     justify-content: center;
@@ -101,4 +99,12 @@ header .nav-link > svg {
 header .nav-link:hover > svg {
     height: 40px;
     width: 40px;
+}
+
+/* Card */
+
+.card {
+    background-color: var(--back-color);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
 }
