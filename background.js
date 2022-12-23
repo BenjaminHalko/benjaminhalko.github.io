@@ -1,10 +1,10 @@
 var circles = [];
 
-for (var i = 0; i < 10; i++) {
+for (var i = 0; i < 5; i++) {
     circles.push({
         x: Math.round(Math.random() * window.innerWidth),
         y: Math.round(Math.random() * window.innerHeight),
-        r: i / 10,
+        r: i / 5,
         max: 300,
         color: 190 + Math.round(Math.random() * 95),
         spd: 0.0025//Math.random() * 0.001 + 0.002

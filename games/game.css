@@ -1,0 +1,120 @@
+#active {
+    /* Cover the whole screen */
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: calc(100% - 80px);
+    height: calc(100% - 80px);
+    /* Background */
+    background-color: rgba(46, 1, 136, 0.35);
+    border-radius: 20px;
+    padding: 20px;
+    overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.active-content {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: var(--shadow);
+}
+
+.active-description {
+    word-wrap: break-word;
+    width: 38%;
+}
+
+#active img {
+    width: 600px;
+    max-width: 90%;
+    margin-bottom: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.active-links {
+    margin-top: 40px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+    height: 70px;
+}
+
+.active-links .link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: white;
+    background-color: var(--back-color);
+    padding: 10px;
+    line-height: 0px;
+    border-radius: 20px;
+    transition: all 300ms var(--curve);
+    text-shadow: var(--shadow);
+    box-shadow: var(--shadow);
+}
+
+.active-links svg {
+    fill: white;
+    height: 34px;
+    width: 34px;
+    transition: all 300ms var(--curve);
+    filter: drop-shadow(var(--shadow));
+}
+
+.active-links .link:hover > svg {
+    height: 40px;
+    width: 40px;
+}
+
+.active-links .link:hover {
+    background-color: var(--col);
+    font-size: calc(40em / 34);
+}
+
+#game {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    background-size: cover;
+    border-radius: 20px;
+}
+
+#game button {
+    background-color: var(--back-color);
+    border-radius: 20px;
+    border: none;
+    color: white;
+    text-shadow: var(--shadow);
+    box-shadow: var(--shadow);
+    padding: 20px;
+    width: auto;
+    height: auto;
+    font-size: 40px;
+    margin: 10px;
+    transition: all 300ms var(--curve);
+}
+
+#game button:hover {
+    background-color: rgba(219, 219, 219, 0.373);
+    font-size: 60px;
+}
