@@ -69,7 +69,10 @@ function loadGameInfo(i) {
     loadedGame = i;
 }
 
-loadGameInfo(window.location.href.split("/#").pop())
+var url = window.location.href.split("/#").pop();
+if(url in gameInfo) {
+loadGameInfo(url);
+}
 
 function loadGame() {
     const info = gameInfo[loadedGame];
