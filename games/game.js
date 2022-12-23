@@ -36,6 +36,7 @@ var loadedGame = "";
 const active = document.getElementById('active');
 
 function loadGameInfo(i) {
+    window.location.href=`#${i}`;
     const info = gameInfo[i];
     active.style.removeProperty('display');
     active.innerHTML = `
@@ -84,6 +85,7 @@ function loadGame() {
 }
 
 function removeGame() {
+    window.location.href="#";
     active.innerHTML = "";
     active.style.display = "none";
 }
