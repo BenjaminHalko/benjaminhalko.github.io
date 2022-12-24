@@ -32,13 +32,33 @@ const gameInfo = {
 };
 
 /* DO NOT EDIT BELOW THIS LINE */
-var loadedGame = "";
+const gameList = document.getElementById('gameList');
 const active = document.getElementById('active');
+const otherContent = document.getElementById('content');
 
+
+/* Create Game List */
+gameList.innerHTML = Object.keys(gameInfo).map(i => `
+    <div class="gameCard" onclick="loadGameInfo('${i}')">
+        <img class="logo" src="data/${i}/cover.png" align="center">
+    </div>
+`).join(`
+`);
+
+/* Load Game */
+var loadedGame = "";
 function loadGameInfo(i) {
+    loadedGame = i;
     window.location.href=`#${i}`;
-    const info = gameInfo[i];
+    setTimeout(() => {
+        otherContent.style.opacity = 0;
+        otherContent.style.setProperty('transition-duration', '200ms');
+        otherContent.style.removeProperty('transform');
+        active.style.removeProperty('opacity');
+    }, 20);
+    setTimeout(() => {otherContent.style.display = "none";}, 300);
     active.style.removeProperty('display');
+    const info = gameInfo[i];
     active.innerHTML = `
     
     <div class="active-content">
@@ -55,25 +75,21 @@ function loadGameInfo(i) {
             </div>
             <div class="active-links">
                 <a class="link" href="https://benjamin-halko.itch.io/${info.itch}" target="_blank" style="--col: #fa5c5c">
-                    <svg><use href="/svg/itchio.svg#Capa_1"/></svg>
+                    <svg><use href="/root/svg/itchio.svg#Capa_1"/></svg>
                     <h1>Play on itch.io</h1>
                 </a>
                 <a class="link" href="https://github.com/BenjaminHalko/${info.github}" target="_blank" style="--col: #0d1117">
-                    <svg><use href="/svg/github.svg#Capa_1"/></svg>
+                    <svg><use href="/root/svg/github.svg#Capa_1"/></svg>
                     <h1>Source Code</h1>
                 </a>
             </div>
         </div>
     </div>
     `;
-
-    loadedGame = i;
 }
 
-var url = window.location.href.split("/#").pop();
-if(url in gameInfo) {
-loadGameInfo(url);
-}
+var url = window.location.href.split("#").pop();
+if(url in gameInfo) loadGameInfo(url);
 
 function loadGame() {
     const info = gameInfo[loadedGame];
@@ -86,6 +102,10 @@ function loadGame() {
 
 function removeGame() {
     window.location.href="#";
-    active.innerHTML = "";
-    active.style.display = "none";
+    loadedGame = "";
+    setTimeout(() => {otherContent.style.removeProperty('opacity');}, 1);
+    otherContent.style.removeProperty('display');
+    otherContent.style.removeProperty('transition-duration');
+    active.style.opacity = 0;
+    setTimeout(() => {active.style.display = "none";}, 300);
 }
