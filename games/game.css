@@ -10,19 +10,20 @@
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 50px;
-    max-width: 1200px;
-    gap: 200px;
+    max-width: 1600px;
+    gap: 70px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 50px;
 }
 
 .gameCard {
-    width: 350px;
-    height: 250px;
     box-shadow: var(--shadow);
     border-radius: 20px;
-    overflow: hidden;
     transition: transform 300ms var(--curve);
+    cursor: pointer;
+    overflow: hidden;
+    background-color: #2e01887d;
 }
 
 .gameCard:hover {
@@ -34,10 +35,34 @@
     transform: scale(0.8);  
 }
 
+.active-right .active-links {
+    min-width: 550px;
+}
+
 .gameCard img {
+    width: 350px;
+    height: 250px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.gameCard p {
+    max-width: 310px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.gameCard video {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
+    display: none;
+}
+
+.gameCard:hover video {
+    display: block;
 }
 
 /* Game Page */
@@ -46,12 +71,12 @@
     position: fixed;
     top: 20px;
     left: 20px;
-    width: calc(100% - 80px);
-    height: calc(100% - 80px);
+    width: calc(100% - 120px);
+    height: calc(100% - 120px);
 
     background-color: rgba(46, 1, 136, 0.35);
     border-radius: 20px;
-    padding: 20px;
+    padding: 40px;
     overflow-y: auto;
 
     display: flex;
@@ -63,12 +88,11 @@
 
 .active-content {
     display: flex;
-    flex-flow: row wrap;
     align-items: center;
     width: 100%;
-    gap: 20px;
+    gap: 10px;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     height: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -77,16 +101,15 @@
 
 .active-description {
     word-wrap: break-word;
-    width: 38%;
+    max-width: 50%;
 }
 
 #active img {
-    width: 600px;
-    max-width: 90%;
+    display: block;
+    width: 90%;
     margin-bottom: 40px;
     margin-left: auto;
     margin-right: auto;
-    
 }
 
 .active-links {
@@ -142,6 +165,9 @@
     gap: 20px;
     background-size: cover;
     border-radius: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: var(--shadow);
 }
 
 #game button {
@@ -154,12 +180,12 @@
     padding: 20px;
     width: auto;
     height: auto;
-    font-size: 40px;
+    font-size: 30px;
     margin: 10px;
     transition: all 300ms var(--curve);
 }
 
 #game button:hover {
     background-color: rgba(219, 219, 219, 0.373);
-    font-size: 60px;
+    font-size: 40px;
 }

@@ -98,11 +98,3 @@ header .nav-link:hover > svg {
     height: 40px;
     width: 40px;
 }
-
-/* Card */
-
-.card {
-    background-color: var(--back-color);
-    border-radius: 20px;
-    box-shadow: var(--shadow);
-}
