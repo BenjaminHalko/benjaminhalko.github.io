@@ -3,25 +3,28 @@ const gameInfo = {
         "name": "Blades of Doom",
         "itch": "blades-of-doom",
         "shortdesc": "Don't touch the blades or else you will be sad.",
-        "embed": "6708607",
+        "embed": 6708607,
         "width": 960,
         "height": 560,
         "desc": `
         <p>Don't touch the blades or else you will be sad.</p>
-       `
+        `
     },
     "impact": {
         "name": "Neon Impact",
         "github": "Neon-Impact",
         "itch": "neon-impact",
         "shortdesc": "A fast paced arcade game about dodging bullets",
-        "embed": "6708607",
+        "embed": 6454496,
         "width": 960,
         "height": 560,
         "desc": `
-        <p>Neon Impact is a fast paced arcade game about dodging bullets. It was made in 2 weeks for <a href="https://gxc.gg/game-jam/" target="_blank">Gamemaker's Notice-Me game jam</a>. The theme was "The night changed everything". It was my first time participating in a game jam. The game ended up <a href="https://gamemaker.io/en/blog/noticeme-voting" target="_blank">winning</a> the $2000 prize for best game!</p>
-        <p>Controls:</p>
-        <p>Move with the mouse and click to shoot. You can also use the arrow keys to move and space to shoot.</p>
+        <p>Play the <a href="https://gxc.gg/games/mc6y9k/neon-impact/">Opera GX version</a> to experience online multiplayer and global leaderboards!</p>
+        <p>This game was made in 2 weeks for&nbsp;<a href="https://gamemaker.io/en/blog/multiplayer-showcase" target="_blank">GameMaker's Multiplayer Jam</a>.</p>
+        <h2>Objective:</h2>
+        <ul><li>Last as long as possible without hitting the wall of doom.</li></ul>
+        <h2>Controls:</h2>
+        <ul><li>Drag your mouse across the screen, let go to blast forward!</li><li>Press shift (or 4 finger tap) to disable effects. Useful if you have a weak computer.</li><li><strong>Desktop Only:</strong> F4 or F11 for fullscreen.</li><li><strong>Desktop&nbsp;Only:</strong> ESC to quit.</li></ul>
         `
     },
     "shapeion": {
@@ -29,7 +32,7 @@ const gameInfo = {
         "github": "Shapeion",
         "itch": "shapeion",
         "shortdesc": "An arcade game about shape recognition",
-        "embed": "6111550",
+        "embed": 6111550,
         "width": 960,
         "height": 560,
         "desc": `
@@ -49,11 +52,14 @@ const gameInfo = {
         "github": "You-Are-A-Bomb",
         "itch": "you-are-a-bomb",
         "shortdesc": "Be a happy little bomb and eat other bombs.",
-        "embed": "6092851",
+        "embed": 6092851,
         "width": 960,
         "height": 532,
         "desc": `
-        <p style="font-size: 16px">Be a happy little bomb. Jump around and eat other bombs. Just don't explode, or you will be sad!</p>
+        <h3>Single Player Controls</h3>
+        <table><thead><tr><th>Key</th><th>Action</th></tr></thead><tbody><tr><td>Left - Right / A - D</td><td>Move</td></tr><tr><td>Space / Up / W / Shift / Ctr</td><td>Jump (twice to double jump)</td></tr></tbody></table>
+        <h3>Multiplayer  Controls</h3>
+        <table><thead><tr><th>Player</th><th>Key</th><th>Action</th></tr></thead><tbody><tr><td class="text-center">Player 1</td><td>A - D<br></td><td>Move<br></td></tr><tr><td></td><td>Space / W</td><td>Jump (twice to double jump)</td></tr><tr><td>Player 2</td><td>Left - Right</td><td>Move</td></tr><tr><td></td><td>Up / Shift / Ctr</td><td>Jump (twice to double jump)</td></tr></tbody></table>
         `
     },
     "tempo": {
@@ -65,9 +71,12 @@ const gameInfo = {
         "width": 960,
         "height": 560,
         "desc": `
-        <p>Shoot to the music in this rhythmic arcade game!<br></p>
+        <h3>Shoot to the music in this rhythmic arcade game!<br></h3>
         <p>At night the screen goes dark! You have to listen and memorize the patterns to defeat the evil diamonds.</p>
         <p>This game was made in 2 weeks for <a href="https://gxc.gg/game-jam/" target="_blank">Gamemaker's Notice-Me game jam</a>.&nbsp;The theme was "The night changed everything". It was my second time participating in a game jam. The game ended up <a href="https://gamemaker.io/en/blog/noticeme-voting" target="_blank">winning</a> the $2000 prize for hardest game!</p>
+        <h2>Controls</h2>
+        <p><strong>Arrow Keys / WASD / D-PAD / Left & Right Joystick</strong> - Move<br></p>
+        <p><strong>Any Other Key&nbsp;</strong>- Select</p>
         `
     }
 };
@@ -100,11 +109,11 @@ function loadGameInfo(i) {
     window.location.href=`#${i}`;
     setTimeout(() => {
         otherContent.style.opacity = 0;
-        otherContent.style.setProperty('transition-duration', '200ms');
+        otherContent.style.setProperty('transition-duration', '400ms');
         otherContent.style.removeProperty('transform');
         active.style.removeProperty('opacity');
     }, 20);
-    setTimeout(() => {otherContent.style.display = "none";}, 300);
+    setTimeout(() => {otherContent.style.display = "none";}, 400);
     active.style.removeProperty('display');
     const info = gameInfo[i];
     var html = `
@@ -113,7 +122,10 @@ function loadGameInfo(i) {
             <img class="logo" src="data/${i}/logo.png" align="center">
             ${info.desc}
             <div class="active-links">
-                <button class="link" onclick="removeGame()"><h1>Back to Games</h1></button>
+                <button class="link" onclick="removeGame()">
+                    <svg><use href="/root/svg/back.svg#Capa_1"/></svg>
+                    <h1>Back to Games</h1>
+                </button>
             </div>
         </div>
         <div class="active-right">
@@ -148,7 +160,7 @@ function loadGame() {
     const game = document.getElementById('game');
     game.classList.remove('nonactive');
     game.innerHTML = `
-    <iframe frameborder="0" src="https://itch.io/embed-upload/${info.embed}?color=000000" allowfullscreen="" width="${info.width}" height="${info.height}"><a href="https://benjamin-halko.itch.io/${info.itch}">Play ${info.name} on itch.io</a></iframe>
+    <iframe  allow="autoplay" frameborder="0" src="https://itch.io/embed-upload/${info.embed}?color=000000" allowfullscreen="" width="${info.width}" height="${info.height}"><a href="https://benjamin-halko.itch.io/${info.itch}">Play ${info.name} on itch.io</a></iframe>
     `;
 }
 
@@ -162,5 +174,5 @@ function removeGame() {
     setTimeout(() => {
         game.innerHTML = "";
         active.style.display = "none";
-    }, 300);
+    }, 400);
 }

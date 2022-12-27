@@ -1,7 +1,7 @@
 /* Game List */
 
 #content {
-    transition: opacity 300ms var(--curve);
+    transition: opacity 400ms var(--curve);
 }
 
 #gameList {
@@ -20,7 +20,7 @@
 .gameCard {
     box-shadow: var(--shadow);
     border-radius: 20px;
-    transition: transform 300ms var(--curve);
+    transition: transform 400ms var(--curve);
     cursor: pointer;
     overflow: hidden;
     background-color: #2e01887d;
@@ -107,6 +107,7 @@
 #active img {
     display: block;
     width: 90%;
+    max-width: 800px;
     margin-bottom: 40px;
     margin-left: auto;
     margin-right: auto;
