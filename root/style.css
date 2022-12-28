@@ -37,67 +37,7 @@ html {
     border-radius: 20px;
 }
 
-/* Header */
-header {
-    align-items: center;
-    display: flex;
-    gap: 20px;
-    height: 70px;
-    padding: 10px;
-    width: calc(100% - 20px);
-}
-
-header .nav-link {
-    align-items: center;
-    color: white;
-    cursor: pointer;
-    justify-content: center;
-    display: flex;
-    font-size: 80%;
-    gap: 10px;
-    padding: 30px;
-    padding-top: 0;
-    padding-bottom: 0;
-    position: relative;
-    text-decoration: none;
-    text-shadow: var(--shadow);
-    transition: all 300ms var(--curve);
-}
-
-header .nav-link:hover {
-    font-size: calc(40em / 34);
-}
-
-header .nav-link::before {
-    background-image: linear-gradient(180deg, #ff004c, #ff0000);
-    border-radius: inherit;
-    bottom: 0;
-    content: "";
-    left: 0;
-    opacity: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    transition: opacity 400ms var(--curve);
-    z-index: -1;
-}
-
-header .nav-link:hover::before {
-    opacity: 100%;
-}
-
-header .nav-link > svg {
-    fill: white;
-    height: 34px;
-    width: 34px;
-    transition: all 300ms var(--curve);
-    filter: drop-shadow(var(--shadow));
-}
-
-header .nav-link:hover > svg {
-    height: 40px;
-    width: 40px;
-}
+/* More Stuff */
 
 a {
     color: cyan;
@@ -107,4 +47,45 @@ table, th, td {
     border: 1px solid rgb(76, 0, 255);
     border-collapse: collapse;
     padding: 10px;
+}
+
+/* Button */
+
+button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: white;
+    background-color: var(--back-color);
+    padding: 10px;
+    line-height: 0px;
+    border-radius: 20px;
+    transition: all 300ms var(--curve);
+    text-shadow: var(--shadow);
+    box-shadow: var(--shadow);
+    font-size: 18px;
+    padding: 15px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--col, rgba(219, 219, 219, 0.373));
+    font-size: 22px;
+}
+
+button svg {
+    fill: white;
+    height: 34px;
+    width: 34px;
+    transition: all 300ms var(--curve);
+    filter: drop-shadow(var(--shadow));
+}
+
+button:hover > svg {
+    height: 40px;
+    width: 40px;
 }

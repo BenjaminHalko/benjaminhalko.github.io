@@ -14,9 +14,34 @@
 	<meta name="msapplication-config" content="/root/favicon/browserconfig.xml">
 	<meta name="theme-color" content="#ffffff">
 	<link rel="stylesheet" href="/root/style.css">
+	<link rel="stylesheet" href="/home/home.css">
 	<script defer src="/root/background.js"></script>
+	<script defer src="/home/snake.js"></script>
+	
 	<title>Benjamin Halko</title>
 </head>
 <body>
+	<div class="content">
+		<div class="logo">
+			<img onclick="toggleSnake()" src="/root/images/Logo.png" alt="Logo">
+			<div id="logoContent">
+				<h1>Hello there</h1>
+				<p>Subtitle</p>
+			</div>
+		</div>
+
+		<h2>I like programming</h2>
+
+		<button>
+			<svg><use href="/root/svg/github.svg#Capa_1"/></svg>
+			<p>GitHub</p>
+		</button>
+	</div>
+
+	<div id="SnakeGame">
+
+	</div>
+
+
 </body>
 </html>
