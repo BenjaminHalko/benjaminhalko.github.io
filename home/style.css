@@ -15,9 +15,9 @@ body {
 .logo {
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 20px;
     text-align: left;
+    width: 500px;
 }
 .logo img {
     width: 140px;
@@ -44,8 +44,13 @@ body {
 
 .logo img:hover {
     transform: scale(1.15);
+    margin-right: 14px;
+}
+
+#logoContent {
+    text-shadow: var(--textshadow);
 }
 
 #logoContent span {
-    color: var(--color,#48ff00);
+    color: var(--color);
 }

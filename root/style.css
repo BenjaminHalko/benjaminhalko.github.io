@@ -3,6 +3,7 @@
 :root {
     --curve: cubic-bezier(.4,0,.1,1);
     --shadow: 5px 5px 10px #00000099;
+    --textshadow: 2px 2px 2px black;
     --back-color: #7671883a;
 }
 
