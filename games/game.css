@@ -136,23 +136,3 @@
     margin-right: auto;
     box-shadow: var(--shadow);
 }
-
-#game button {
-    background-color: var(--back-color);
-    border-radius: 20px;
-    border: none;
-    color: white;
-    text-shadow: var(--shadow);
-    box-shadow: var(--shadow);
-    padding: 20px;
-    width: auto;
-    height: auto;
-    font-size: 30px;
-    margin: 10px;
-    transition: all 300ms var(--curve);
-}
-
-#game button:hover {
-    background-color: rgba(219, 219, 219, 0.373);
-    font-size: 40px;
-}

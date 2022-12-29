@@ -55,7 +55,7 @@ function StartSnake() {
 
 function SnakeIntro(num) {
     var html = "";
-    if (num == gridWidth+gridHeight) {
+    if (num == gridWidth+gridHeight+3) {
         logoText.style.setProperty("--color", "hsl(" + color + ", 100%, 50%)");
         html = `
 ● ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ●<br>

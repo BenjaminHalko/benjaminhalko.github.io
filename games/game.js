@@ -122,26 +122,29 @@ function loadGameInfo(i) {
             <img class="logo" src="data/${i}/logo.png" align="center">
             ${info.desc}
             <div class="active-links">
-                <button class="link" onclick="removeGame()">
+                <button class="button" onclick="removeGame()">
                     <svg><use href="/root/svg/back.svg#Capa_1"/></svg>
-                    <h1>Back to Games</h1>
+                    <p>Back to Games</p>
                 </button>
             </div>
         </div>
         <div class="active-right">
             <div id="game" class="nonactive" style="width: ${info.width}px; height: ${info.height}px; background-image: url('data/${i}/background.png')">
-                <button onclick="loadGame()"><b>Play ${info.name}</b></button>
+                <button style="font-size: 30px" onclick="loadGame()">
+                    <svg style="--svgSize: 50px"><use href="/root/svg/play.svg#Capa_1"/></svg>
+                    <p>Play ${info.name}</p>
+                </button>
             </div>
             <div class="active-links">
-                <a class="link" href="https://benjamin-halko.itch.io/${info.itch}" target="_blank" style="--col: #fa5c5c">
+                <a class="button" href="https://benjamin-halko.itch.io/${info.itch}" target="_blank" style="--col: #fa5c5c">
                     <svg><use href="/root/svg/itchio.svg#Capa_1"/></svg>
-                    <h1>Play on itch.io</h1>
+                    <p>Play on itch.io</p>
                 </a>
                 `;
     if(info.github) html += `
-                <a class="link" href="https://github.com/benjaminhalko/${info.github}" target="_blank" style="--col: #333">
+                <a class="button" href="https://github.com/benjaminhalko/${info.github}" target="_blank" style="--col: #333">
                     <svg><use href="/root/svg/github.svg#Capa_1"/></svg>
-                    <h1>Source Code</h1>
+                    <p>Source Code</p>
                 </a>`;
     html += `
             </div>
