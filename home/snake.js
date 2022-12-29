@@ -124,7 +124,7 @@ function Snake() {
     grid[head[1]][head[0]][1] = dir % 2;
 
     // Collision Detection
-    if (grid[head[1]][head[0]][0] > 0) {
+    if (grid[head[1]][head[0]][0] > 0 && head[0] != apple[0] && head[1] != apple[1]) {
         //Use apple[0] to hold death animation frame
         apple = [0, -1];
         snakeState = 2;
