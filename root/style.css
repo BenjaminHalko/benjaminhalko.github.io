@@ -52,7 +52,7 @@ table, th, td {
 
 /* Button */
 
-button {
+button, .button {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -71,14 +71,15 @@ button {
     padding-top: 12px;
     padding-bottom: 12px;
     cursor: pointer;
+    width: fit-content;
 }
 
-button:hover {
+button:hover, .button:hover {
     background-color: var(--col, rgba(219, 219, 219, 0.373));
     font-size: 22px;
 }
 
-button svg {
+button svg, .button svg {
     fill: white;
     height: 34px;
     width: 34px;
@@ -86,7 +87,7 @@ button svg {
     filter: drop-shadow(var(--shadow));
 }
 
-button:hover > svg {
+button:hover > svg, .button:hover > svg {
     height: 40px;
     width: 40px;
 }
