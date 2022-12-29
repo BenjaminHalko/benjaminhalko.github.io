@@ -9,6 +9,34 @@ const gameInfo = {
         "height": 560,
         "desc": `
         <p>Don't touch the blades or else you will be sad.</p>
+        <h2>Controls</h2>
+        <p>Press tab to disable glow.</p>
+        <p>Press backspace to return to the menu.</p>
+        <div style="display: flex; gap: 20px">
+        <div>
+        <h3>Single Player</h3>
+        <table><thead><tr><th>Key</th><th>Action</th></tr></thead><tbody><tr><td>Left - Right / A - D
+        </td><td>Move
+        </td></tr><tr><td>Space / Up / W / Shift / Ctr
+        </td><td>Jump</td></tr></tbody></table>
+        </div>
+        <div>
+        <h3>Multiplayer</h3>
+        <table><thead><tr><th>Player</th><th>Key</th><th>Action</th></tr></thead><tbody><tr><td>Player 1
+        </td><td>A - D
+        </td><td>Move
+        </td></tr><tr><td>
+        </td><td>Space / W
+        </td><td>Jump</td></tr><tr><td>Player 2
+        </td><td>Left - Right
+        </td><td>Move
+        </td></tr><tr><td>
+        </td><td>Up / Shift / Ctr
+        </td><td>Jump</td></tr></tbody></table>
+        </div>
+        </div>
+        <h2>Ludum Dare</h2>
+        <p>The original version was made in 48 hours&nbsp;for&nbsp;<a href="https://ldjam.com/events/ludum-dare/51/blades-of-doom" target="_blank">Ludum Dare 51</a>.&nbsp;It was my 3rd time participating.</p>
         `
     },
     "impact": {
@@ -57,10 +85,34 @@ const gameInfo = {
         "width": 960,
         "height": 532,
         "desc": `
+        <p>Be a happy little bomb. Jump around and eat other bombs. Just don't explode, or you will be sad!</p>
+        <p>If the HTML5 version is running slow, press tab to disable particle effects.</p>
+        <div style="display: flex; gap: 20px">
+        <div>
         <h3>Single Player Controls</h3>
-        <table><thead><tr><th>Key</th><th>Action</th></tr></thead><tbody><tr><td>Left - Right / A - D</td><td>Move</td></tr><tr><td>Space / Up / W / Shift / Ctr</td><td>Jump (twice to double jump)</td></tr></tbody></table>
-        <h3>Multiplayer  Controls</h3>
-        <table><thead><tr><th>Player</th><th>Key</th><th>Action</th></tr></thead><tbody><tr><td class="text-center">Player 1</td><td>A - D<br></td><td>Move<br></td></tr><tr><td></td><td>Space / W</td><td>Jump (twice to double jump)</td></tr><tr><td>Player 2</td><td>Left - Right</td><td>Move</td></tr><tr><td></td><td>Up / Shift / Ctr</td><td>Jump (twice to double jump)</td></tr></tbody></table>
+        <table><thead><tr><th>Key</th><th>Action</th></tr></thead><tbody><tr><td>Left - Right / A - D
+        </td><td>Move
+        </td></tr><tr><td>Space / Up / W / Shift / Ctr
+        </td><td>Jump</td></tr></tbody></table>
+        </div>
+        <div>
+        <h3>Multiplayer Controls</h3>
+        <table><thead><tr><th>Player</th><th>Key</th><th>Action</th></tr></thead><tbody><tr><td>Player 1
+        </td><td>A - D
+        </td><td>Move
+        </td></tr><tr><td>
+        </td><td>Space / W
+        </td><td>Jump</td></tr><tr><td>Player 2
+        </td><td>Left - Right
+        </td><td>Move
+        </td></tr><tr><td>
+        </td><td>Up / Shift / Ctr
+        </td><td>Jump</td></tr></tbody></table>
+        </div>
+        </div>
+        <h2>Ludum Dare</h2>
+    <p>This was made in 2 days for Ludum Dare 50.<br></p>
+    <p>Ludum Dare Page:&nbsp;<a href="https://ldjam.com/events/ludum-dare/50/$276460">https://ldjam.com/events/ludum-dare/50/you-are-a-bomb</a></p>
         `
     },
     "tempo": {
