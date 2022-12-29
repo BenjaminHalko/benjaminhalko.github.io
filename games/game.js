@@ -142,24 +142,17 @@ const otherContent = document.getElementById('content');
 
 /* Create Game List */
 gameList.innerHTML = Object.keys(gameInfo).map(i => `
-    <div class="gameCard" onclick="loadGameInfo('${i}')">
+    <div class="gameCard" onclick="openGame('${i}')">
         <img src="data/${i}/cover.png"/>
         <p>${gameInfo[i].shortdesc}</p>
     </div>
 `).join(`
 `);
 
-/*
-<video autoplay loop muted playsinline disablepictureinpicture style="pointer-events: none">
-            <source src="data/${i}/video.mp4" type="video/mp4">
-        </video>
-*/
-
 /* Load Game */
 var loadedGame = "";
 function loadGameInfo(i) {
     loadedGame = i;
-    window.location.href=`#${i}`;
     setTimeout(() => {
         otherContent.style.opacity = 0;
         otherContent.style.setProperty('transition-duration', '400ms');
@@ -231,4 +224,14 @@ function removeGame() {
         game.innerHTML = "";
         active.style.display = "none";
     }, 400);
+}
+
+function openGame(i) {
+    window.location.href = "#" + i;
+}
+
+window.onhashchange = function() {
+    var url = window.location.href.split("#").pop();
+    if(url in gameInfo) loadGameInfo(url);
+    else removeGame();
 }
