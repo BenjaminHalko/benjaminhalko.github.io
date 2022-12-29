@@ -45,3 +45,7 @@ body {
 .logo img:hover {
     transform: scale(1.15);
 }
+
+#logoContent span {
+    color: var(--color,#48ff00);
+}
