@@ -2,6 +2,7 @@ const gameInfo = {
     "blade": {
         "name": "Blades of Doom",
         "itch": "blades-of-doom",
+        "github": "Blades-of-Doom",
         "shortdesc": "Don't touch the blades or else you will be sad.",
         "embed": 6708607,
         "width": 960,
