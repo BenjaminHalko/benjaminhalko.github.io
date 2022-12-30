@@ -162,7 +162,7 @@ function loadGameInfo(i) {
     setTimeout(() => {otherContent.style.display = "none";}, 400);
     active.style.removeProperty('display');
     const info = gameInfo[i];
-    var html = `
+    active.innerHTML = `
     <div class="active-content">
         <div class="active-description">
             <img class="logo" src="data/${i}/logo.png" align="center">
@@ -186,19 +186,14 @@ function loadGameInfo(i) {
                     <svg><use href="/root/svg/itchio.svg#Capa_1"/></svg>
                     <p>Play on itch.io</p>
                 </a>
-                `;
-    if(info.github) html += `
                 <a class="button" href="https://github.com/benjaminhalko/${info.github}" target="_blank" style="--col: #333">
                     <svg><use href="/root/svg/github.svg#Capa_1"/></svg>
                     <p>Source Code</p>
-                </a>`;
-    html += `
+                </a>
             </div>
         </div>
     </div>
     `;
-
-    active.innerHTML = html;
 }
 
 var url = window.location.href.split("#").pop();
@@ -213,8 +208,8 @@ function loadGame() {
     `;
 }
 
-function removeGame() {
-    window.location.href="#";
+function removeGame(changeURL = true) {
+    if(changeURL) window.location.href="#";
     loadedGame = "";
     setTimeout(() => {otherContent.style.removeProperty('opacity');}, 1);
     otherContent.style.removeProperty('display');
@@ -233,5 +228,5 @@ function openGame(i) {
 window.onhashchange = function() {
     var url = window.location.href.split("#").pop();
     if(url in gameInfo) loadGameInfo(url);
-    else removeGame();
+    else removeGame(false);
 }
