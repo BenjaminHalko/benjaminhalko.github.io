@@ -23,11 +23,15 @@ const originalHtml = logoText.innerHTML;
 // Functions
 function toggleSnake() {
     if (snakeTimer != null) {
-        clearInterval(snakeTimer);
+        clearTimeout(snakeTimer);
         logoText.innerHTML = originalHtml;
         snakeTimer = null;
         snakeState = 0;
         tailLength = 0;
+    } else if(snakeTimer == 3) {
+        clearInterval(snakeTimer);
+        logoText.innerHTML = originalHtml;
+        snakeTimer = null;
     } else {
         StartSnake();
     }
@@ -217,20 +221,35 @@ function SnakeDeath() {
     snakeTimer = setTimeout(SnakeDeath, 20);
 }
 
-// Other Functions
 function displaySnake(text) {
     logoText.innerHTML = "<p style='font-family: monospace, monospace; line-height: 20px; font-size: 14px'>"+text+"</p>";
 }
 
 // Event Listeners
 document.addEventListener('keydown', function(event) {
-    if(snakeState == 2) return;
-    if(event.key == "ArrowDown") dir = 2;
-    else if(event.key == "ArrowUp") dir = 0;
-    else if(event.key == "ArrowLeft") dir = 3;
-    else if(event.key == "ArrowRight") dir = 1;
+    var key = -1;
+    if(event.key == "ArrowDown") key = 2;
+    else if(event.key == "ArrowUp") key = 0;
+    else if(event.key == "ArrowLeft") key = 3;
+    else if(event.key == "ArrowRight") key = 1;
 
-    if (event.key == "ArrowDown" || event.key == "ArrowUp" || event.key == "ArrowLeft" || event.key == "ArrowRight") {
+    // Code
+    if (key != -1 && snakeState != 3) {
+        if (key == code[codePos]) {
+            codePos++;
+            if (codePos == code.length) {
+                codePos = 0;
+                if (videodata != null) playVideo();
+            }
+        } else if(codePos != 2 || key != 0) {
+            codePos = 0;
+        }
+    }
+
+    if(snakeState == 2) return;
+    dir = key;
+
+    if (key != -1) {
         if (snakeTimer != null && snakeState == 0) {
             snakeState = 1;
             tailLength = 0;
@@ -238,3 +257,50 @@ document.addEventListener('keydown', function(event) {
         }
     }
 });
+
+// Video
+const code = [0,0,2,2,3,1,3,1]
+var codePos = 0;
+var videodata = null;
+var request = new XMLHttpRequest();
+request.open('GET', '/home/video', true);
+request.onload = function() {
+    if (request.status >= 200 && request.status < 400) {
+        videodata = request.responseText;
+    }
+}
+request.send();
+
+var vidIndex = 0;
+const videoWidth = 40;
+const videoHeight = 17;
+
+function playVideo() {
+    snakeState = 3;
+    vidIndex = 0;
+    clearTimeout(snakeTimer);
+    snakeTimer = setInterval(video, 1000/25);
+}
+
+function video() {
+    var html = "";
+
+    for(var i = 0; i < videoHeight; i++) {
+        for(var j = 0; j < videoWidth * 7; j += 7) {
+            const num = vidIndex + i * videoWidth * 7 + j;
+            html += `<span style="color: #${videodata.slice(num+1, num+7)}">${videodata[num]}</span>`;
+        }
+        if (i != videoHeight - 1) html += "<br>";
+    }
+
+    logoText.innerHTML = `
+        <div style="display: flex; font-family: monospace, monospace;">
+        <p style="margin-right: 2px; line-height: 21px; text-align: right; color: cyan">||<br>|||<br>||||<br>||<||<br>||||<br>|||<br>||</p>
+        <p style='line-height: 10px; font-size: 10px'>${html}</p>
+        <p style="margin-left: 2px; line-height: 21px; color: cyan">||<br>|||<br>||||<br>||>||<br>||||<br>|||<br>||</p>
+        </div>
+    `;
+
+    vidIndex += videoWidth * videoHeight * 7;
+    if (vidIndex >= videodata.length) vidIndex = 0;
+}
