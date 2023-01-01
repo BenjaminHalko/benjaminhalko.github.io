@@ -176,7 +176,7 @@ function loadGameInfo(i) {
         </div>
         <div class="active-right">
             <div id="game" class="nonactive" style="width: ${info.width}px; height: ${info.height}px; background-image: url('data/${i}/background.png')">
-                <button style="font-size: 30px" onclick="loadGame()">
+                <button class="button" style="font-size: 30px" onclick="loadGame()">
                     <svg style="--svgSize: 50px"><use href="/root/svg/play.svg#Capa_1"/></svg>
                     <p>Play ${info.name}</p>
                 </button>
@@ -194,6 +194,8 @@ function loadGameInfo(i) {
         </div>
     </div>
     `;
+
+    updateButtons();
 }
 
 var url = window.location.href.split("#").pop();

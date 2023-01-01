@@ -19,9 +19,8 @@
 	<meta name="theme-color" content="#ffffff">
 	<link rel="stylesheet" href="/root/style.css">
 	<link rel="stylesheet" href="/home/style.css">
-	<script defer src="/root/background.js"></script>
+	<script defer src="/root/app.js"></script>
 	<script defer src="/home/snake.js"></script>
-	
 	<title>Benjamin Halko</title>
 </head>
 <body>
@@ -30,19 +29,24 @@
 			<img onclick="toggleSnake()" src="/root/images/logo.png" alt="Logo">
 			<div id="logoContent">
 				<h1>Benjamin Halko</h1>
-				<p>I program stuff.</p>
+				<p>A programmer that programs things.</p>
 			</div>
 		</div>
 
-		<a class="button" href="/games" style="--col: #8400ff">
-			<svg><use href="/root/svg/videogames.svg#Capa_1"/></svg>
-			<p>My Games</p>
-		</a>
+		<div style="margin-bottom: 20px">
+			<a class="button" href="/games" style="--col: #8400ff">
+				<div><svg><use href="/root/svg/videogames.svg#Capa_1"/></svg></div>
+				<p>My Games</p>
+			</a>
+		</div>
 
+		<div class="container" style="margin-bottom: 20px">
+			<h2>About Me</h2>
+			<p>hello</p>
+		</div>
 
-		<h2>Socials</h2>
 		<div class="socials">
-			<a class="button" href="https://github.com/BenjaminHalko" target="_blank" style="--col: #181717">
+			<a class="button" href="https://github.com/BenjaminHalko" target="_blank" style="--col: cyan"> <!-- #181717 -->
 				<svg><use href="/root/svg/github.svg#Capa_1"/></svg>
 				<p>GitHub</p>
 			</a>
@@ -58,7 +62,7 @@
 				<svg><use href="/root/svg/youtube.svg#Capa_1"/></svg>
 				<p>YouTube</p>
 			</a>
-			<a class="button" href="mailto:benjamin.g.halko@gmail.com" target="_blank" style="--col: #EA4335">
+			<a class="button" href="mailto:benjamin.g.halko@gmail.com" target="_blank" style="--col: lime">
 				<svg><use href="/root/svg/contact.svg#Capa_1"/></svg>
 				<p>Contact</p>
 			</a>

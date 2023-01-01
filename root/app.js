@@ -1,3 +1,4 @@
+// Background
 (function() {
 // Variables
 
@@ -22,13 +23,15 @@ const ctx = canvas.getContext("2d");
 
 // Create the circles
 var circles = [];
+var dir = 0;
 for (var i = 0; i < numCircles; i++) {
     circles.push({
-        x: Math.round(Math.random() * window.innerWidth),
-        y: Math.round(Math.random() * window.innerHeight),
+        x: Math.round(Math.random()*Math.cos(dir * Math.PI / 180) * window.innerWidth / 2 + window.innerWidth / 2),
+        y: Math.round(Math.random()*Math.sin(dir * Math.PI / 180) * window.innerHeight / 2 + window.innerHeight / 2),
         r: i / numCircles,
         color: minHue + Math.round(Math.random() * (maxHue - minHue)),
     });
+    dir = (dir + 360 / numCircles + 50 * Math.random()) % 360;
 }
 
 setInterval(function() {
@@ -39,10 +42,12 @@ setInterval(function() {
         circles[i].r += spd;
 
         if (circles[i].r >= 1) {
+            console.log(i);
             circles[i].r = 0;
-            circles[i].x = Math.round(Math.random() * window.innerWidth);
-            circles[i].y = Math.round(Math.random() * window.innerHeight);
+            circles[i].x = Math.round(Math.random()*Math.cos(dir * Math.PI / 180) * window.innerWidth / 2 + window.innerWidth / 2);
+            circles[i].y = Math.round(Math.random()*Math.sin(dir * Math.PI / 180) * window.innerHeight / 2 + window.innerHeight / 2);
             circles[i].color = minHue + Math.round(Math.random() * (maxHue - minHue));
+            dir = (dir + 360 / numCircles + 50 * Math.random()) % 360;
         }
 
         ctx.fillStyle = ctx.createRadialGradient(circles[i].x, circles[i].y, 0, circles[i].x, circles[i].y, Math.round(startRadius + Math.sin(circles[i].r * Math.PI) * (endRadius - startRadius)));
@@ -52,3 +57,18 @@ setInterval(function() {
     }
 }, 1000 / 30);
 })();
+
+const handleMouseMove = e => {
+    const { currentTarget: target } = e;
+    const rect = target.getBoundingClientRect(),
+        x = e.clientX - rect.left,
+        y = e.clientY - rect.top;
+    target.style.setProperty("--mouse-x", `${x}px`);
+    target.style.setProperty("--mouse-y", `${y}px`);
+};
+
+function updateButtons() {
+    for(const button of document.getElementsByClassName("button")) button.onmousemove = e => handleMouseMove(e);
+}
+
+updateButtons();

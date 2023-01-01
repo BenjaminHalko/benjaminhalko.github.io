@@ -5,8 +5,7 @@ body {
 }
 
 .content {
-    width: 520px;
-    margin-top: auto;
+    width: 550px;
 }
 
 #logoContent {
@@ -22,37 +21,26 @@ body {
 .logo {
     display: flex;
     align-items: center;
+    justify-content: right;
     gap: 20px;
     text-align: left;
-}
-.logo img {
-    width: 140px;
-    height: 140px;
-    margin-top: 34px;
-    margin-bottom: 34px;
-    border-radius: 40px;
-    box-shadow: var(--shadow);
-    transition: all 300ms var(--curve);
-    cursor: pointer;
-    margin-right: 8px;
-}
-
-.logo h1 {
-    font-size: 40px;
-    font-weight: 100;
-    color: #fff;
-}
-
-.logo p {
-    font-size: 20px;
-    font-weight: 100;
-    color: #fff;
+    font-size: large;
+    height: 250px;
 }
 
 .logo img:hover {
-    transform: scale(1.15);
+    transform: scale(1.1);
 }
 
+.logo img {
+    width: 130px;
+    height: 130px;
+    border-radius: 30px;
+    transition: all 300ms var(--curve);
+    cursor: pointer;
+}
+  
+/* Socials */
 .socials {
     display: flex;
     align-items: center;
