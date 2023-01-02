@@ -6,10 +6,12 @@ body {
 
 .content {
     width: 550px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
 #logoContent {
-    width: 100%;
     text-shadow: var(--textshadow);
     white-space: nowrap;
 }
@@ -21,15 +23,13 @@ body {
 .logo {
     display: flex;
     align-items: center;
-    justify-content: right;
+    justify-content: space-between;
     gap: 20px;
     text-align: left;
     font-size: large;
-    height: 250px;
-}
-
-.logo img:hover {
-    transform: scale(1.1);
+    height: 210px;
+    margin-left: 50px;
+    margin-right: 50px;
 }
 
 .logo img {
@@ -39,6 +39,12 @@ body {
     transition: all 300ms var(--curve);
     cursor: pointer;
 }
+
+.logo img:hover {
+    transform: scale(1.1);
+}
+
+
   
 /* Socials */
 .socials {
