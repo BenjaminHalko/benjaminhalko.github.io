@@ -1,0 +1,29 @@
+body::before {
+    background: var(--backColorGradient);
+    width: 100vw;
+    height: 100vh;
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.content {
+    transform: translateY(calc(50vh - 50%));
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.buttons {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.buttons .button {
+    flex-grow: 1;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
+}
