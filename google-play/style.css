@@ -22,10 +22,14 @@ body::before {
     justify-content: center;
 }
 
+.content h1 {
+    font-size: 3em;
+}
+
 .buttons {
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     margin-top: 20px;
 }
 
