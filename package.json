@@ -2,7 +2,6 @@
   "dependencies": {
     "ejs": "^3.1.9",
     "express": "^4.18.2",
-    "nodemon": "^3.0.1",
     "npm-run-all2": "^6.0.6",
     "sass": "^1.63.6"
   },
@@ -13,5 +12,8 @@
     "sass-watch": "sass --watch --no-source-map scss:public/css",
     "app-build": "node build.js",
     "sass-build": "sass --no-source-map --style=compressed scss:public/css"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }
