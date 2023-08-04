@@ -1,0 +1,101 @@
+:root {
+  --curve: cubic-bezier(.4,0,.1,1);
+  --back-color: #ffffff0a;
+  --border: 1px solid #ffffff1a;
+  --shadow: 0 15px 15px #0000004d;
+  --shadowTiny: 2px 2px 5px black;
+}
+
+* {
+  scrollbar-color: #333333 #111111;
+}
+*::-webkit-scrollbar {
+  width: 14px;
+}
+*::-webkit-scrollbar-track {
+  background: #111111;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #242424;
+  border-radius: 20px;
+}
+
+body {
+  color: #ffffff;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+a {
+  color: cyan;
+}
+
+.button {
+  --col: cyan;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--back-color);
+  box-shadow: var(--shadow);
+  border-bottom: var(--border);
+  border-top: var(--border);
+  border-radius: 30px;
+  gap: 10px;
+  padding: 4px;
+  padding-left: 30px;
+  padding-right: 30px;
+  text-decoration: none;
+  color: #fff;
+  transition: all 400ms var(--curve);
+  font-size: 16px;
+  line-height: 10px;
+  text-shadow: var(--shadowTiny);
+}
+.button svg {
+  fill: white;
+  height: var(--svgSize, 34px);
+  width: var(--svgSize, 34px);
+}
+.button:hover {
+  letter-spacing: 3px;
+  padding-left: 26px;
+  padding-right: 26px;
+}
+.button:hover::before {
+  opacity: 0.3;
+}
+.button:hover svg {
+  filter: drop-shadow(0 0 16px var(--col)) drop-shadow(var(--shadowTiny)) saturate(1.7);
+  fill: var(--col);
+}
+.button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  background: radial-gradient(circle at 50% 50%, var(--col) 0%, transparent 150%);
+  z-index: -1;
+  opacity: 0;
+  transition: all 400ms var(--curve);
+}
+
+.container {
+  position: relative;
+  padding: 30px;
+  padding-top: var(--padding, 30px);
+  padding-bottom: var(--padding, 30px);
+  font-size: large;
+  background: var(--back-color);
+  box-shadow: var(--shadow);
+  border-bottom: var(--border);
+  border-top: var(--border);
+  border-radius: 30px;
+}

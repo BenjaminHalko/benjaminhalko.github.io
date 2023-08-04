@@ -1,0 +1,39 @@
+// Global Variables
+:root {
+    --curve: cubic-bezier(.4,0,.1,1);
+    --back-color: #ffffff0a;
+    --border: 1px solid #ffffff1a;
+    --shadow: 0 15px 15px #0000004d;
+    --shadowTiny: 2px 2px 5px black;
+}
+
+// Scrollbar & Scrolling
+* {
+    scrollbar-color: #333333 #111111;
+    &::-webkit-scrollbar {
+        width: 14px;
+    }
+    &::-webkit-scrollbar-track {
+        background: #111111;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: #242424;
+        border-radius: 20px;
+    }
+}
+
+// General
+body {
+    color: #ffffff;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+// Links
+a {
+    color: cyan;
+}

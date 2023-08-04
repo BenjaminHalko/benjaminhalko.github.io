@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/favicon') %>
+    <%- include('../partials/header') %>
+    <meta property="og:url" content="https://benjaminhalko.github.io">
+    <meta property="og:title" content="Benjamin Halko">
+    <meta property="og:description" content="This is a website I made!">
+	<meta property="og:image" content="https://benjamin.halko.ca/images/logo.png">
+    <title>Benjamin Halko</title>
+    <link rel="stylesheet" href="/css/home.css">
+    <script defer src="/js/background.js"></script>
+    <script defer src="/js//home/snake.js"></script>
+</head>
+<body>
+    <div class="content">
+		<div class="logo">
+			<img onclick="toggleSnake()" src="/images/logo.png" alt="Logo">
+			<div id="logoContent">
+				<h1>Benjamin Halko</h1>
+				<p>A programmer that programs things.</p>
+			</div>
+		</div>
+
+		<div class="container" style="margin-bottom: 20px">
+			<h2>About Me</h2>
+			<p>I mainly spend my time <a href="https://benjamin-halko.itch.io">making games</a> in GameMaker, though I also <a href="https://github.com/BenjaminHalko/Cho-RealEstate-Website">design websites</a> in Node.js and <a href="https://github.com/BenjaminHalko/WiiMusicEditorPlus">create tools</a> in Python.</p>
+            <p>🌱 I am currently attempting to become a game programmer at <a href="https://www.lasallecollegevancouver.com/vfx-game-design/game-programming-bachelor">LaSalle College</a>.</p>
+            <p>💬 My area of expertise includes GameMaker, Python, HTML, CSS, JavaScript, PowerShell, and C++.</p>
+		</div>
+
+		<div class="socials">
+            <%- include('../partials/button',{
+                link: 'https://github.com/BenjaminHalko',
+                color: 'cyan',
+                text: 'GitHub',
+                svg: 'github'
+            }) %>
+            <%- include('../partials/button',{
+                link: 'https://benjamin-halko.itch.io',
+                color: '#FA5C5C',
+                text: 'itch.io',
+                svg: 'itchio'
+            }) %>
+            <%- include('../partials/button',{
+                link: 'https://benjamin-halko.itch.io',
+                color: 'lime',
+                text: 'Google Play',
+                svg: 'googleplay'
+            }) %>
+            <%- include('../partials/button',{
+                link: 'https://gx.games/studios/001cf107-345b-4227-b45e-d54580fe019c/',
+                color: '#fc1d4e',
+                text: 'GX Games',
+                svg: 'operagx'
+            }) %>
+            <%- include('../partials/button',{
+                link: 'https://linkedin.com/in/BenjaminHalko/',
+                color: '#0A66C2',
+                text: 'LinkedIn',
+                svg: 'linkedin'
+            }) %>
+            <%- include('../partials/button',{
+                link: 'https://youtube.com/BenjaminHalko',
+                color: 'red',
+                text: 'YouTube',
+                svg: 'youtube'
+            }) %>
+            <%- include('../partials/button',{
+                link: 'mailto:benjamin.g.halko@gmail.com',
+                color: 'yellow',
+                text: 'Contact',
+                svg: 'contact'
+            }) %>
+		</div>
+	</div>
+</body>
+</html>

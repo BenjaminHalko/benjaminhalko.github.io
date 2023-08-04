@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "nodemon": "^3.0.1",
+    "npm-run-all2": "^6.0.6",
+    "sass": "^1.63.6"
+  },
+  "scripts": {
+    "build": "npm-run-all sass-build app-build",
+    "dev": "npm-run-all --parallel sass-watch app-dev",
+    "app-dev": "nodemon app.js",
+    "sass-watch": "sass --watch --no-source-map scss:public/css",
+    "app-build": "node build.js",
+    "sass-build": "sass --no-source-map --style=compressed scss:public/css"
+  }
+}

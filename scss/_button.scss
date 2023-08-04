@@ -1,0 +1,60 @@
+.button {
+    --col: cyan;
+    position: relative;
+    display: flex;
+	justify-content: center;
+	align-items: center;
+
+    background: var(--back-color);
+	box-shadow: var(--shadow);
+	border-bottom: var(--border);
+	border-top: var(--border);
+	border-radius: 30px;
+    
+    gap: 10px;
+
+    padding: 4px;
+    padding-left: 30px;
+    padding-right: 30px;
+	text-decoration: none;
+	color: #fff;
+	transition: all 400ms var(--curve);
+    font-size: 16px;
+    line-height: 10px;
+    text-shadow: var(--shadowTiny);
+
+    svg {
+        fill: white;
+        height: var(--svgSize, 34px);
+        width: var(--svgSize, 34px);
+    }
+
+    &:hover {
+        letter-spacing: 3px;
+        padding-left: 26px;
+        padding-right: 26px;
+
+        &::before {
+            opacity: 0.3;
+        }
+
+        svg {
+            filter: drop-shadow(0 0 16px var(--col)) drop-shadow(var(--shadowTiny)) saturate(1.7);
+            fill: var(--col);
+        }
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 30px;
+        background: radial-gradient(circle at 50% 50%, var(--col) 0%, transparent 150%);
+        z-index: -1;
+        opacity: 0;
+        transition: all 400ms var(--curve);
+    }
+}

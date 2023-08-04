@@ -1,0 +1,60 @@
+function getPages() {
+    // Create pages object
+    const pages = {};
+
+    // Home Page
+    pages['root'] = {
+        template: 'home'
+    };
+
+    // Google Play
+    const googlePlayOptions = {
+        'bladesofdoom': {
+            name: 'Blades of Doom',
+            itchio: 'blades-of-doom',
+            googleplay: 'bladesofdoom',
+            gxgames: 'ovtmf7/blades-of-doom',
+            github: 'Blades-Of-Doom'
+        },
+        'shapeion': {
+            name: 'Shapeion',
+            itchio: 'shapeion',
+            googleplay: 'shapeion',
+            gxgames: '3tyac9/shapeion',
+            github: 'Shapeion'
+        },
+        'youareabomb': {
+            name: 'You Are A Bomb',
+            itchio: 'you-are-a-bomb',
+            googleplay: 'youareabomb',
+            gxgames: '249rmr/you-are-a-bomb',
+            github: 'You-Are-A-Bomb'
+        },
+        'twilighttempo': {
+            name: 'Twilight Tempo',
+            itchio: 'twilight-tempo',
+            googleplay: 'twilighttempo',
+            gxgames: 'r4gpyp/twilight-tempo',
+            github: 'Twilight-Tempo'
+        }
+    };
+
+    for(const name in googlePlayOptions) {
+        googlePlayOptions[name].id = name;
+        pages[`googleplay/${name}`] = {
+            template: 'googleplay/home',
+            options: googlePlayOptions[name]
+        };
+        pages[`googleplay/${name}/privacypolicy`] = {
+            template: 'googleplay/privacypolicy',
+            options: googlePlayOptions[name]
+        };
+    }
+
+    return pages;
+}
+
+// Export functions
+module.exports = {
+    getPages
+};

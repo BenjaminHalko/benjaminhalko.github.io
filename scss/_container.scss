@@ -1,0 +1,13 @@
+.container {
+    position: relative;
+    padding: 30px;
+    padding-top: var(--padding, 30px);
+    padding-bottom: var(--padding, 30px);
+    font-size: large;
+
+    background: var(--back-color);
+	box-shadow: var(--shadow);
+	border-bottom: var(--border);
+	border-top: var(--border);
+	border-radius: 30px;
+}
