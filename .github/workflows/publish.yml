@@ -1,8 +1,5 @@
 name: Publish
   on:
-    push:
-      branches:
-        - main
     workflow_dispatch:
 
 jobs:
@@ -13,7 +10,7 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: 18
-    - run: npm install
+    - run: npm install 
     - run: npm run build
     - uses: actions/upload-artifact@v2
       with:
