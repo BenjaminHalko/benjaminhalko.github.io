@@ -45,7 +45,7 @@ function getPages() {
             template: 'googleplay/home',
             options: googlePlayOptions[name]
         };
-        pages[`google-play/${name}/privacypolicy`] = {
+        pages[`google-play/${name}/privacypolicy.html`] = {
             template: 'googleplay/privacypolicy',
             options: googlePlayOptions[name]
         };
