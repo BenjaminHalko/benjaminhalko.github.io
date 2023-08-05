@@ -41,11 +41,11 @@ function getPages() {
 
     for(const name in googlePlayOptions) {
         googlePlayOptions[name].id = name;
-        pages[`googleplay/${name}`] = {
+        pages[`google-play/${name}`] = {
             template: 'googleplay/home',
             options: googlePlayOptions[name]
         };
-        pages[`googleplay/${name}/privacypolicy`] = {
+        pages[`google-play/${name}/privacypolicy`] = {
             template: 'googleplay/privacypolicy',
             options: googlePlayOptions[name]
         };
