@@ -9,6 +9,13 @@ function getPages() {
 
     // Google Play
     const googlePlayOptions = {
+        'makenewfriends': {
+            name: 'Make New Friends',
+            itchio: 'make-new-friends',
+            googleplay: 'makenewfriends',
+            gxgames: 'v408fd/make-new-friends',
+            github: 'Make-New-Friends'
+        },
         'bladesofdoom': {
             name: 'Blades of Doom',
             itchio: 'blades-of-doom',
