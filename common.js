@@ -9,6 +9,12 @@ function getPages() {
 
     // Google Play
     const googlePlayOptions = {
+        'hammerhex': {
+            name: 'Hammer Hex',
+            itchio: 'https://bluishgreenpro.itch.io/hammer-hex',
+            googleplay: 'hammerhex',
+            gxgames: 'ynf9dg/hammer-hex'
+        },
         'makenewfriends': {
             name: 'Make New Friends',
             itchio: 'make-new-friends',

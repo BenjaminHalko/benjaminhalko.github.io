@@ -10,12 +10,21 @@
     <div class="content">
         <img src="/images/googleplay/<%= id %>/logo.png" style="max-width: 100%; max-height: 200px"/>
         <div class="buttons">
-			<%- include('../../partials/button',{
-				link: `https://benjamin-halko.itch.io/${itchio}`,
-				color: '#FA5C5C',
-				text: 'Itch.io',
-				svg: 'itchio'
-			}) %>
+			<% if (id != "hammerhex") { %>
+				<%- include('../../partials/button',{
+					link: `https://benjamin-halko.itch.io/${itchio}`,
+					color: '#FA5C5C',
+					text: 'Itch.io',
+					svg: 'itchio'
+				}) %>
+			<% } else { %>
+				<%- include('../../partials/button',{
+					link: `${itchio}`,
+					color: '#FA5C5C',
+					text: 'Itch.io',
+					svg: 'itchio'
+				}) %>
+			<% } %>
 			<%- include('../../partials/button',{
 				link: `https://play.google.com/store/apps/details?id=com.benjaminhalko.${googleplay}`,
 				color: 'lime',
@@ -28,12 +37,14 @@
 				text: 'GX Games',
 				svg: 'operagx'
 			}) %>
-			<%- include('../../partials/button',{
-				link: `https://github.com/BenjaminHalko/${github}`,
-				color: 'cyan',
-				text: 'GitHub',
-				svg: 'github'
-			}) %>
+			<% if (id != "hammerhex") { %>
+				<%- include('../../partials/button',{
+					link: `https://github.com/BenjaminHalko/${github}`,
+					color: 'cyan',
+					text: 'GitHub',
+					svg: 'github'
+				}) %>
+			<% } %>
 			<%- include('../../partials/button',{
 				link: 'privacypolicy.html',
 				color: 'grey',
