@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <%- include('../../partials/header') %>
-    <link rel="icon" type="image/png" href="/images/googleplay/<%= id %>/favicon.png">
+    <link rel="icon" type="image/png" href="/images/games/<%= id %>/favicon.png">
     <title><%= name %> - Privacy Policy</title>
-    <link rel="stylesheet" href="/css/googleplay.css">
+    <link rel="stylesheet" href="/css/games.css">
 </head>
 <body>
     <div class="content">
-        <img src="/images/googleplay/<%= id %>/logo.png" style="max-width: 100%; max-height: 200px"/>
+        <img src="/images/games/<%= id %>/logo.png" style="max-width: 100%; max-height: 200px"/>
         <div class="buttons">
 			<% if (id != "hammerhex") { %>
 				<%- include('../../partials/button',{

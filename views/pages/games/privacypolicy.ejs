@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../../partials/header') %>
+    <link rel="icon" type="image/png" href="/images/games/<%= id %>/favicon.png">
+    <title><%= name %> - Privacy Policy</title>
+    <link rel="stylesheet" href="/css/games.css">
+</head>
+<body>
+    <div class="content">
+        <div class="container">
+            <h1><%= name %> - Privacy Policy</h1>
+            <h2>User Info</h2>
+            <p>No user info is collected by me</p>
+            <h2>Save Data</h2>
+            <p>Save files are used to save settings and scores</p>
+            <% if (id == "makenewfriends" || id == "hammerhex") { %>
+                <h2>Leaderboard</h2>
+                <p>Google Firebase Database is used to store user scores.</p>
+            <% } else { %>
+                <h2>Google Play Games</h2>
+                <p>Google Play Games is used to store Achievements and Leaderboards.</p>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>

@@ -8,7 +8,7 @@ function getPages() {
     };
 
     // Google Play
-    const googlePlayOptions = {
+    const gameOptions = {
         'hammerhex': {
             name: 'Hammer Hex',
             itchio: 'https://bluishgreenpro.itch.io/hammer-hex',
@@ -52,15 +52,26 @@ function getPages() {
         }
     };
 
-    for(const name in googlePlayOptions) {
-        googlePlayOptions[name].id = name;
+    for(const name in gameOptions) {
+        gameOptions[name].id = name;
+        // Legacy
         pages[`google-play/${name}`] = {
-            template: 'googleplay/home',
-            options: googlePlayOptions[name]
+            template: 'games/home',
+            options: gameOptions[name]
         };
         pages[`google-play/${name}/privacypolicy.html`] = {
-            template: 'googleplay/privacypolicy',
-            options: googlePlayOptions[name]
+            template: 'games/privacypolicy',
+            options: gameOptions[name]
+        };
+
+        // New
+        pages[`${name}`] = {
+            template: 'games/home',
+            options: gameOptions[name]
+        };
+        pages[`${name}/privacypolicy`] = {
+            template: 'games/privacypolicy',
+            options: gameOptions[name]
         };
     }
 
