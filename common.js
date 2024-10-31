@@ -75,6 +75,11 @@ function getPages() {
         };
     }
 
+    // Unless
+    pages['unless/privacy'] = {
+        template: 'unless'
+    }
+
     return pages;
 }
 
