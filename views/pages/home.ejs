@@ -29,13 +29,31 @@
             <p>💬 My area of expertise includes GameMaker, Python, HTML, CSS, JavaScript, PowerShell, and C++.</p>
 		</div>
 
-		<div class="socials">
+        
+        <div class="socials" style="margin-bottom: 20px">
+            <h1>Contact</h1>
             <%- include('../partials/button',{
-                link: 'https://github.com/BenjaminHalko',
-                color: 'cyan',
-                text: 'GitHub',
-                svg: 'github'
+                link: 'https://discord.com/users/752353849070714980',
+                color: '#5865F2',
+                text: 'Discord',
+                svg: 'discord'
             }) %>
+            <%- include('../partials/button',{
+                link: 'mailto:benjamin.g.halko@gmail.com',
+                color: 'yellow',
+                text: 'Email',
+                svg: 'contact'
+            }) %>
+            <%- include('../partials/button',{
+                link: 'https://linkedin.com/in/BenjaminHalko/',
+                color: '#0A66C2',
+                text: 'LinkedIn',
+                svg: 'linkedin'
+            }) %>
+        </div>
+        
+		<div class="socials" style="margin-bottom: 20px">
+            <h1>My Games</h1>
             <%- include('../partials/button',{
                 link: 'https://benjamin-halko.itch.io',
                 color: '#FA5C5C',
@@ -54,11 +72,15 @@
                 text: 'GX Games',
                 svg: 'operagx'
             }) %>
+        </div>
+        
+        <div class="socials" style="margin-bottom: 20px">
+            <h1>Other</h1>
             <%- include('../partials/button',{
-                link: 'https://linkedin.com/in/BenjaminHalko/',
-                color: '#0A66C2',
-                text: 'LinkedIn',
-                svg: 'linkedin'
+                link: 'https://github.com/BenjaminHalko',
+                color: 'cyan',
+                text: 'GitHub',
+                svg: 'github'
             }) %>
             <%- include('../partials/button',{
                 link: 'https://youtube.com/BenjaminHalko',
@@ -66,12 +88,18 @@
                 text: 'YouTube',
                 svg: 'youtube'
             }) %>
-            <%- include('../partials/button',{
-                link: 'mailto:benjamin.g.halko@gmail.com',
-                color: 'yellow',
-                text: 'Contact',
-                svg: 'contact'
-            }) %>
+		</div>
+
+        <div class="container" style="margin-bottom: 20px">
+			<h2>Download Unless</h2>
+            <iframe scrolling="no" style="
+            width: 100%;
+            border: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 200px;
+          " src="https://store.steampowered.com/widget/2944340/?utm_source=homepage&utm_campaign=mycampaign"></iframe>
 		</div>
 	</div>
 </body>
