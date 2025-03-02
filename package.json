@@ -11,8 +11,7 @@
     "app-dev": "nodemon app.js",
     "sass-watch": "sass --watch --no-source-map scss:public/css",
     "app-build": "node build.js",
-    "sass-build": "sass --no-source-map --style=compressed scss:public/css",
-    "deploy": "npm run build && npx wrangler pages deploy build/"
+    "sass-build": "sass --no-source-map --style=compressed scss:public/css"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"
