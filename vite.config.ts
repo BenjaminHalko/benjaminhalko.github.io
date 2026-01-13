@@ -95,14 +95,9 @@ const gamePageTemplate = Handlebars.compile(
 const privacyPageTemplate = Handlebars.compile(
   fs.readFileSync(resolve(partialsDir, "privacy-page.html"), "utf-8"),
 );
-const unlessPageTemplate = Handlebars.compile(
-  fs.readFileSync(resolve(partialsDir, "unless-page.html"), "utf-8"),
-);
 
 // Build virtual pages
-const virtualPages: Record<string, string> = {
-  "unless/privacy.html": unlessPageTemplate({}),
-};
+const virtualPages: Record<string, string> = {};
 
 for (const game of games) {
   const isHammerHex = game.id === "hammerhex";
@@ -120,9 +115,6 @@ for (const game of games) {
 
   virtualPages[`${game.id}/index.html`] = gamePageTemplate(context);
   virtualPages[`${game.id}/privacypolicy.html`] = privacyPageTemplate(context);
-  virtualPages[`google-play/${game.id}/index.html`] = gamePageTemplate(context);
-  virtualPages[`google-play/${game.id}/privacypolicy.html`] =
-    privacyPageTemplate(context);
 }
 
 function virtualHtmlPlugin(): Plugin {
