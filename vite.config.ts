@@ -113,14 +113,12 @@ for (const game of games) {
       : null,
   };
 
-  virtualPages[`${game.id}/index.html`] = gamePageTemplate(context);
+  if (game.id != "hammerhex") {
+    virtualPages[`${game.id}/index.html`] = gamePageTemplate(context);
+  }
+
   virtualPages[`${game.id}/privacypolicy.html`] = privacyPageTemplate(context);
 }
-
-// Compile main index.html through Handlebars
-const indexTemplate = Handlebars.compile(
-  fs.readFileSync(resolve(__dirname, "src/index.html"), "utf-8"),
-);
 
 function virtualHtmlPlugin(): Plugin {
   let isBuild = false;
@@ -133,17 +131,27 @@ function virtualHtmlPlugin(): Plugin {
       isBuild = config.command === "build";
     },
 
-    transformIndexHtml(html, ctx) {
-      // Transform main index.html through Handlebars
-      if (ctx.filename.endsWith("src/index.html")) {
-        return indexTemplate({});
-      }
-      return html;
+    transformIndexHtml(html) {
+      // Transform all HTML files through Handlebars
+      const template = Handlebars.compile(html);
+      return template({});
     },
 
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
         let url = req.url?.split("?")[0].replace(/^\//, "") || "";
+
+        // Redirect /folder to /folder/ for directories with index.html
+        if (url && !url.includes(".") && !url.endsWith("/")) {
+          const possibleIndex = `${url}/index.html`;
+          const srcPath = resolve(__dirname, "src", possibleIndex);
+          if (fs.existsSync(srcPath) || virtualPages[possibleIndex]) {
+            res.writeHead(301, { Location: `/${url}/` });
+            res.end();
+            return;
+          }
+        }
+
         if (url === "" || url.endsWith("/")) url += "index.html";
 
         if (virtualPages[url]) {
@@ -212,6 +220,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, "src/index.html"),
+        hammerhex: resolve(__dirname, "src/hammerhex/index.html"),
       },
     },
   },
