@@ -117,6 +117,11 @@ for (const game of games) {
   virtualPages[`${game.id}/privacypolicy.html`] = privacyPageTemplate(context);
 }
 
+// Compile main index.html through Handlebars
+const indexTemplate = Handlebars.compile(
+  fs.readFileSync(resolve(__dirname, "src/index.html"), "utf-8"),
+);
+
 function virtualHtmlPlugin(): Plugin {
   let isBuild = false;
 
@@ -126,6 +131,14 @@ function virtualHtmlPlugin(): Plugin {
 
     configResolved(config) {
       isBuild = config.command === "build";
+    },
+
+    transformIndexHtml(html, ctx) {
+      // Transform main index.html through Handlebars
+      if (ctx.filename.endsWith("src/index.html")) {
+        return indexTemplate({});
+      }
+      return html;
     },
 
     configureServer(server) {
