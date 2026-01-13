@@ -1,19 +1,15 @@
 {
-  "dependencies": {
-    "ejs": "^3.1.10",
-    "express": "^4.19.2",
-    "npm-run-all2": "^6.1.2",
-    "sass": "^1.75.0"
-  },
+  "type": "module",
   "scripts": {
-    "build": "npm-run-all sass-build app-build",
-    "dev": "npm-run-all --parallel sass-watch app-dev",
-    "app-dev": "nodemon app.js",
-    "sass-watch": "sass --watch --no-source-map scss:public/css",
-    "app-build": "node build.js",
-    "sass-build": "sass --no-source-map --style=compressed scss:public/css"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "devDependencies": {
-    "nodemon": "^3.1.0"
+    "@types/node": "^22.10.0",
+    "handlebars": "^4.7.8",
+    "sass": "^1.75.0",
+    "typescript": "^5.7.0",
+    "vite": "^6.0.0"
   }
 }

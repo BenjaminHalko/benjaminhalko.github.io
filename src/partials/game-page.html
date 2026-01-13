@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        {{> header}}
+        <link
+            rel="icon"
+            type="image/png"
+            href="/images/games/{{id}}/favicon.png"
+        />
+        <title>{{name}}</title>
+        <link rel="stylesheet" href="/styles/games.scss" />
+    </head>
+    <body>
+        <div class="content">
+            <img
+                src="/images/games/{{id}}/logo.png"
+                style="max-width: 100%; max-height: 200px"
+            />
+            <div class="buttons">
+                {{> button link=itchioLink color="#FA5C5C" text="Itch.io"
+                icon="itchio"}} {{> button link=googleplayLink color="lime"
+                text="Google Play" icon="googleplay"}} {{> button
+                link=gxgamesLink color="#fc1d4e" text="GX Games"
+                icon="operagx"}} {{#if github}} {{> button link=githubLink
+                color="cyan" text="GitHub" icon="github"}} {{/if}} {{> button
+                link="privacypolicy.html" color="grey" text="Privacy Policy"
+                icon="privacy" style="margin-top: 50px"}}
+            </div>
+        </div>
+    </body>
+</html>
