@@ -20,8 +20,10 @@ body::before {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
 
-    @media screen and (min-height: 750px) {
+@media screen and (min-height: 750px) {
+    .content {
         transform: translateY(calc(50vh - 50%));
     }
 }
@@ -31,11 +33,11 @@ body::before {
     display: flex;
     flex-direction: column;
     margin-top: 20px;
+}
 
-    .button {
-        flex-grow: 1;
-        margin-left: 20px;
-        margin-right: 20px;
-        margin-top: 10px;
-    }
+.buttons .button {
+    flex-grow: 1;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
 }

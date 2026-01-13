@@ -121,15 +121,9 @@ for (const game of games) {
 }
 
 function virtualHtmlPlugin(): Plugin {
-  let isBuild = false;
-
   return {
     name: "virtual-html",
     enforce: "pre",
-
-    configResolved(config) {
-      isBuild = config.command === "build";
-    },
 
     transformIndexHtml(html) {
       // Transform all HTML files through Handlebars
@@ -168,43 +162,12 @@ function virtualHtmlPlugin(): Plugin {
       });
     },
 
-    buildStart() {
-      if (isBuild) {
-        this.emitFile({
-          type: "chunk",
-          id: resolve(__dirname, "src/styles/games-entry.ts"),
-          name: "games-css",
-        });
-      }
-    },
-
-    generateBundle(_, bundle) {
-      let mainCss = "";
-      let gamesCss = "";
-
-      for (const [fileName] of Object.entries(bundle)) {
-        if (fileName.endsWith(".css")) {
-          if (fileName.includes("games")) {
-            gamesCss = fileName;
-          } else if (fileName.includes("main")) {
-            mainCss = fileName;
-          }
-        }
-      }
-
+    generateBundle() {
       for (const [path, content] of Object.entries(virtualPages)) {
-        let html = content;
-        if (mainCss) {
-          html = html.replace("/styles/main.scss", `/${mainCss}`);
-        }
-        if (gamesCss) {
-          html = html.replace("/styles/games.scss", `/${gamesCss}`);
-        }
-
         this.emitFile({
           type: "asset",
           fileName: path,
-          source: html,
+          source: content,
         });
       }
     },
@@ -224,12 +187,6 @@ export default defineConfig({
       },
     },
   },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        api: "modern-compiler",
-      },
-    },
-  },
+
   plugins: [virtualHtmlPlugin()],
 });
