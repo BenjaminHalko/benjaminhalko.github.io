@@ -162,12 +162,58 @@ function virtualHtmlPlugin(): Plugin {
       });
     },
 
-    generateBundle() {
+    buildStart() {
+      // Emit CSS files so they get processed and hashed
+      const mainCss = fs.readFileSync(
+        resolve(__dirname, "src/styles/main.css"),
+        "utf-8",
+      );
+      const gamesCss = fs.readFileSync(
+        resolve(__dirname, "src/styles/games.css"),
+        "utf-8",
+      );
+
+      this.emitFile({
+        type: "asset",
+        name: "main.css",
+        source: mainCss,
+      });
+      this.emitFile({
+        type: "asset",
+        name: "games.css",
+        source: gamesCss,
+      });
+    },
+
+    generateBundle(_, bundle) {
+      // Find the hashed CSS filenames
+      let mainCssFile = "";
+      let gamesCssFile = "";
+
+      for (const [fileName, chunk] of Object.entries(bundle)) {
+        if (chunk.type === "asset" && fileName.endsWith(".css")) {
+          if (fileName.includes("main") && !fileName.includes("games")) {
+            mainCssFile = fileName;
+          } else if (fileName.includes("games")) {
+            gamesCssFile = fileName;
+          }
+        }
+      }
+
+      // Emit virtual pages with updated CSS paths
       for (const [path, content] of Object.entries(virtualPages)) {
+        let html = content;
+        if (mainCssFile) {
+          html = html.replace("/styles/main.css", `/${mainCssFile}`);
+        }
+        if (gamesCssFile) {
+          html = html.replace("/styles/games.css", `/${gamesCssFile}`);
+        }
+
         this.emitFile({
           type: "asset",
           fileName: path,
-          source: content,
+          source: html,
         });
       }
     },
