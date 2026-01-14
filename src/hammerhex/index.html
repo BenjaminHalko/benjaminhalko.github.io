@@ -1,102 +1,287 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        {{> header}}
-        <link
-            rel="icon"
-            type="image/png"
-            href="/res/games/hammerhex/favicon.png"
-        />
-        <meta
-            property="og:url"
-            content="https://benjaminhalko.dev/hammerhex/"
-        />
-        <meta property="og:title" content="Hammer Hex" />
-        <meta
-            property="og:description"
-            content="It's not about the size of your hammer!"
-        />
-        <meta property="og:image" content="/res/games/hammerhex/cover.png" />
-        <title>Hammer Hex</title>
-        <link rel="stylesheet" href="style.css" />
-    </head>
-    <body>
-        <div class="container">
-            <div class="logo">
-                <img src="/res/games/hammerhex/logo.png" alt="Hammer Hex" />
-            </div>
 
-            <div class="section">
-                <p style="font-size: 1.2em; text-align: center; margin: 0">
-                    It's not about the size of your hammer; it's how you use it
-                    to pole-vault yourself through this fast-paced
-                    action-platformer!
-                </p>
-            </div>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/res/games/hammerhex/favicon.png" />
 
-            <div class="steam-widget">
-                <iframe
-                    src="https://store.steampowered.com/widget/793440/"
-                    frameborder="0"
-                ></iframe>
-            </div>
+    <!-- Primary meta tags -->
+    <title>Hammer Hex - Press Kit</title>
+    <meta name="description"
+        content="Wield a hammer three times your size to slam foes and pole-vault to victory in this blindingly fast precision platformer!" />
 
-            <div class="section links">
-                <a href="https://store.steampowered.com/app/793440/Hammer_Hex/"
-                    >Steam</a
-                >
-                <a href="https://discord.gg/JyAsWMHjQt">Discord</a>
-                <a href="https://bluishgreenpro.itch.io/hammer-hex">itch.io</a>
-            </div>
+    <!-- Open graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://benjaminhalko.dev/hammerhex/" />
+    <meta property="og:title" content="Hammer Hex - Press Kit" />
+    <meta property="og:description"
+        content="Wield a hammer three times your size to slam foes and pole-vault to victory in this blindingly fast precision platformer!" />
+    <meta property="og:image" content="/res/games/hammerhex/cover.png" />
+    <meta property="og:image:type" content="image/png" />
 
-            <div class="section">
-                <h2>About the Game</h2>
-                <p>
-                    Wield a continuously growing magical hammer to navigate
-                    through levels while managing its expanding size. A curse
-                    from a dying wizard causes your magical hammer to grow
-                    uncontrollably. You must find grindstones to shrink it while
-                    fighting through a wizard's tower to escape.
-                </p>
-                <p>
-                    Time your swings carefully, preserve momentum through
-                    bunny-hopping, and balance hammer size against combat
-                    effectiveness as you race through the tower!
-                </p>
-            </div>
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://benjaminhalko.dev/hammerhex/" />
+    <meta name="twitter:title" content="Hammer Hex - Press Kit" />
+    <meta name="twitter:description"
+        content="Wield a hammer three times your size to slam foes and pole-vault to victory in this blindingly fast precision platformer!" />
+    <meta name="twitter:image" content="/res/games/hammerhex/cover.png" />
 
-            <div class="section features">
-                <h2>Features</h2>
-                <ul>
-                    <li>
-                        <strong>Campaign:</strong> Level-based progression
-                        through the wizard's tower
-                    </li>
-                    <li>
-                        <strong>Scale-Based Combat:</strong> Larger hammers
-                        deliver powerful attacks; smaller ones enable rapid
-                        strikes
-                    </li>
-                    <li>
-                        <strong>Speed & Momentum:</strong> Bunny-hopping
-                        mechanics reward skillful play
-                    </li>
-                    <li>
-                        <strong>Leaderboards:</strong> Steam integration for
-                        global time comparisons
-                    </li>
-                    <li>
-                        <strong>Accessibility:</strong> Adjustable game speed,
-                        customizable controls, font selection, UI scaling, high
-                        contrast modes, and reduced distraction settings
-                    </li>
-                </ul>
-            </div>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=MedievalSharp&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
 
-            <div class="section">
-                <h2>Screenshots</h2>
-                <div class="screenshots"></div>
+<body>
+    <div class="parallax-bg"></div>
+
+    <!-- Quick Links Navigation -->
+    <nav class="quick-nav">
+        <a href="#trailer">Trailer</a>
+        <a href="#features">Features</a>
+        <a href="#screenshots">Screenshots</a>
+        <a href="#factsheet">Fact Sheet</a>
+        <a href="#description">Description</a>
+        <a href="#assets">Assets</a>
+        <a href="#team">Team</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <h1 class="sr-only">Hammer Hex</h1>
+        <div class="hero-content">
+            <img src="/res/games/hammerhex/logo.png" alt="Hammer Hex" class="hero-logo" />
+            <div class="hero-buttons">
+                <a href="https://store.steampowered.com/app/793440/Hammer_Hex/" class="btn btn-steam" target="_blank"
+                    rel="noopener noreferrer">
+                    <img src="/res/icons/steam.svg" alt="" class="btn-icon" />
+                    Wishlist on Steam
+                </a>
+                <a href="https://discord.gg/JyAsWMHjQt" class="btn btn-discord" target="_blank"
+                    rel="noopener noreferrer">
+                    <img src="/res/icons/discord.svg" alt="" class="btn-icon" />
+                    Join Discord
+                </a>
             </div>
         </div>
-    </body>
+    </header>
+
+    <main class="container">
+        <!-- Trailer -->
+        <section id="trailer" class="section">
+            <h2>Trailer</h2>
+            <div class="trailer-container">
+                <iframe src="https://www.youtube.com/embed/qrsClNbnSz8" title="Hammer Hex Trailer" frameborder="0"
+                    allow="
+                            accelerometer;
+                            autoplay;
+                            clipboard-write;
+                            encrypted-media;
+                            gyroscope;
+                            picture-in-picture;
+                            web-share;
+                        " referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section id="features" class="section">
+            <h2>Key Features</h2>
+            <ul class="features-list">
+                <li>
+                    <strong>Crushing Weight</strong>
+                    <span>Your hammer never stops growing! Make it to the
+                        next magical grindstone to reduce it down before
+                        it's too late.</span>
+                </li>
+                <li>
+                    <strong>Hit the Floor</strong>
+                    <span>Whack the ground to vault yourself through the
+                        environment at blistering speeds; then bunny-hop to
+                        preserve your pace!</span>
+                </li>
+                <li>
+                    <strong>Scale-Based Combat</strong>
+                    <span>Scale up your Hammer for devastating heavy attacks
+                        or keep it light-weight and unleash a flurry of
+                        blows!</span>
+                </li>
+                <li>
+                    <strong>Campaign Mode</strong>
+                    <span>Level-based progression through the wizard's tower
+                        with increasing challenges.</span>
+                </li>
+                <li>
+                    <strong>Speedrun Leaderboards</strong>
+                    <span>Steam integration for global time comparisons.
+                        Compete against players worldwide!</span>
+                </li>
+                <li>
+                    <strong>Accessibility Options</strong>
+                    <span>Adjustable game speed, customizable controls, font
+                        selection, UI scaling, high contrast modes, and
+                        reduced distraction settings.</span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Screenshots -->
+        <section id="screenshots" class="section">
+            <h2>Screenshots</h2>
+            <div class="screenshots-grid">
+                <a href="/res/games/hammerhex/screenshots/animated1.gif" target="_blank" rel="noopener noreferrer"
+                    class="screenshot-item">
+                    <img src="/res/games/hammerhex/screenshots/animated1.gif" alt="Hammer Hex Gameplay Gif 1" />
+                </a>
+                <a href="/res/games/hammerhex/screenshots/animated2.gif" target="_blank" rel="noopener noreferrer"
+                    class="screenshot-item">
+                    <img src="/res/games/hammerhex/screenshots/animated2.gif" alt="Hammer Hex Gameplay Gif 2" />
+                </a>
+                <a href="/res/games/hammerhex/screenshots/1.png" target="_blank" rel="noopener noreferrer"
+                    class="screenshot-item">
+                    <img src="/res/games/hammerhex/screenshots/1.png" alt="Hammer Hex Screenshot 1" />
+                </a>
+                <a href="/res/games/hammerhex/screenshots/2.png" target="_blank" rel="noopener noreferrer"
+                    class="screenshot-item">
+                    <img src="/res/games/hammerhex/screenshots/2.png" alt="Hammer Hex Screenshot 2" />
+                </a>
+                <a href="/res/games/hammerhex/screenshots/3.png" target="_blank" rel="noopener noreferrer"
+                    class="screenshot-item">
+                    <img src="/res/games/hammerhex/screenshots/3.png" alt="Hammer Hex Screenshot 3" />
+                </a>
+                <a href="/res/games/hammerhex/screenshots/4.png" target="_blank" rel="noopener noreferrer"
+                    class="screenshot-item">
+                    <img src="/res/games/hammerhex/screenshots/4.png" alt="Hammer Hex Screenshot 4" />
+                </a>
+            </div>
+        </section>
+
+        <!-- Fact Sheet -->
+        <section id="factsheet" class="section">
+            <h2>Fact Sheet</h2>
+            <div class="factsheet-grid">
+                <div class="fact-item">
+                    <h3>Developer</h3>
+                    <p>Benjamin Halko</p>
+                </div>
+                <div class="fact-item">
+                    <h3>Release Date</h3>
+                    <p>September 2026</p>
+                </div>
+                <div class="fact-item">
+                    <h3>Platforms</h3>
+                    <p>Windows, MacOS, Linux (Steam)</p>
+                </div>
+                <div class="fact-item">
+                    <h3>Genre</h3>
+                    <p>Precision Platformer, Action</p>
+                </div>
+                <div class="fact-item">
+                    <h3>Players</h3>
+                    <p>Single Player</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Description -->
+        <section id="description" class="section">
+            <h2>Description</h2>
+            <div class="description-content">
+                <h3>Short Description</h3>
+                <p class="short-desc">
+                    Wield a continuously growing magical hammer to navigate
+                    through levels while managing its expanding size.
+                    Pole-vault through a wizard's tower in this fast-paced
+                    precision platformer!
+                </p>
+            </div>
+        </section>
+
+        <!-- Downloadable Assets -->
+        <section id="assets" class="section">
+            <h2>Downloadable Assets</h2>
+            <p class="section-note">
+                All assets are free to use for press coverage and
+                promotional purposes.
+                <br />
+                More coming soon!
+            </p>
+            <div class="assets-grid">
+                <a href="/res/games/hammerhex/logo.png" download class="asset-card">
+                    <img src="/res/games/hammerhex/logo.png" alt="Logo" />
+                    <span>Game Logo (PNG)</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Team -->
+        <section id="team" class="section">
+            <h2>Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <h3>Benjamin Halko</h3>
+                    <p class="role">Lead Developer</p>
+                    <div class="team-socials">
+                        <a href="https://benjamin-halko.itch.io" target="_blank" rel="noopener noreferrer"
+                            title="Itch.io">
+                            <img src="/res/icons/itchio.svg" alt="Itch.io" class="social-icon" />
+                        </a>
+                        <a href="https://github.com/BenjaminHalko" target="_blank" rel="noopener noreferrer"
+                            title="GitHub">
+                            <img src="/res/icons/github.svg" alt="GitHub" class="social-icon" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="section">
+            <h2>Contact</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <h3>Inquiries</h3>
+                    <p>
+                        <a href="mailto:benjamin@benjaminhalko.dev" style="
+                                    color: var(--primary);
+                                    text-decoration: none;
+                                    font-size: 1.1rem;
+                                ">benjamin@benjaminhalko.dev</a>
+                    </p>
+                </div>
+                <div class="contact-item">
+                    <h3>Social Media</h3>
+                    <div class="social-links">
+                        <a href="https://discord.gg/JyAsWMHjQt" target="_blank" rel="noopener noreferrer">
+                            <img src="/res/icons/discord.svg" alt="" class="social-icon" />
+                            Discord
+                        </a>
+                        <a href="https://store.steampowered.com/app/793440/Hammer_Hex/" target="_blank"
+                            rel="noopener noreferrer">
+                            <img src="/res/icons/steam.svg" alt="" class="social-icon" />
+                            Steam
+                        </a>
+                        <a href="https://bluishgreenpro.itch.io/hammer-hex" target="_blank" rel="noopener noreferrer">
+                            <img src="/res/icons/itchio.svg" alt="" class="social-icon" />
+                            itch.io
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Benjamin Halko. All rights reserved.</p>
+    </footer>
+    <script type="module" src="./script.ts"></script>
+</body>
+
 </html>
