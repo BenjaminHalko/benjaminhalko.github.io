@@ -163,6 +163,9 @@ function virtualHtmlPlugin(): Plugin {
     },
 
     buildStart() {
+      // Only emit files during build, not serve
+      if (this.meta.watchMode) return;
+
       // Emit CSS files so they get processed and hashed
       const mainCss = fs.readFileSync(
         resolve(__dirname, "src/styles/main.css"),
