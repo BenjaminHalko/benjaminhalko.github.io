@@ -1,4 +1,4 @@
-# benjaminhalko.dev
+# [benjaminhalko.dev](https://benjaminhalko.dev)
 
 ## Development
 
