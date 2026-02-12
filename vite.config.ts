@@ -8,7 +8,7 @@ interface GameData {
   name: string;
   itchio: string;
   googleplay: string;
-  gxgames: string;
+  gxgames?: string;
   github?: string;
   useFirebase?: boolean;
 }
@@ -63,6 +63,13 @@ const games: GameData[] = [
     gxgames: "r4gpyp/twilight-tempo",
     github: "Twilight-Tempo",
   },
+  {
+    id: "spacehole",
+    name: "SPACEHOLE",
+    itchio: "spacehole",
+    googleplay: "spacehole",
+    github: "SPACEHOLE",
+  },
 ];
 
 // Register SVG helper - inlines SVG content
@@ -107,7 +114,9 @@ for (const game of games) {
       ? game.itchio
       : `https://benjamin-halko.itch.io/${game.itchio}`,
     googleplayLink: `https://play.google.com/store/apps/details?id=com.benjaminhalko.${game.googleplay}`,
-    gxgamesLink: `https://gx.games/games/${game.gxgames}/`,
+    gxgamesLink: game.gxgames
+      ? `https://gx.games/games/${game.gxgames}/`
+      : null,
     githubLink: game.github
       ? `https://github.com/BenjaminHalko/${game.github}`
       : null,
@@ -121,6 +130,9 @@ for (const game of games) {
 }
 
 function virtualHtmlPlugin(): Plugin {
+  // Map from original path (e.g. "/res/games/spacehole/logo.png") to emitFile reference ID
+  const assetRefIds = new Map<string, string>();
+
   return {
     name: "virtual-html",
     enforce: "pre",
@@ -186,6 +198,30 @@ function virtualHtmlPlugin(): Plugin {
         name: "games.css",
         source: gamesCss,
       });
+
+      // Emit static assets from src/res/ with hashing
+      const resDir = resolve(__dirname, "src/res");
+      const emitAsset = (filePath: string, originalUrl: string) => {
+        const refId = this.emitFile({
+          type: "asset",
+          name: filePath.split("/").pop()!,
+          source: fs.readFileSync(filePath),
+        });
+        assetRefIds.set(originalUrl, refId);
+      };
+
+      const emitDir = (dir: string, urlPrefix: string) => {
+        for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+          const fullPath = resolve(dir, entry.name);
+          if (entry.isDirectory()) {
+            emitDir(fullPath, `${urlPrefix}/${entry.name}`);
+          } else if (!entry.name.startsWith(".")) {
+            emitAsset(fullPath, `${urlPrefix}/${entry.name}`);
+          }
+        }
+      };
+      emitDir(resolve(resDir, "games"), "/res/games");
+      emitAsset(resolve(resDir, "logo.png"), "/res/logo.png");
     },
 
     generateBundle(_, bundle) {
@@ -203,7 +239,7 @@ function virtualHtmlPlugin(): Plugin {
         }
       }
 
-      // Emit virtual pages with updated CSS paths
+      // Emit virtual pages with updated CSS and asset paths
       for (const [path, content] of Object.entries(virtualPages)) {
         let html = content;
         if (mainCssFile) {
@@ -211,6 +247,11 @@ function virtualHtmlPlugin(): Plugin {
         }
         if (gamesCssFile) {
           html = html.replace("/styles/games.css", `/${gamesCssFile}`);
+        }
+
+        // Replace asset paths with hashed filenames
+        for (const [originalUrl, refId] of assetRefIds) {
+          html = html.replaceAll(originalUrl, `/${this.getFileName(refId)}`);
         }
 
         this.emitFile({
