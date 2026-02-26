@@ -274,6 +274,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, "src/index.html"),
         hammerhex: resolve(__dirname, "src/hammerhex/index.html"),
+        johnsquest: resolve(__dirname, "src/johnsquest/index.html"),
       },
     },
   },
