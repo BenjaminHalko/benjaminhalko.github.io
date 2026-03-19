@@ -69,22 +69,90 @@ section p:last-child {
     margin-bottom: 0;
 }
 
-.features ul {
+.features ul,
+.details ul {
     margin: 0;
-    padding-left: 20px;
+    padding: 0;
     list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
-.features li {
-    margin-bottom: 8px;
+.details ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.features li,
+.details li {
+    margin: 0;
     line-height: 1.5;
+    background: rgba(28, 18, 43, 0.6);
+    padding: 12px 16px;
+    border-radius: 4px;
+    border-left: 4px solid #4ef0ff;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
-.features li::before {
-    content: "\25B6";
+.features li strong,
+.details li strong {
     color: #4ef0ff;
-    margin-right: 8px;
-    font-size: 0.7em;
+    margin-bottom: 4px;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+
+
+.details li strong {
+    color: #4ef0ff;
+    margin-bottom: 4px;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.details .tags-item {
+    grid-column: 1 / -1;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.chip {
+    background: rgba(78, 240, 255, 0.12);
+    color: #4ef0ff;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 0.8em;
+    white-space: nowrap;
+}
+
+.screenshot-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.screenshot-grid img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    transition: transform 0.2s;
+}
+
+.screenshot-grid img:hover {
+    transform: scale(1.02);
 }
 
 .links {
@@ -148,6 +216,10 @@ section p:last-child {
 }
 
 @media (max-width: 480px) {
+    .screenshot-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
     .store-btn {
         padding: 12px 24px;
         font-size: 1rem;
