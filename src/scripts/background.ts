@@ -24,13 +24,30 @@ document.body.insertBefore(canvas, document.body.firstChild);
 const ctx = canvas.getContext('2d')!;
 let lastTime = 0;
 let dir = 0;
+let canvasW = 0;
+let canvasH = 0;
+
+// Resize only when dimensions change
+function resize(): void {
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+  if (w !== canvasW || h !== canvasH) {
+    canvasW = w;
+    canvasH = h;
+    canvas.width = w;
+    canvas.height = h;
+  }
+}
+
+window.addEventListener('resize', resize);
+resize();
 
 // Create the circles
 const circles: Circle[] = [];
 for (let i = 0; i < NUM_CIRCLES; i++) {
   circles.push({
-    x: Math.round(Math.random() * Math.cos(dir * Math.PI / 180) * window.innerWidth / 2 + window.innerWidth / 2),
-    y: Math.round(Math.random() * Math.sin(dir * Math.PI / 180) * window.innerHeight / 2 + window.innerHeight / 2),
+    x: Math.round(Math.random() * Math.cos(dir * Math.PI / 180) * canvasW / 2 + canvasW / 2),
+    y: Math.round(Math.random() * Math.sin(dir * Math.PI / 180) * canvasH / 2 + canvasH / 2),
     r: i / NUM_CIRCLES,
     color: MIN_HUE + Math.round(Math.random() * (MAX_HUE - MIN_HUE))
   });
@@ -38,9 +55,7 @@ for (let i = 0; i < NUM_CIRCLES; i++) {
 }
 
 function animate(timeStamp: number): void {
-  // Resize the canvas
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  resize();
 
   // Calculate the elapsed time since the last frame
   let elapsedTime = timeStamp - lastTime;
@@ -50,7 +65,7 @@ function animate(timeStamp: number): void {
   if (elapsedTime > 500) elapsedTime = 1;
 
   // Clear the canvas
-  ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+  ctx.clearRect(0, 0, canvasW, canvasH);
 
   for (const circle of circles) {
     // Scale the animation value based on elapsed time
@@ -58,21 +73,23 @@ function animate(timeStamp: number): void {
 
     if (circle.r >= 1) {
       circle.r = circle.r % 1;
-      circle.x = Math.round(Math.random() * Math.cos(dir * Math.PI / 180) * window.innerWidth / 2 + window.innerWidth / 2);
-      circle.y = Math.round(Math.random() * Math.sin(dir * Math.PI / 180) * window.innerHeight / 2 + window.innerHeight / 2);
+      circle.x = Math.round(Math.random() * Math.cos(dir * Math.PI / 180) * canvasW / 2 + canvasW / 2);
+      circle.y = Math.round(Math.random() * Math.sin(dir * Math.PI / 180) * canvasH / 2 + canvasH / 2);
       circle.color = MIN_HUE + Math.round(Math.random() * (MAX_HUE - MIN_HUE));
       dir = (dir + 360 / NUM_CIRCLES + 50 * Math.random()) % 360;
     }
 
-    const radius = Math.round(START_RADIUS + Math.sin(circle.r * Math.PI) * (END_RADIUS - START_RADIUS));
-    const gradient = ctx.createRadialGradient(circle.x, circle.y, 0, circle.x, circle.y, radius);
-    const alpha = Math.round(Math.min(100, (1 - Math.abs(1 - circle.r * 2)) * 140));
+    const radius = START_RADIUS + Math.sin(circle.r * Math.PI) * (END_RADIUS - START_RADIUS);
+    const alpha = Math.min(1, (1 - Math.abs(1 - circle.r * 2)) * 1.4);
 
-    gradient.addColorStop(0, `hsla(${circle.color}, 100%, 15%, ${alpha}%)`);
+    const gradient = ctx.createRadialGradient(circle.x, circle.y, 0, circle.x, circle.y, radius);
+    gradient.addColorStop(0, `hsla(${circle.color}, 100%, 15%, ${alpha})`);
     gradient.addColorStop(1, `hsla(${circle.color}, 100%, 15%, 0)`);
 
     ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.beginPath();
+    ctx.arc(circle.x, circle.y, radius, 0, Math.PI * 2);
+    ctx.fill();
   }
 
   requestAnimationFrame(animate);
