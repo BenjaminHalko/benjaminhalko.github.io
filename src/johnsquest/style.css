@@ -206,6 +206,12 @@ section p:last-child {
     background: #24292e;
 }
 
+.coverage {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
 .coverage-item {
     display: flex;
     flex-direction: column;
