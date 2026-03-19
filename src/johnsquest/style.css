@@ -106,16 +106,6 @@ section p:last-child {
     letter-spacing: 0.05em;
 }
 
-
-
-.details li strong {
-    color: #4ef0ff;
-    margin-bottom: 4px;
-    font-size: 0.9em;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
 .details .tags-item {
     grid-column: 1 / -1;
 }
@@ -215,11 +205,46 @@ section p:last-child {
     background: #24292e;
 }
 
+.coverage-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-decoration: none;
+    color: inherit;
+    background: rgba(28, 18, 43, 0.6);
+    padding: 12px 16px;
+    border-radius: 4px;
+    border-left: 4px solid #4ef0ff;
+    gap: 4px;
+    transition: background 0.15s;
+}
+
+.coverage-item:hover {
+    background: rgba(28, 18, 43, 0.9);
+}
+
+.coverage-item strong {
+    color: #4ef0ff;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.coverage-quote {
+    color: #e0e0ff;
+    font-style: italic;
+}
+
+.coverage-date {
+    color: rgba(224, 224, 255, 0.4);
+    font-size: 0.8em;
+}
+
 @media (max-width: 480px) {
     .screenshot-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .store-btn {
         padding: 12px 24px;
         font-size: 1rem;
