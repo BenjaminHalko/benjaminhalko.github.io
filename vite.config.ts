@@ -125,7 +125,7 @@ for (const game of games) {
   };
 
   if (game.id != "hammerhex") {
-    virtualPages[`${game.id}/index.html`] = gamePageTemplate(context);
+    virtualPages[`${game.id}.html`] = gamePageTemplate(context);
   }
 
   virtualPages[`${game.id}/privacypolicy.html`] = privacyPageTemplate(context);
@@ -268,6 +268,24 @@ function virtualHtmlPlugin(): Plugin {
   };
 }
 
+function flattenIndexHtmlPlugin(): Plugin {
+  return {
+    name: "flatten-index-html",
+    enforce: "post",
+    generateBundle(_, bundle) {
+      for (const fileName of Object.keys(bundle)) {
+        if (fileName.endsWith("/index.html")) {
+          const newName = fileName.replace(/\/index\.html$/, ".html");
+          const entry = bundle[fileName];
+          entry.fileName = newName;
+          bundle[newName] = entry;
+          delete bundle[fileName];
+        }
+      }
+    },
+  };
+}
+
 export default defineConfig({
   root: "src",
   publicDir: "../public",
@@ -285,6 +303,7 @@ export default defineConfig({
 
   plugins: [
     virtualHtmlPlugin(),
+    flattenIndexHtmlPlugin(),
     Sitemap({
       hostname: "https://benjaminhalko.dev",
       exclude: excludedPages,
