@@ -1,7 +1,8 @@
 import { defineConfig, Plugin } from "vite";
-import { resolve } from "path";
+import { resolve, basename } from "path";
 import fs from "fs";
 import Handlebars from "handlebars";
+import Sitemap from "vite-plugin-sitemap";
 
 interface GameData {
   id: string;
@@ -105,6 +106,7 @@ const privacyPageTemplate = Handlebars.compile(
 
 // Build virtual pages
 const virtualPages: Record<string, string> = {};
+const excludedPages: string[] = ["/hammerhex"];
 
 for (const game of games) {
   const isHammerHex = game.id === "hammerhex";
@@ -127,6 +129,8 @@ for (const game of games) {
   }
 
   virtualPages[`${game.id}/privacypolicy.html`] = privacyPageTemplate(context);
+  excludedPages.push(`/${game.id}`);
+  excludedPages.push(`/${game.id}/privacypolicy`);
 }
 
 function virtualHtmlPlugin(): Plugin {
@@ -204,7 +208,7 @@ function virtualHtmlPlugin(): Plugin {
       const emitAsset = (filePath: string, originalUrl: string) => {
         const refId = this.emitFile({
           type: "asset",
-          name: filePath.split("/").pop()!,
+          name: basename(filePath),
           source: fs.readFileSync(filePath),
         });
         assetRefIds.set(originalUrl, refId);
@@ -279,5 +283,12 @@ export default defineConfig({
     },
   },
 
-  plugins: [virtualHtmlPlugin()],
+  plugins: [
+    virtualHtmlPlugin(),
+    Sitemap({
+      hostname: "https://benjaminhalko.dev",
+      exclude: excludedPages,
+      outDir: "build",
+    }),
+  ],
 });
