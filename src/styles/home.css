@@ -61,7 +61,7 @@ body {
             rgba(0, 0, 0, 0.2) 50%,
             transparent 100%
         ),
-        url("/res/games/johnsquest-cover.png");
+        url("/res/johnsquest/cover.png");
     background-size: cover;
     background-position: center;
     height: 350px;
