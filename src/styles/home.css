@@ -54,7 +54,14 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    background-image: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 50%, transparent 100%), url('/johnsquest/res/cover.png');
+    background-image:
+        linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.9) 0%,
+            rgba(0, 0, 0, 0.2) 50%,
+            transparent 100%
+        ),
+        url("/res/games/johnsquest-cover.png");
     background-size: cover;
     background-position: center;
     height: 350px;
@@ -196,11 +203,11 @@ body {
         width: 100px;
         height: 100px;
     }
-    
+
     .games {
         grid-template-columns: 1fr;
     }
-    
+
     .featured-game {
         height: 250px;
     }
