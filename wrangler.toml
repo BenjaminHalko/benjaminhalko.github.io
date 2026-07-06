@@ -1,0 +1,9 @@
+name = "benjaminhalko-github"
+compatibility_date = "2026-07-06"
+routes = [
+  { pattern = "benjaminhalko.dev/*", zone_name = "benjaminhalko.dev" }
+]
+
+[assets]
+directory = "./build"
+html_handling = "drop-trailing-slash"

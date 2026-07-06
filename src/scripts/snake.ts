@@ -1,4 +1,5 @@
 // Snake game easter egg
+export {};
 
 // Constants
 const GRID_WIDTH = 20;
