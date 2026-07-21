@@ -22,8 +22,9 @@ body {
     white-space: nowrap;
 }
 
-#logoContent span {
+#logoContent span, h1 {
     color: var(--color);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .logo {
@@ -202,11 +203,11 @@ body {
         width: 100px;
         height: 100px;
     }
-    
+
     .games {
         grid-template-columns: 1fr;
     }
-    
+
     .featured-game {
         height: 250px;
     }
