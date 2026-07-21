@@ -73,7 +73,7 @@ export function JohnsQuestPage() {
       <body>
         <Navbar />
         <main>
-          <img src="/pages/johnsquest/res/logo.png" alt="John's Quest" class="logo" />
+          <img src="/pages/johnsquest/res/logo.png" alt="John's Quest" class="logo" width={1072} height={468} />
 
           <p class="tagline">
             You are <strong>John Appleby</strong>, game historian.
@@ -110,7 +110,7 @@ export function JohnsQuestPage() {
           </section>
 
           <section class="john">
-            <img src="/pages/johnsquest/res/footer.png" alt="" style="width: 100%" loading="lazy" decoding="async" />
+            <img src="/pages/johnsquest/res/footer.png" alt="" style="width: 100%" loading="lazy" decoding="async" width={784} height={130} />
           </section>
 
           <section class="trailer">

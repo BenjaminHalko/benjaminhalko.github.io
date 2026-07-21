@@ -17,6 +17,7 @@ export function Navbar() {
         </a>
       </div>
       <div class="navbar-center">
+        <a href="/johnsquest">John's Quest</a>
         <div class="nav-dropdown" tabIndex={0}>
           <span class="nav-dropdown-trigger">Games ▾</span>
           <div class="nav-dropdown-content">
@@ -30,7 +31,6 @@ export function Navbar() {
             <a href="https://store.steampowered.com/app/2944340/Unless/">
               <img src="/res/games/unless/favicon.png" alt="" /> Unless
             </a>
-            
             <hr class="nav-divider" />
             <span class="nav-dropdown-label">Jam Games</span>
             {jamGames.map((g) => (
@@ -40,7 +40,6 @@ export function Navbar() {
             ))}
           </div>
         </div>
-        <a href="/johnsquest">John's Quest</a>
       </div>
       <div class="navbar-right">
         {navSocials.map((s) => (
@@ -48,8 +47,6 @@ export function Navbar() {
             href={s.link}
             class="nav-social"
             style={`--col: ${s.color}`}
-            target="_blank"
-            rel="noopener noreferrer"
             aria-label={s.text}
             dangerouslySetInnerHTML={{ __html: loadSvg(s.icon) }}
           />

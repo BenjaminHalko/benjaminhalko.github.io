@@ -17,7 +17,7 @@ export const AUTHOR_SAME_AS: readonly string[] = [
 export const SOCIALS = [
   {
     link: "https://store.steampowered.com/developer/benjaminhalko",
-    color: "#1b2838",
+    color: "#00ADEE",
     text: "Steam",
     icon: "steam",
   },
@@ -29,7 +29,7 @@ export const SOCIALS = [
   },
   {
     link: "https://github.com/BenjaminHalko",
-    color: "cyan",
+    color: "#0FBF3E",
     text: "GitHub",
     icon: "github",
   },

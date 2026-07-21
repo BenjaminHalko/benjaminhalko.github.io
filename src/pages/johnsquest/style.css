@@ -27,6 +27,7 @@ main {
 .logo {
     width: 100%;
     max-width: 480px;
+    height: auto;
     image-rendering: pixelated;
     image-rendering: crisp-edges;
 }
@@ -44,6 +45,11 @@ main {
     background: rgba(5, 2, 15, 0.9);
     padding: 16px 4px 4px 16px;
     border-radius: 4px;
+}
+
+.john img {
+    height: auto;
+    display: block;
 }
 
 section {
