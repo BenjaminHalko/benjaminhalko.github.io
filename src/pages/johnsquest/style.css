@@ -136,6 +136,7 @@ section p:last-child {
 .screenshot-grid img {
     width: 100%;
     height: auto;
+    aspect-ratio: 16 / 9;
     border-radius: 4px;
     image-rendering: pixelated;
     image-rendering: crisp-edges;

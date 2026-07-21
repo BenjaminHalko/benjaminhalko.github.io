@@ -1,0 +1,51 @@
+import type { VideoGame, WithContext } from "schema-dts";
+import { SITE, AUTHOR_SAME_AS } from "../data/site";
+import type { GameData } from "../data/games";
+
+export function generateGameSchema(game: GameData): WithContext<VideoGame> {
+  const sameAs: string[] = [];
+  if (game.itchio) sameAs.push(game.itchio);
+  if (game.googleplay) sameAs.push(game.googleplay);
+  if (game.gxgames) sameAs.push(game.gxgames);
+  if (game.github) sameAs.push(game.github);
+  if (game.jamEventUrl) sameAs.push(game.jamEventUrl);
+
+  // Deduplicate platforms for OS/Platform properties
+  const platforms = game.platforms || ["web", "android", "windows"];
+  
+  const mappedOs = platforms.map(p => {
+      if (p === 'windows') return 'Windows';
+      if (p === 'macos') return 'macOS';
+      if (p === 'linux') return 'Linux';
+      if (p === 'android') return 'Android';
+      if (p === 'ios') return 'iOS';
+      return null;
+  }).filter(Boolean) as string[];
+
+  if (mappedOs.length === 0) mappedOs.push("WebBrowser");
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    name: game.name,
+    description: game.description || `Play ${game.name} by ${SITE.author}`,
+    url: `${SITE.hostname}/${game.id}`,
+    genre: game.genre ? [game.genre] : ["Indie Game"],
+    gamePlatform: mappedOs.length > 0 ? mappedOs : ["WebBrowser"],
+    operatingSystem: mappedOs.length > 0 ? mappedOs : ["Any"],
+    applicationCategory: "Game",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
+      url: sameAs[0] || `${SITE.hostname}/${game.id}`,
+    },
+    author: {
+      "@type": "Person",
+      name: SITE.author,
+      sameAs: [SITE.hostname, ...AUTHOR_SAME_AS],
+    },
+    sameAs,
+  };
+}

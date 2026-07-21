@@ -1,5 +1,6 @@
 /** @jsxRuntime automatic @jsxImportSource preact */
 import type { ComponentChildren } from "preact";
+import { TransitionScripts } from "./TransitionScripts";
 
 export interface OpenGraph {
   url?: string;
@@ -44,6 +45,7 @@ export function Head({
       <meta charset="UTF-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <TransitionScripts />
       {robots && <meta name="robots" content={robots} />}
       {favicons}
       <title>{title}</title>

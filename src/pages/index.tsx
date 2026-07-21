@@ -2,54 +2,10 @@
 import { Head } from "../components/Head";
 import { JsonLd } from "../components/JsonLd";
 import { Button } from "../components/Button";
+import { Navbar } from "../components/Navbar";
 import { personSchema } from "../schema/person";
 import { websiteSchema } from "../schema/website";
-import { SITE } from "../data/site";
-
-const socials = [
-  {
-    link: "https://store.steampowered.com/developer/benjaminhalko",
-    color: "#1b2838",
-    text: "Steam",
-    icon: "steam",
-  },
-  {
-    link: "https://benjamin-halko.itch.io",
-    color: "#FA5C5C",
-    text: "itch.io",
-    icon: "itchio",
-  },
-  {
-    link: "https://github.com/BenjaminHalko",
-    color: "cyan",
-    text: "GitHub",
-    icon: "github",
-  },
-  {
-    link: "https://youtube.com/BenjaminHalko",
-    color: "red",
-    text: "YouTube",
-    icon: "youtube",
-  },
-  {
-    link: "https://discord.gg/h6k9Q4QCb8",
-    color: "#5865F2",
-    text: "Discord",
-    icon: "discord",
-  },
-  {
-    link: "mailto:contact@benjaminhalko.dev",
-    color: "yellow",
-    text: "Email",
-    icon: "contact",
-  },
-  {
-    link: "https://linkedin.com/in/BenjaminHalko/",
-    color: "#0A66C2",
-    text: "LinkedIn",
-    icon: "linkedin",
-  },
-];
+import { SITE, SOCIALS } from "../data/site";
 
 function Favicons() {
   return (
@@ -105,36 +61,41 @@ export function HomePage() {
         <JsonLd schema={websiteSchema} />
       </Head>
       <body>
-        <div class="content">
-          <div class="logo">
+        <Navbar />
+        <main class="content">
+          <header class="logo">
             <img
-              {...{ onclick: "window.toggleSnake()" }}
-              src="https://github.com/BenjaminHalko.png"
-              alt={SITE.author}
+              {...{ onclick: "window.toggleSnake()", onkeydown: "if(event.key==='Enter') window.toggleSnake()" }}
+              tabIndex={0}
+              role="button"
+              src="/res/avatar.png"
+              alt={`${SITE.author} Profile`}
+              decoding="async"
             />
             <div id="logoContent">
               <h1>{SITE.author}</h1>
               <p>{SITE.tagline}</p>
             </div>
-          </div>
+          </header>
 
           <a
             href="/johnsquest"
             class="featured-game"
             style="margin-bottom: 20px"
+            aria-label="View John's Quest"
           >
             <div class="featured-game-content">
               <h2>John's Quest</h2>
               <p>You are John Appleby, game historian.</p>
-              <span class="cta-button">Learn More</span>
+              <span class="cta-button" aria-hidden="true">Learn More</span>
             </div>
           </a>
 
-          <section class="games" style="margin-bottom: 20px">
-            <a href="https://hammerhex.com" class="game-card">
+          <section id="games" class="games" style="margin-bottom: 20px" aria-label="Games">
+            <a href="https://hammerhex.com" class="game-card" aria-label="Hammer Hex">
               <img
                 src="/res/games/hammerhex/logo.png"
-                alt="Hammer Hex"
+                alt="Hammer Hex Logo"
                 class="game-logo"
               />
               <p class="coming-soon">Coming Soon</p>
@@ -142,23 +103,22 @@ export function HomePage() {
             <a
               href="https://store.steampowered.com/app/2944340/Unless/"
               class="game-card"
-              target="_blank"
-              rel="noopener noreferrer"
+              aria-label="Unless on Steam"
             >
               <img
                 src="/res/games/unless/logo.png"
-                alt="Unless"
+                alt="Unless Logo"
                 class="game-logo"
               />
               <p class="coming-soon">Available on Steam</p>
             </a>
           </section>
 
-          <div class="socials links-section" style="margin-bottom: 20px">
+          <section class="socials links-section" style="margin-bottom: 20px" aria-label="Social Links">
             <h2 style="width: 100%; text-align: center; margin-top: 0">
               Links
             </h2>
-            {socials.map((s) => (
+            {SOCIALS.map((s) => (
               <Button
                 link={s.link}
                 color={s.color}
@@ -166,8 +126,8 @@ export function HomePage() {
                 icon={s.icon}
               />
             ))}
-          </div>
-        </div>
+          </section>
+        </main>
       </body>
     </html>
   );

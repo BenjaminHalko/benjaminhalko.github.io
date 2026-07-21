@@ -1,44 +1,19 @@
 /** @jsxRuntime automatic @jsxImportSource preact */
 import { Head } from "../../components/Head";
 import { JsonLd } from "../../components/JsonLd";
+import { Navbar } from "../../components/Navbar";
 import { johnsQuestSchema } from "../../schema/johnsquest";
 import { SITE } from "../../data/site";
+import {
+  johnsQuestFeatures as features,
+  johnsQuestGifs as gifs,
+  johnsQuestTags as tags,
+} from "./content";
 
 const DESCRIPTION =
   "Travel through the 4 mystical genres of gaming to defeat Evil John and his 6 Evil Eyes";
 const COVER = `${SITE.hostname}/johnsquest/res/cover.png`;
-const URL = `${SITE.hostname}/johnsquest`;
-
-const gifs: { src: string; alt: string }[] = [
-  { src: "/pages/johnsquest/res/gifs/springs.gif", alt: "John's Quest platforming gameplay" },
-  { src: "/pages/johnsquest/res/gifs/sword.gif", alt: "John's Quest sword combat gameplay" },
-  { src: "/pages/johnsquest/res/gifs/boss_world2.gif", alt: "John's Quest fight with Evil Eyes" },
-  { src: "/pages/johnsquest/res/gifs/walking.gif", alt: "John's Quest walking adventure" },
-  { src: "/pages/johnsquest/res/gifs/falling_rocks.gif", alt: "John's Quest rocks" },
-  { src: "/pages/johnsquest/res/gifs/opening.gif", alt: "John's Quest opening sequence" },
-];
-
-const features: { title: string; desc: string }[] = [
-  { title: "Multi-Genre Adventure", desc: "Every level is different, thanks to Evil John" },
-  { title: "Rhythm-based Platforming", desc: "Everything moves in time with the music" },
-  { title: "Sword-based Combat", desc: 'Includes "Bomb-based Combat" as well' },
-  { title: "Mouse-based Movement", desc: "Simply click where you want to go" },
-  { title: "Laser-based Gun", desc: "You shoot lasers... with a gun (that's it)" },
-  { title: "Multi-Phase Boss Battles", desc: "Take on Evil John in deadly fights" },
-  { title: "Humor", desc: "Maybe" },
-  { title: "Play as John", desc: "Arguably the most important feature" },
-];
-
-const tags = [
-  "2D Platformer",
-  "Action RPG",
-  "Point & Click",
-  "Twin Stick Shooter",
-  "Multi-genre",
-  "Comedy",
-  "Retro",
-  "Adventure",
-];
+const PAGE_URL = `${SITE.hostname}/johnsquest`;
 
 export function JohnsQuestPage() {
   return (
@@ -57,10 +32,10 @@ export function JohnsQuestPage() {
             <link rel="shortcut icon" href="/johnsquest/favicon/favicon.ico" />
           </>
         }
-        styles={["/pages/johnsquest/style.css"]}
+        styles={["/styles/main.css", "/pages/johnsquest/style.css"]}
         og={{
           type: "website",
-          url: URL,
+          url: PAGE_URL,
           title: "John's Quest",
           description: DESCRIPTION,
           image: COVER,
@@ -68,7 +43,7 @@ export function JohnsQuestPage() {
         }}
         twitter={{
           card: "summary_large_image",
-          url: URL,
+          url: PAGE_URL,
           title: "John's Quest",
           description: DESCRIPTION,
           image: COVER,
@@ -83,10 +58,20 @@ export function JohnsQuestPage() {
         <link
           href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
           rel="stylesheet"
+          media="print"
+          {...{ onload: "this.media='all'" }}
         />
+        <noscript>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+            rel="stylesheet"
+          />
+        </noscript>
+        <script type="module" src="/scripts/deferred-media.ts"></script>
         <JsonLd schema={johnsQuestSchema} />
       </Head>
       <body>
+        <Navbar />
         <main>
           <img src="/pages/johnsquest/res/logo.png" alt="John's Quest" class="logo" />
 
@@ -125,24 +110,38 @@ export function JohnsQuestPage() {
           </section>
 
           <section class="john">
-            <img src="/pages/johnsquest/res/footer.png" alt="" style="width: 100%" />
+            <img src="/pages/johnsquest/res/footer.png" alt="" style="width: 100%" loading="lazy" decoding="async" />
           </section>
 
           <section class="trailer">
             <h2>Trailer</h2>
             <iframe
-              src="https://www.youtube-nocookie.com/embed/cA0T3so10CQ"
+              data-deferred-src="https://www.youtube-nocookie.com/embed/cA0T3so10CQ"
               title="John's Quest Trailer"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
               allowFullScreen
             ></iframe>
+            <noscript>
+              <iframe
+                src="https://www.youtube-nocookie.com/embed/cA0T3so10CQ"
+                title="John's Quest Trailer"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
+                allowFullScreen
+                loading="lazy"
+              ></iframe>
+            </noscript>
           </section>
 
           <section class="screenshots">
             <h2>Screenshots</h2>
             <div class="screenshot-grid">
               {gifs.map((g) => (
-                <img src={g.src} alt={g.alt} />
+                <>
+                  <img data-deferred-key={g.key} alt={g.alt} decoding="async" />
+                  <noscript>
+                    <img src={g.fallbackSrc} alt={g.alt} loading="lazy" decoding="async" />
+                  </noscript>
+                </>
               ))}
             </div>
           </section>

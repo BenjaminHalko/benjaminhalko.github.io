@@ -1,7 +1,10 @@
 body {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    margin: 0;
 }
 
 .content {
@@ -54,25 +57,25 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    background-image: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 50%, transparent 100%), url('/johnsquest/res/cover.png');
+    background-image: linear-gradient(to top, rgba(5, 5, 5, 0.9) 0%, rgba(5, 5, 5, 0.2) 50%, transparent 100%), url('/johnsquest/res/cover.png');
     background-size: cover;
     background-position: center;
     height: 350px;
-    border-radius: 30px;
+    border-radius: var(--radius);
     text-decoration: none;
-    color: white;
+    color: var(--text-primary);
     padding: 30px;
     box-shadow: var(--shadow);
-    border-bottom: var(--border);
-    border-top: var(--border);
+    border: var(--border);
     transition: all 300ms var(--curve);
     position: relative;
     overflow: hidden;
 }
 
 .featured-game:hover {
-    transform: scale(1.02);
-    filter: brightness(1.1);
+    transform: translateY(-4px) scale(1.02);
+    border-color: var(--text-primary);
+    box-shadow: 6px 6px 0px var(--text-primary);
 }
 
 .featured-game h2 {
@@ -89,18 +92,22 @@ body {
 
 .cta-button {
     display: inline-block;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 8px 20px;
-    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.04);
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
+    backdrop-filter: blur(16px) saturate(150%);
+    padding: 12px 24px;
+    border-radius: var(--radius);
     font-weight: bold;
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    transition: all 300ms var(--curve);
+    border: var(--border);
+    transition: all 200ms var(--curve);
     width: fit-content;
+    color: var(--text-primary);
 }
 
 .featured-game:hover .cta-button {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
 }
 
 /* Games Section */
@@ -113,15 +120,14 @@ body {
 .game-card {
     background: var(--back-color);
     box-shadow: var(--shadow);
-    border-bottom: var(--border);
-    border-top: var(--border);
-    border-radius: 30px;
+    border: var(--border);
+    border-radius: var(--radius);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    color: white;
+    color: var(--text-primary);
     padding: 20px;
     transition: all 300ms var(--curve);
     position: relative;
@@ -129,8 +135,9 @@ body {
 }
 
 .game-card:not(.iframe-card):hover {
-    transform: scale(1.03);
-    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-4px) scale(1.02);
+    border-color: var(--text-primary);
+    box-shadow: 6px 6px 0px var(--text-primary);
 }
 
 .game-logo {
@@ -170,9 +177,8 @@ body {
 .links-section {
     background: var(--back-color);
     box-shadow: var(--shadow);
-    border-bottom: var(--border);
-    border-top: var(--border);
-    border-radius: 30px;
+    border: var(--border);
+    border-radius: var(--radius);
     padding: 30px;
 }
 

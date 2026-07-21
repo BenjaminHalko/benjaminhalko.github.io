@@ -1,0 +1,63 @@
+/** @jsxRuntime automatic @jsxImportSource preact */
+
+export function Content() {
+  return (
+    <>
+      <p>
+        Shoot to the music in this rhythmic arcade game!
+        <br />
+      </p>{" "}
+      <figure>
+        <img
+          src="/res/games/twilighttempo/rhythm.gif"
+          loading="lazy"
+        />
+      </figure>{" "}
+      <p>
+        At night the screen goes dark! You have to listen and memorize the
+        patterns to defeat the evil diamonds.
+      </p>{" "}
+      <figure>
+        <img
+          src="/res/games/twilighttempo/night.gif"
+          loading="lazy"
+        />
+      </figure>{" "}
+      <h2>Made in 2 weeks</h2>{" "}
+      <p>
+        This game was made in 2 weeks for{" "}
+        <a
+          target="_blank"
+          href="https://gxc.gg/game-jam/"
+          referrerpolicy="origin"
+          rel="nofollow noopener"
+        >
+          Gamemaker&#x27;s Notice-Me game jam
+        </a>
+        .&nbsp;The theme was &quot;The night changed everything&quot;. It was my
+        second time participating in a game jam. The game ended up{" "}
+        <a
+          target="_blank"
+          href="https://gamemaker.io/en/blog/noticeme-voting"
+          referrerpolicy="origin"
+          rel="nofollow noopener"
+        >
+          winning
+        </a>{" "}
+        the $2000 prize for hardest game!
+      </p>{" "}
+      <p>
+        <br />
+        If you have OperaGX you can play the online web version and compete in
+        the online leaderboards&nbsp;
+        <a
+          href="https://gxc.gg/games/r4gpyp/Twilight-Tempo"
+          referrerpolicy="origin"
+          rel="nofollow noopener"
+        >
+          here
+        </a>
+      </p>
+    </>
+  );
+}

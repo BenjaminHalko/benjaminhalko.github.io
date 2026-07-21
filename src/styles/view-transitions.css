@@ -1,0 +1,105 @@
+:root {
+    --page-transition-exit-duration: 160ms;
+    --page-transition-enter-duration: 320ms;
+    --page-transition-navigation-delay: 100ms;
+    --page-transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes vt-slide-left-out {
+    0% { opacity: 1; transform: translateX(0); }
+    60% { opacity: 0; transform: translateX(-18%); }
+    100% { opacity: 0; transform: translateX(-30%); }
+}
+
+@keyframes vt-slide-right-in {
+    from { opacity: 0; transform: translateX(100%); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes vt-slide-right-out {
+    0% { opacity: 1; transform: translateX(0); }
+    60% { opacity: 0; transform: translateX(18%); }
+    100% { opacity: 0; transform: translateX(30%); }
+}
+
+@keyframes vt-slide-left-in {
+    from { opacity: 0; transform: translateX(-100%); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+html[data-vt-pending="forward"] main {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+html[data-vt-pending="back"] main {
+    opacity: 0;
+    transform: translateX(-100%);
+}
+
+html[data-vt-enter="forward"] main {
+    animation: var(--page-transition-enter-duration) var(--page-transition-easing) both vt-slide-right-in;
+}
+
+html[data-vt-enter="back"] main {
+    animation: var(--page-transition-enter-duration) var(--page-transition-easing) both vt-slide-left-in;
+}
+
+html[data-vt-exit="forward"] main {
+    animation: var(--page-transition-exit-duration) var(--page-transition-easing) both vt-slide-left-out;
+}
+
+html[data-vt-exit="back"] main {
+    animation: var(--page-transition-exit-duration) var(--page-transition-easing) both vt-slide-right-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html[data-vt-pending] main {
+        opacity: 1;
+        transform: none;
+    }
+
+    html[data-vt-enter] main,
+    html[data-vt-exit] main {
+        animation: none;
+    }
+
+    html[data-vt-background]::before {
+        display: none;
+    }
+}
+
+html[data-vt-background]::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background-color: var(--vt-bg-color);
+    background-image: var(--vt-bg-image);
+    background-position: var(--vt-bg-position);
+    background-size: var(--vt-bg-size);
+    background-repeat: var(--vt-bg-repeat);
+    background-attachment: var(--vt-bg-attachment);
+    pointer-events: none;
+    opacity: 0;
+}
+
+html[data-vt-pending] main,
+html[data-vt-enter] main,
+html[data-vt-exit] main {
+    position: relative;
+    z-index: 1;
+}
+
+html[data-vt-pending][data-vt-background]::before {
+    opacity: 1;
+}
+
+html[data-vt-enter][data-vt-background]::before {
+    animation: var(--page-transition-enter-duration) var(--page-transition-easing) both vt-fade-out;
+}
+
+@keyframes vt-fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}

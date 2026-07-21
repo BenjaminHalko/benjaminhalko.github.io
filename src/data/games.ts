@@ -1,89 +1,110 @@
 export interface GameData {
   id: string;
   name: string;
-  itchio: string;
-  googleplay: string;
+  description?: string;
+  genre?: string;
+  platforms?: string[];
+  jamEventName?: string;
+  jamEventUrl?: string;
+  itchio?: string;
+  googleplay?: string;
   gxgames?: string;
   github?: string;
   useFirebase?: boolean;
+  isJamGame?: boolean;
 }
 
 export const games: GameData[] = [
   {
+    id: "spacehole",
+    name: "SPACEHOLE",
+    description: "Spaceship Jim is lost in space, surrounded by SPACEHOLES! Luckily you have the power of space acrobatics!",
+    genre: "Action",
+    platforms: ["web", "windows", "macos", "android"],
+    jamEventName: "Global Game Jam 2026",
+    jamEventUrl: "https://globalgamejam.org/games/2026/spacehole-7",
+    itchio: "https://benjamin-halko.itch.io/spacehole",
+    googleplay: "https://play.google.com/store/apps/details?id=com.benjaminhalko.spacehole",
+    github: "https://github.com/BenjaminHalko/SPACEHOLE",
+    isJamGame: true,
+  },
+  {
     id: "hammerhex",
     name: "Hammer Hex",
+    description: "It's not about the size of your hammer; it's how you use it to pole-vault at blazing fast speeds!",
+    genre: "Platformer",
+    platforms: ["web", "windows", "linux", "macos", "android"],
     itchio: "https://bluishgreenpro.itch.io/hammer-hex",
-    googleplay: "hammerhex",
-    gxgames: "ynf9dg/hammer-hex",
+    googleplay: "https://play.google.com/store/apps/details?id=com.benjaminhalko.hammerhex",
+    gxgames: "https://gx.games/games/ynf9dg/hammer-hex/",
     useFirebase: true,
+    isJamGame: false,
   },
   {
     id: "makenewfriends",
     name: "Make New Friends",
-    itchio: "make-new-friends",
-    googleplay: "makenewfriends",
-    gxgames: "v408fd/make-new-friends",
-    github: "Make-New-Friends",
+    description: "Help the lonely people of LudumDare™ Land by creating friends for them.",
+    genre: "Action",
+    platforms: ["web", "windows", "linux", "android"],
+    jamEventName: "Ludum Dare 55",
+    jamEventUrl: "https://ldjam.com/events/ludum-dare/55/make-new-friends",
+    itchio: "https://benjamin-halko.itch.io/make-new-friends",
+    googleplay: "https://play.google.com/store/apps/details?id=com.benjaminhalko.makenewfriends",
+    gxgames: "https://gx.games/games/v408fd/make-new-friends/",
+    github: "https://github.com/BenjaminHalko/Make-New-Friends",
     useFirebase: true,
+    isJamGame: true,
   },
   {
     id: "bladesofdoom",
     name: "Blades of Doom",
-    itchio: "blades-of-doom",
-    googleplay: "bladesofdoom",
-    gxgames: "ovtmf7/blades-of-doom",
-    github: "Blades-Of-Doom",
+    description: "Don't touch the saw blades or else you will be sad.",
+    genre: "Platformer",
+    platforms: ["web", "windows", "linux", "android"],
+    jamEventName: "Ludum Dare 51",
+    jamEventUrl: "https://ldjam.com/events/ludum-dare/51/blades-of-doom",
+    itchio: "https://benjamin-halko.itch.io/blades-of-doom",
+    googleplay: "https://play.google.com/store/apps/details?id=com.benjaminhalko.bladesofdoom",
+    gxgames: "https://gx.games/games/ovtmf7/blades-of-doom/",
+    github: "https://github.com/BenjaminHalko/Blades-Of-Doom",
+    isJamGame: true,
   },
   {
     id: "shapeion",
     name: "Shapeion",
-    itchio: "shapeion",
-    googleplay: "shapeion",
-    gxgames: "3tyac9/shapeion",
-    github: "Shapeion",
+    description: "A fast paced arcade game about shape recognition!",
+    genre: "Action",
+    platforms: ["web", "windows", "linux", "android"],
+    itchio: "https://benjamin-halko.itch.io/shapeion",
+    googleplay: "https://play.google.com/store/apps/details?id=com.benjaminhalko.shapeion",
+    gxgames: "https://gx.games/games/3tyac9/shapeion/",
+    github: "https://github.com/BenjaminHalko/Shapeion",
+    isJamGame: true,
   },
   {
     id: "youareabomb",
     name: "You Are A Bomb",
-    itchio: "you-are-a-bomb",
-    googleplay: "youareabomb",
-    gxgames: "249rmr/you-are-a-bomb",
-    github: "You-Are-A-Bomb",
+    description: "Be a happy little bomb and eat other bombs",
+    genre: "Platformer",
+    platforms: ["web", "windows", "linux", "android"],
+    jamEventName: "Ludum Dare 50",
+    jamEventUrl: "https://ldjam.com/events/ludum-dare/50/you-are-a-bomb",
+    itchio: "https://benjamin-halko.itch.io/you-are-a-bomb",
+    googleplay: "https://play.google.com/store/apps/details?id=com.benjaminhalko.youareabomb",
+    gxgames: "https://gx.games/games/249rmr/you-are-a-bomb/",
+    github: "https://github.com/BenjaminHalko/You-Are-A-Bomb",
+    isJamGame: true,
   },
   {
     id: "twilighttempo",
     name: "Twilight Tempo",
-    itchio: "twilight-tempo",
-    googleplay: "twilighttempo",
-    gxgames: "r4gpyp/twilight-tempo",
-    github: "Twilight-Tempo",
-  },
-  {
-    id: "spacehole",
-    name: "SPACEHOLE",
-    itchio: "spacehole",
-    googleplay: "spacehole",
-    github: "SPACEHOLE",
+    description: "Keep your ears open, because at night, the screen goes black. Listen to the music and score as many points as you can.",
+    genre: "Rhythm",
+    platforms: ["web", "windows", "linux", "android"],
+    itchio: "https://benjamin-halko.itch.io/twilight-tempo",
+    googleplay: "https://play.google.com/store/apps/details?id=com.benjaminhalko.twilighttempo",
+    gxgames: "https://gx.games/games/r4gpyp/twilight-tempo/",
+    github: "https://github.com/BenjaminHalko/Twilight-Tempo",
+    isJamGame: true,
   },
 ];
-
-export interface GameLinks {
-  itchioLink: string;
-  googleplayLink: string;
-  gxgamesLink: string | null;
-  githubLink: string | null;
-}
-
-export function gameLinks(game: GameData): GameLinks {
-  const isHammerHex = game.id === "hammerhex";
-  return {
-    itchioLink: isHammerHex
-      ? game.itchio
-      : `https://benjamin-halko.itch.io/${game.itchio}`,
-    googleplayLink: `https://play.google.com/store/apps/details?id=com.benjaminhalko.${game.googleplay}`,
-    gxgamesLink: game.gxgames ? `https://gx.games/games/${game.gxgames}/` : null,
-    githubLink: game.github
-      ? `https://github.com/BenjaminHalko/${game.github}`
-      : null,
-  };
-}

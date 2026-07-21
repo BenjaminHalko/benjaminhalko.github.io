@@ -1,4 +1,6 @@
 /** @jsxRuntime automatic @jsxImportSource preact */
+import { Navbar } from "../../components/Navbar";
+import { TransitionScripts } from "../../components/TransitionScripts";
 import type { GameData } from "../../data/games";
 
 export function PrivacyPage({ game }: { game: GameData }) {
@@ -12,6 +14,7 @@ export function PrivacyPage({ game }: { game: GameData }) {
           content="width=device-width, initial-scale=1.0"
         />
         <meta name="robots" content="noindex" />
+        <TransitionScripts />
         <link
           rel="icon"
           type="image/png"
@@ -22,13 +25,14 @@ export function PrivacyPage({ game }: { game: GameData }) {
         <link rel="stylesheet" href="/pages/games/games.css" />
       </head>
       <body>
-        <div class="content">
-          <div class="container">
+        <Navbar />
+        <main class="content">
+          <section class="container" aria-label="Privacy Policy">
             <h1>{game.name} - Privacy Policy</h1>
             <h2>User Info</h2>
-            <p>No user info is collected by me</p>
+            <p>No user info is collected by me.</p>
             <h2>Save Data</h2>
-            <p>Save files are used to save settings and scores</p>
+            <p>Save files are used to save settings and scores.</p>
             {game.useFirebase ? (
               <>
                 <h2>Leaderboard</h2>
@@ -43,8 +47,8 @@ export function PrivacyPage({ game }: { game: GameData }) {
                 </p>
               </>
             )}
-          </div>
-        </div>
+          </section>
+        </main>
       </body>
     </html>
   );
