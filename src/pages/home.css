@@ -22,7 +22,11 @@ body {
     white-space: nowrap;
 }
 
-#logoContent span, h1 {
+#logoContent span {
+    color: var(--color);
+}
+
+h1 {
     color: var(--color);
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
