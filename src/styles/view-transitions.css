@@ -1,8 +1,87 @@
+/* Native cross-document view transitions.
+ *
+ * The browser snapshots the outgoing document itself and holds the incoming
+ * one until it is ready to render, so there is no hand-rolled handoff and no
+ * window where content is deliberately hidden while the next page loads.
+ *
+ * Two snapshots participate:
+ *   root - everything not named below: the animated canvas background and the
+ *          navbar. Cross-fading it keeps the randomly generated background of
+ *          the incoming page from popping, which is what the old sessionStorage
+ *          canvas snapshot existed to fake. Identical navbars cross-fading read
+ *          as stationary.
+ *   page - <main>. Slides directionally on top of the root cross-fade.
+ *
+ * Direction is tagged as an active view-transition type by the inline script in
+ * src/components/TransitionScripts.tsx. Browsers without cross-document view
+ * transitions just navigate normally.
+ */
+
 :root {
     --page-transition-exit-duration: 160ms;
     --page-transition-enter-duration: 320ms;
-    --page-transition-navigation-delay: 100ms;
     --page-transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@view-transition {
+    navigation: auto;
+}
+
+main {
+    view-transition-name: page;
+}
+
+/* Canvas background + navbar: cross-fade for continuity. */
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: var(--page-transition-enter-duration);
+    animation-timing-function: var(--page-transition-easing);
+}
+
+/* Custom (non cross-fade) animations need the default blending turned off, or
+   the two snapshots blend into each other instead of overlapping. */
+::view-transition-image-pair(page) {
+    isolation: auto;
+}
+
+::view-transition-old(page),
+::view-transition-new(page) {
+    mix-blend-mode: normal;
+    /* Both snapshots fill the group box so pages of differing height do not
+       letterbox or stretch while the group morphs between them. */
+    height: 100%;
+    overflow: clip;
+}
+
+::view-transition-group(page) {
+    animation-duration: var(--page-transition-enter-duration);
+    animation-timing-function: var(--page-transition-easing);
+}
+
+/* Fallback when direction is unknown - direct entry, or a browser without the
+   Navigation API. */
+::view-transition-old(page) {
+    animation: var(--page-transition-exit-duration) var(--page-transition-easing) both vt-fade-out;
+}
+
+::view-transition-new(page) {
+    animation: var(--page-transition-enter-duration) var(--page-transition-easing) both vt-fade-in;
+}
+
+html:active-view-transition-type(forward)::view-transition-old(page) {
+    animation: var(--page-transition-exit-duration) var(--page-transition-easing) both vt-slide-left-out;
+}
+
+html:active-view-transition-type(forward)::view-transition-new(page) {
+    animation: var(--page-transition-enter-duration) var(--page-transition-easing) both vt-slide-right-in;
+}
+
+html:active-view-transition-type(back)::view-transition-old(page) {
+    animation: var(--page-transition-exit-duration) var(--page-transition-easing) both vt-slide-right-out;
+}
+
+html:active-view-transition-type(back)::view-transition-new(page) {
+    animation: var(--page-transition-enter-duration) var(--page-transition-easing) both vt-slide-left-in;
 }
 
 @keyframes vt-slide-left-out {
@@ -27,79 +106,25 @@
     to { opacity: 1; transform: translateX(0); }
 }
 
-html[data-vt-pending="forward"] main {
-    opacity: 0;
-    transform: translateX(100%);
-}
-
-html[data-vt-pending="back"] main {
-    opacity: 0;
-    transform: translateX(-100%);
-}
-
-html[data-vt-enter="forward"] main {
-    animation: var(--page-transition-enter-duration) var(--page-transition-easing) both vt-slide-right-in;
-}
-
-html[data-vt-enter="back"] main {
-    animation: var(--page-transition-enter-duration) var(--page-transition-easing) both vt-slide-left-in;
-}
-
-html[data-vt-exit="forward"] main {
-    animation: var(--page-transition-exit-duration) var(--page-transition-easing) both vt-slide-left-out;
-}
-
-html[data-vt-exit="back"] main {
-    animation: var(--page-transition-exit-duration) var(--page-transition-easing) both vt-slide-right-out;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    html[data-vt-pending] main {
-        opacity: 1;
-        transform: none;
-    }
-
-    html[data-vt-enter] main,
-    html[data-vt-exit] main {
-        animation: none;
-    }
-
-    html[data-vt-background]::before {
-        display: none;
-    }
-}
-
-html[data-vt-background]::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    background-color: var(--vt-bg-color);
-    background-image: var(--vt-bg-image);
-    background-position: var(--vt-bg-position);
-    background-size: var(--vt-bg-size);
-    background-repeat: var(--vt-bg-repeat);
-    background-attachment: var(--vt-bg-attachment);
-    pointer-events: none;
-    opacity: 0;
-}
-
-html[data-vt-pending] main,
-html[data-vt-enter] main,
-html[data-vt-exit] main {
-    position: relative;
-    z-index: 1;
-}
-
-html[data-vt-pending][data-vt-background]::before {
-    opacity: 1;
-}
-
-html[data-vt-enter][data-vt-background]::before {
-    animation: var(--page-transition-enter-duration) var(--page-transition-easing) both vt-fade-out;
+@keyframes vt-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 @keyframes vt-fade-out {
     from { opacity: 1; }
     to { opacity: 0; }
+}
+
+/* The inline script also calls skipTransition() for reduced motion; this is the
+   belt-and-braces path for browsers that fire the transition without it. */
+@media (prefers-reduced-motion: reduce) {
+    ::view-transition-group(root),
+    ::view-transition-group(page),
+    ::view-transition-old(root),
+    ::view-transition-new(root),
+    ::view-transition-old(page),
+    ::view-transition-new(page) {
+        animation-duration: 1ms !important;
+    }
 }

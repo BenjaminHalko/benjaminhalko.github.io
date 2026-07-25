@@ -1,3 +1,4 @@
+import { whenActivated } from "./activation";
 import gifBossWorld2 from "../pages/johnsquest/res/gifs/boss_world2.gif";
 import gifFallingRocks from "../pages/johnsquest/res/gifs/falling_rocks.gif";
 import gifOpening from "../pages/johnsquest/res/gifs/opening.gif";
@@ -42,26 +43,30 @@ const hydrateIframe = (iframe: HTMLIFrameElement) => {
   iframe.removeAttribute("data-deferred-src");
 };
 
-if ("IntersectionObserver" in window) {
-  const observer = new IntersectionObserver(
-    (entries, obs) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          if (entry.target instanceof HTMLImageElement) {
-            hydrateImage(entry.target);
-          } else if (entry.target instanceof HTMLIFrameElement) {
-            hydrateIframe(entry.target);
+// Held until activation so merely hovering a link does not pull down megabytes
+// of GIFs (or start an embed) for a page the user may never open.
+whenActivated(() => {
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (entry.target instanceof HTMLImageElement) {
+              hydrateImage(entry.target);
+            } else if (entry.target instanceof HTMLIFrameElement) {
+              hydrateIframe(entry.target);
+            }
+            obs.unobserve(entry.target);
           }
-          obs.unobserve(entry.target);
-        }
-      });
-    },
-    { rootMargin: "200px 0px" }
-  );
+        });
+      },
+      { rootMargin: "200px 0px" }
+    );
 
-  deferredImages.forEach((el) => observer.observe(el));
-  deferredIframes.forEach((el) => observer.observe(el));
-} else {
-  deferredImages.forEach((el) => hydrateImage(el));
-  deferredIframes.forEach((el) => hydrateIframe(el));
-}
+    deferredImages.forEach((el) => observer.observe(el));
+    deferredIframes.forEach((el) => observer.observe(el));
+  } else {
+    deferredImages.forEach((el) => hydrateImage(el));
+    deferredIframes.forEach((el) => hydrateIframe(el));
+  }
+});
