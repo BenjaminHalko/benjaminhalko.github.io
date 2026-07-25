@@ -1,29 +1,23 @@
 /** @jsxRuntime automatic @jsxImportSource preact */
+import { Head } from "../../components/Head";
 import { Navbar } from "../../components/Navbar";
-import { TransitionScripts } from "../../components/TransitionScripts";
 import type { GameData } from "../../data/games";
 
 export function PrivacyPage({ game }: { game: GameData }) {
   return (
     <html lang="en">
-      <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0"
-        />
-        <meta name="robots" content="noindex" />
-        <TransitionScripts />
-        <link
-          rel="icon"
-          type="image/png"
-          href={`/res/games/${game.id}/favicon.png`}
-        />
-        <title>{game.name} - Privacy Policy</title>
-        <link rel="stylesheet" href="/styles/main.css" />
-        <link rel="stylesheet" href="/pages/games/games.css" />
-      </head>
+      <Head
+        title={`${game.name} - Privacy Policy`}
+        robots="noindex"
+        favicons={
+          <link
+            rel="icon"
+            type="image/png"
+            href={`/res/games/${game.id}/favicon.png`}
+          />
+        }
+        styles={["/styles/main.css", "/pages/games/games.css"]}
+      />
       <body>
         <Navbar />
         <main class="content">
