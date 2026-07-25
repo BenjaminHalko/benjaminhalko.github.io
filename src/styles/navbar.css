@@ -305,7 +305,10 @@ html[data-vt-navigation] .navbar {
         gap: 0;
     }
 
-    .navbar-center > a,
+    .navbar-center > a {
+        display: none;
+    }
+
     .nav-dropdown-trigger {
         padding: 8px 4px;
         font-size: 1rem;
