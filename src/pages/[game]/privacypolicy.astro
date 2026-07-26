@@ -6,7 +6,7 @@ import type {
 } from "astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { games } from "../../data/games";
-import "../games/games.css";
+import "../../styles/games.css";
 
 export const getStaticPaths = (() => {
   const faviconModules = import.meta.glob<{ default: ImageMetadata }>(

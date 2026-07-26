@@ -9,13 +9,10 @@ import avatar from "../res/avatar.png";
 import hammerHexLogo from "../res/games/hammerhex/logo.png";
 import unlessLogo from "../res/games/unless/logo.png";
 import siteLogo from "../res/logo.png";
-// Referenced as a CSS background in home.css, so the browser assigns it a
-// default priority. Importing it here yields the identical hashed URL, which
-// lets us preload it with fetchpriority=high (it is the LCP element).
-import featuredCover from "./johnsquest/res/cover.png";
+import featuredCover from "../res/johnsquest/cover.png";
 import { personSchema } from "../schema/person";
 import { websiteSchema } from "../schema/website";
-import "./home.css";
+import "../styles/home.css";
 ---
 
 <BaseLayout
@@ -89,6 +86,8 @@ import "./home.css";
 
     <a href="/johnsquest" class="featured-game" style="margin-bottom: 20px">
       <div class="featured-game-content">
+        <h2>John's Quest</h2>
+        <p>{johnsQuestDescription}</p>
         <span class="cta-button">Learn More</span>
       </div>
     </a>

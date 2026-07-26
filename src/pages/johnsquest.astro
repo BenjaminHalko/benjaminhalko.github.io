@@ -11,11 +11,11 @@ import {
   johnsQuestTags as tags,
 } from "../data/johnsquest-content";
 import { SITE } from "../data/site";
-import footer from "./johnsquest/res/footer.png";
-import logo from "./johnsquest/res/logo.png";
-import cover from "./johnsquest/res/cover.png";
+import footer from "../res/johnsquest/footer.png";
+import logo from "../res/johnsquest/logo.png";
+import cover from "../res/johnsquest/cover.png";
 import { johnsQuestSchema } from "../schema/johnsquest";
-import "./johnsquest/style.css";
+import "../styles/johnsquest.css";
 
 const PAGE_URL = `${SITE.hostname}/johnsquest`;
 const ogImage = new URL(cover.src, Astro.site).href;

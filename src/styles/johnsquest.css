@@ -7,7 +7,7 @@ body {
 }
 
 body {
-    background: #1c122b url("res/bg.png") top center / cover no-repeat fixed;
+    background: #1c122b url("../res/johnsquest/bg.png") top center / cover no-repeat fixed;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     color: #e0e0ff;
     image-rendering: pixelated;
