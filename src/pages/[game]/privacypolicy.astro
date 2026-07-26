@@ -34,7 +34,11 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { game, favicon } = Astro.props;
 ---
 
-<BaseLayout title={`${game.name} - Privacy Policy`} robots="noindex">
+<BaseLayout
+  title={`${game.name} - Privacy Policy`}
+  description={`Privacy policy for ${game.name}: what data the game stores and how it is used.`}
+  robots="noindex"
+>
   <Fragment slot="favicons">
     <link rel="icon" type="image/png" href={favicon.src} />
   </Fragment>

@@ -6,6 +6,9 @@ import gifSprings from "../pages/johnsquest/res/gifs/springs.gif";
 import gifSword from "../pages/johnsquest/res/gifs/sword.gif";
 import gifWalking from "../pages/johnsquest/res/gifs/walking.gif";
 
+export const johnsQuestDescription =
+  "Travel through the 4 mystical genres of gaming to defeat Evil John and his 6 Evil Eyes";
+
 export const johnsQuestGifs: ReadonlyArray<{
   image: ImageMetadata;
   alt: string;

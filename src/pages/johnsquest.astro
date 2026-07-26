@@ -5,6 +5,7 @@ import { Icon } from "astro-icon/components";
 import JsonLd from "../components/JsonLd.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import {
+  johnsQuestDescription as DESCRIPTION,
   johnsQuestFeatures as features,
   johnsQuestGifs as gifs,
   johnsQuestTags as tags,
@@ -16,8 +17,6 @@ import cover from "./johnsquest/res/cover.png";
 import { johnsQuestSchema } from "../schema/johnsquest";
 import "./johnsquest/style.css";
 
-const DESCRIPTION =
-  "Travel through the 4 mystical genres of gaming to defeat Evil John and his 6 Evil Eyes";
 const PAGE_URL = `${SITE.hostname}/johnsquest`;
 const ogImage = new URL(cover.src, Astro.site).href;
 ---

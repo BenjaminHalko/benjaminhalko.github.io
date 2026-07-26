@@ -1,4 +1,6 @@
 // Snake game easter egg
+import videoUrl from "../res/home/video.txt?url";
+
 export {};
 
 // Constants
@@ -309,7 +311,11 @@ document.addEventListener("keydown", (event: KeyboardEvent) => {
       codePos++;
       if (codePos === code.length) {
         codePos = 0;
-        if (videoData !== null) playVideo();
+        void loadVideoData().then((data) => {
+          if (data === null) return;
+          videoData = data;
+          playVideo();
+        });
       }
     } else if (codePos !== 2 || key !== 0) {
       codePos = 0;
@@ -336,14 +342,17 @@ let vidIndex = 0;
 const VIDEO_WIDTH = 40;
 const VIDEO_HEIGHT = 17;
 
-const request = new XMLHttpRequest();
-request.open("GET", "/files/home/video", true);
-request.onload = function () {
-  if (request.status >= 200 && request.status < 400) {
-    videoData = request.responseText;
-  }
-};
-request.send();
+/* Deliberately NOT fetched on page load: this payload is ~500 KB, which was
+   two thirds of the homepage's transfer weight and contended with the LCP
+   image for bandwidth. It is only needed once the code above is entered. */
+let videoRequest: Promise<string | null> | null = null;
+
+function loadVideoData(): Promise<string | null> {
+  videoRequest ??= fetch(videoUrl)
+    .then((response) => (response.ok ? response.text() : null))
+    .catch(() => null);
+  return videoRequest;
+}
 
 function playVideo(): void {
   snakeState = 3;

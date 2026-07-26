@@ -29,4 +29,9 @@ export default defineConfig({
       fallbacks: ["cursive"],
     },
   ],
+  redirects: {
+    "/hammerhex": "https://hammerhex.com",
+    "/google-play/[game]": "/[game]",
+    "/google-play/[game]/privacypolicy": "/[game]/privacypolicy"
+  }
 });

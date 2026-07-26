@@ -3,11 +3,16 @@ import { Image } from "astro:assets";
 import Button from "../components/Button.astro";
 import JsonLd from "../components/JsonLd.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { johnsQuestDescription } from "../data/johnsquest-content";
 import { SITE, SOCIALS } from "../data/site";
 import avatar from "../res/avatar.png";
 import hammerHexLogo from "../res/games/hammerhex/logo.png";
 import unlessLogo from "../res/games/unless/logo.png";
 import siteLogo from "../res/logo.png";
+// Referenced as a CSS background in home.css, so the browser assigns it a
+// default priority. Importing it here yields the identical hashed URL, which
+// lets us preload it with fetchpriority=high (it is the LCP element).
+import featuredCover from "./johnsquest/res/cover.png";
 import { personSchema } from "../schema/person";
 import { websiteSchema } from "../schema/website";
 import "./home.css";
@@ -15,6 +20,7 @@ import "./home.css";
 
 <BaseLayout
   title={SITE.author}
+  description={SITE.description}
   og={{
     url: SITE.hostname,
     title: SITE.author,
@@ -52,6 +58,12 @@ import "./home.css";
     <meta name="theme-color" content="#ffffff" />
   </Fragment>
   <Fragment slot="head">
+    <link
+      rel="preload"
+      as="image"
+      href={featuredCover.src}
+      fetchpriority="high"
+    />
     <JsonLd data={personSchema} />
     <JsonLd data={websiteSchema} />
   </Fragment>
@@ -64,8 +76,9 @@ import "./home.css";
         role="button"
         src={avatar}
         alt={`${SITE.author} Profile`}
+        width={130}
+        densities={[1, 2]}
         loading="eager"
-        fetchpriority="high"
         decoding="async"
       />
       <div id="logoContent">
@@ -74,14 +87,9 @@ import "./home.css";
       </div>
     </header>
 
-    <a
-      href="/johnsquest"
-      class="featured-game"
-      style="margin-bottom: 20px"
-      aria-label="View John's Quest"
-    >
+    <a href="/johnsquest" class="featured-game" style="margin-bottom: 20px">
       <div class="featured-game-content">
-        <span class="cta-button" aria-hidden="true">Learn More</span>
+        <span class="cta-button">Learn More</span>
       </div>
     </a>
 
@@ -91,14 +99,12 @@ import "./home.css";
       style="margin-bottom: 20px"
       aria-label="Games"
     >
-      <a
-        href="https://hammerhex.com"
-        class="game-card"
-        aria-label="Hammer Hex"
-      >
+      <a href="https://hammerhex.com" class="game-card">
         <Image
           src={hammerHexLogo}
-          alt="Hammer Hex Logo"
+          alt="Hammer Hex"
+          width={280}
+          densities={[1, 2]}
           class="game-logo"
         />
         <p class="coming-soon">Coming Soon</p>
@@ -106,9 +112,14 @@ import "./home.css";
       <a
         href="https://store.steampowered.com/app/2944340/Unless/"
         class="game-card"
-        aria-label="Unless on Steam"
       >
-        <Image src={unlessLogo} alt="Unless Logo" class="game-logo" />
+        <Image
+          src={unlessLogo}
+          alt="Unless"
+          width={240}
+          densities={[1, 2]}
+          class="game-logo"
+        />
         <p class="coming-soon">Available on Steam</p>
       </a>
     </section>
