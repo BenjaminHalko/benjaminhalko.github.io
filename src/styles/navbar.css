@@ -288,11 +288,6 @@ html[data-nav-settled] .navbar {
 
 @media screen and (max-width: 768px) {
     .navbar {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-        align-items: center;
         padding: 8px 16px;
     }
 
@@ -309,32 +304,7 @@ html[data-nav-settled] .navbar {
         display: none;
     }
 
-    .nav-dropdown-trigger {
-        padding: 8px 4px;
-        font-size: 1rem;
-        white-space: nowrap;
-    }
-
-    .navbar-right {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        justify-content: center;
-        width: auto;
-    }
-
     .nav-dropdown {
         position: static;
-    }
-
-    .nav-dropdown-content {
-        left: 50%;
-        max-width: calc(100vw - 40px);
-        min-width: min(240px, calc(100vw - 40px));
-        box-sizing: border-box;
-        max-height: min(60vh, 420px);
-        overflow-y: auto;
-        overscroll-behavior: contain;
-        transition: all 400ms ease-out;
     }
 }
