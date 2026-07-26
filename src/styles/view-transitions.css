@@ -78,3 +78,17 @@ main {
         animation-duration: 1ms !important;
     }
 }
+
+/* No page-transition animation on mobile. `*` covers our `page` group AND
+   Astro's generated root fade (its rules sit in @layer astro, so unlayered
+   !important wins). Navigation still swaps instantly via the router; iOS
+   edge-swipes already bypass all of this (Astro skips its animation when the
+   UA provides its own). Breakpoint matches navbar.css. */
+@media screen and (max-width: 768px) {
+    ::view-transition-group(*),
+    ::view-transition-image-pair(*),
+    ::view-transition-old(*),
+    ::view-transition-new(*) {
+        animation: none !important;
+    }
+}
