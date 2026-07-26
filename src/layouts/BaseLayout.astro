@@ -89,6 +89,18 @@ const { title, description, robots, og, twitter } = Astro.props;
         e.newDocument.documentElement.dataset.navSettled = "";
         document.querySelector(".nav-dropdown")?.removeAttribute("open");
       });
+
+      document.addEventListener("pointerdown", (event) => {
+        const dropdown = document.querySelector(".nav-dropdown");
+        if (dropdown === null || !dropdown.hasAttribute("open")) return;
+        if (event.target instanceof Node && dropdown.contains(event.target)) {
+          return;
+        }
+
+        dropdown.removeAttribute("open");
+        const trigger = dropdown.querySelector(".nav-dropdown-trigger");
+        if (trigger instanceof HTMLElement) trigger.blur();
+      });
     </script>
   </body>
 </html>
