@@ -6,8 +6,6 @@ export const SITE = {
     "Game Developer - Creator of John's Quest, Hammer Hex, and more",
 } as const;
 
-// Places the author exists elsewhere on the web. Reused by Person JSON-LD and
-// the author reference inside game schemas.
 export const AUTHOR_SAME_AS: readonly string[] = [
   "https://store.steampowered.com/developer/benjaminhalko",
   "https://github.com/BenjaminHalko",
@@ -19,42 +17,42 @@ export const SOCIALS = [
     link: "https://store.steampowered.com/developer/benjaminhalko",
     color: "#00ADEE",
     text: "Steam",
-    icon: "steam",
+    icon: "tabler:brand-steam",
   },
   {
     link: "https://benjamin-halko.itch.io",
     color: "#FA5C5C",
     text: "itch.io",
-    icon: "itchio",
+    icon: "tabler:brand-itch",
   },
   {
     link: "https://github.com/BenjaminHalko",
     color: "#0FBF3E",
     text: "GitHub",
-    icon: "github",
+    icon: "tabler:brand-github",
   },
   {
     link: "https://linkedin.com/in/BenjaminHalko/",
     color: "#0A66C2",
     text: "LinkedIn",
-    icon: "linkedin",
+    icon: "tabler:brand-linkedin",
   },
   {
     link: "https://youtube.com/BenjaminHalko",
     color: "red",
     text: "YouTube",
-    icon: "youtube",
+    icon: "tabler:brand-youtube",
   },
   {
     link: "https://discord.gg/h6k9Q4QCb8",
     color: "#5865F2",
     text: "Discord",
-    icon: "discord",
+    icon: "tabler:brand-discord",
   },
   {
     link: "mailto:contact@benjaminhalko.dev",
     color: "yellow",
     text: "Email",
-    icon: "contact",
+    icon: "tabler:mail",
   }
 ];

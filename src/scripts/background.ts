@@ -1,7 +1,5 @@
 // Background animation with floating gradient circles
 
-import { whenActivated } from "./activation";
-
 interface Circle {
   x: number;
   y: number;
@@ -97,6 +95,6 @@ function animate(timeStamp: number): void {
   requestAnimationFrame(animate);
 }
 
-// The canvas element itself is created eagerly so a prerendered page is fully
-// laid out, but the render loop only starts once the page is really activated.
-whenActivated(() => requestAnimationFrame(animate));
+// Prerendered documents get no rendering opportunities, so this does not fire
+// until activation. No guard needed.
+requestAnimationFrame(animate);

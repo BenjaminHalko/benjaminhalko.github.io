@@ -1,20 +1,11 @@
-/* Native cross-document view transitions.
+/* Cross-document view transitions, no JavaScript.
  *
- * The browser snapshots the outgoing document itself and holds the incoming
- * one until it is ready to render, so there is no hand-rolled handoff and no
- * window where content is deliberately hidden while the next page loads.
+ * Two snapshots participate: `root` (canvas background + navbar) cross-fades,
+ * and `page` (<main>) slides over it.
  *
- * Two snapshots participate:
- *   root - everything not named below: the animated canvas background and the
- *          navbar. Cross-fading it keeps the randomly generated background of
- *          the incoming page from popping, which is what the old sessionStorage
- *          canvas snapshot existed to fake. Identical navbars cross-fading read
- *          as stationary.
- *   page - <main>. Slides directionally on top of the root cross-fade.
- *
- * Direction is tagged as an active view-transition type by the inline script in
- * src/components/TransitionScripts.tsx. Browsers without cross-document view
- * transitions just navigate normally.
+ * Direction comes from the incoming page's own `types` descriptor: forward by
+ * default, overridden to `back` in home.css. Browsers without the descriptor
+ * match no :active-view-transition-type() rule and get the crossfade below.
  */
 
 :root {
@@ -25,21 +16,21 @@
 
 @view-transition {
     navigation: auto;
+    types: forward;
 }
 
 main {
     view-transition-name: page;
 }
 
-/* Canvas background + navbar: cross-fade for continuity. */
 ::view-transition-old(root),
 ::view-transition-new(root) {
     animation-duration: var(--page-transition-enter-duration);
     animation-timing-function: var(--page-transition-easing);
 }
 
-/* Custom (non cross-fade) animations need the default blending turned off, or
-   the two snapshots blend into each other instead of overlapping. */
+/* Custom animations need the default blending off, or the snapshots blend
+   instead of overlapping. */
 ::view-transition-image-pair(page) {
     isolation: auto;
 }
@@ -47,8 +38,7 @@ main {
 ::view-transition-old(page),
 ::view-transition-new(page) {
     mix-blend-mode: normal;
-    /* Both snapshots fill the group box so pages of differing height do not
-       letterbox or stretch while the group morphs between them. */
+    /* Fill the group box so pages of differing height do not letterbox. */
     height: 100%;
     overflow: clip;
 }
@@ -58,8 +48,7 @@ main {
     animation-timing-function: var(--page-transition-easing);
 }
 
-/* Fallback when direction is unknown - direct entry, or a browser without the
-   Navigation API. */
+/* Fallback when no direction type matched. */
 ::view-transition-old(page) {
     animation: var(--page-transition-exit-duration) var(--page-transition-easing) both vt-fade-out;
 }
@@ -116,8 +105,6 @@ html:active-view-transition-type(back)::view-transition-new(page) {
     to { opacity: 0; }
 }
 
-/* The inline script also calls skipTransition() for reduced motion; this is the
-   belt-and-braces path for browsers that fire the transition without it. */
 @media (prefers-reduced-motion: reduce) {
     ::view-transition-group(root),
     ::view-transition-group(page),

@@ -1,0 +1,140 @@
+---
+import { Image } from "astro:assets";
+import Button from "../components/Button.astro";
+import JsonLd from "../components/JsonLd.astro";
+import Navbar from "../components/Navbar.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE, SOCIALS } from "../data/site";
+import avatar from "../res/avatar.png";
+import hammerHexLogo from "../res/games/hammerhex/logo.png";
+import unlessLogo from "../res/games/unless/logo.png";
+import siteLogo from "../res/logo.png";
+import { personSchema } from "../schema/person";
+import { websiteSchema } from "../schema/website";
+import "./home.css";
+---
+
+<BaseLayout
+  title={SITE.author}
+  og={{
+    url: SITE.hostname,
+    title: SITE.author,
+    description: SITE.description,
+    image: new URL(siteLogo.src, Astro.site).href,
+  }}
+>
+  <Fragment slot="favicons">
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
+    <link
+      rel="mask-icon"
+      href="/favicon/safari-pinned-tab.svg"
+      color="#150e6b"
+    />
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+    <meta name="msapplication-TileColor" content="#00aba9" />
+    <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
+    <meta name="theme-color" content="#ffffff" />
+  </Fragment>
+  <Fragment slot="head">
+    <JsonLd data={personSchema} />
+    <JsonLd data={websiteSchema} />
+  </Fragment>
+
+  <Navbar />
+  <main class="content">
+    <header class="logo">
+      <Image
+        onclick="window.toggleSnake()"
+        onkeydown="if(event.key==='Enter') window.toggleSnake()"
+        tabindex="0"
+        role="button"
+        src={avatar}
+        alt={`${SITE.author} Profile`}
+        decoding="async"
+      />
+      <div id="logoContent">
+        <h1>{SITE.author}</h1>
+        <p>{SITE.tagline}</p>
+      </div>
+    </header>
+
+    <a
+      href="/johnsquest"
+      class="featured-game"
+      style="margin-bottom: 20px"
+      aria-label="View John's Quest"
+    >
+      <div class="featured-game-content">
+        <h2>John's Quest</h2>
+        <p>You are John Appleby, game historian.</p>
+        <span class="cta-button" aria-hidden="true">Learn More</span>
+      </div>
+    </a>
+
+    <section
+      id="games"
+      class="games"
+      style="margin-bottom: 20px"
+      aria-label="Games"
+    >
+      <a
+        href="https://hammerhex.com"
+        class="game-card"
+        aria-label="Hammer Hex"
+      >
+        <Image
+          src={hammerHexLogo}
+          alt="Hammer Hex Logo"
+          class="game-logo"
+        />
+        <p class="coming-soon">Coming Soon</p>
+      </a>
+      <a
+        href="https://store.steampowered.com/app/2944340/Unless/"
+        class="game-card"
+        aria-label="Unless on Steam"
+      >
+        <Image src={unlessLogo} alt="Unless Logo" class="game-logo" />
+        <p class="coming-soon">Available on Steam</p>
+      </a>
+    </section>
+
+    <section
+      class="socials links-section"
+      style="margin-bottom: 20px"
+      aria-label="Social Links"
+    >
+      <h2 style="width: 100%; text-align: center; margin-top: 0">Links</h2>
+      {
+        SOCIALS.map((social) => (
+          <Button
+            link={social.link}
+            color={social.color}
+            text={social.text}
+            icon={social.icon}
+          />
+        ))
+      }
+    </section>
+  </main>
+
+  <script src="../scripts/background.ts"></script>
+  <script src="../scripts/snake.ts"></script>
+</BaseLayout>

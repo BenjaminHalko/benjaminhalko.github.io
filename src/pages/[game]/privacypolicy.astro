@@ -1,0 +1,68 @@
+---
+import type {
+  GetStaticPaths,
+  ImageMetadata,
+  InferGetStaticPropsType,
+} from "astro";
+import Navbar from "../../components/Navbar.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { games } from "../../data/games";
+import "../games/games.css";
+
+export const getStaticPaths = (() => {
+  const faviconModules = import.meta.glob<{ default: ImageMetadata }>(
+    "../../res/games/*/favicon.png",
+    { eager: true },
+  );
+  const faviconByGameId: Record<string, ImageMetadata> = Object.fromEntries(
+    Object.entries(faviconModules).map(([path, module]) => [
+      path.split("/").at(-2),
+      module.default,
+    ]),
+  );
+
+  return games.map((game) => ({
+    params: { game: game.id },
+    props: {
+      game,
+      favicon: faviconByGameId[game.id],
+    },
+  }));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { game, favicon } = Astro.props;
+---
+
+<BaseLayout title={`${game.name} - Privacy Policy`} robots="noindex">
+  <Fragment slot="favicons">
+    <link rel="icon" type="image/png" href={favicon.src} />
+  </Fragment>
+
+  <Navbar />
+  <main class="content">
+    <section class="container" aria-label="Privacy Policy">
+      <h1>{game.name} - Privacy Policy</h1>
+      <h2>User Info</h2>
+      <p>No user info is collected by me.</p>
+      <h2>Save Data</h2>
+      <p>Save files are used to save settings and scores.</p>
+      {
+        game.useFirebase ? (
+          <Fragment>
+            <h2>Leaderboard</h2>
+            <p>Google Firebase Database is used to store user scores.</p>
+          </Fragment>
+        ) : (
+          <Fragment>
+            <h2>Google Play Games</h2>
+            <p>
+              Google Play Games is used to store Achievements and Leaderboards.
+            </p>
+          </Fragment>
+        )
+      }
+    </section>
+  </main>
+</BaseLayout>

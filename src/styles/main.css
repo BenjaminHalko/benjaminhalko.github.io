@@ -3,6 +3,13 @@
 
 /* Global Variables */
 :root {
+    /* Without this the browser's default canvas is white, which flashes
+       through during cross-document view transitions while `main` is lifted
+       into the ::view-transition overlay. Set here rather than as a background
+       on `html`, because background.ts relies on body-background propagation
+       to keep the z-index:-1 gradient canvas visible. */
+    color-scheme: dark;
+
     --curve: cubic-bezier(0.25, 1, 0.5, 1);
     --bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
     
@@ -45,7 +52,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Press Start 2P', system-ui, sans-serif;
+    font-family: system-ui, sans-serif;
     line-height: 1.3;
 }
 

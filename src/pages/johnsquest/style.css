@@ -8,10 +8,14 @@ body {
 
 body {
     background: #1c122b url("res/bg.png") top center / cover no-repeat fixed;
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     color: #e0e0ff;
+    image-rendering: pixelated;
+}
+
+body img,
+body svg {
+    image-rendering: auto;
 }
 
 main {
@@ -28,8 +32,6 @@ main {
     width: 100%;
     max-width: 480px;
     height: auto;
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
 }
 
 .tagline {
@@ -64,7 +66,7 @@ h2 {
     margin: 0 0 12px;
     font-size: 1.1rem;
     color: #4ef0ff;
-    font-family: "Press Start 2P", cursive;
+    font-family: var(--font-press-start-2p);
 }
 
 section p {
@@ -144,8 +146,6 @@ section p:last-child {
     height: auto;
     aspect-ratio: 16 / 9;
     border-radius: 4px;
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
     transition: transform 0.2s;
 }
 
@@ -170,12 +170,17 @@ section p:last-child {
     border-radius: 4px;
 }
 
-.trailer iframe {
+.trailer lite-youtube {
     width: 100%;
+    max-width: 100%;
     aspect-ratio: 16 / 9;
-    border: none;
     border-radius: 2px;
     display: block;
+}
+
+.trailer lite-youtube iframe {
+    border: none;
+    border-radius: 2px;
 }
 
 .store-btn {

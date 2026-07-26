@@ -1,0 +1,224 @@
+---
+import type {
+  GetStaticPaths,
+  ImageMetadata,
+  InferGetStaticPropsType,
+} from "astro";
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import Button from "../components/Button.astro";
+import GameDescription from "../components/games/GameDescription.astro";
+import JsonLd from "../components/JsonLd.astro";
+import Navbar from "../components/Navbar.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { games } from "../data/games";
+import { SITE } from "../data/site";
+import { generateGameSchema } from "../schema/game";
+import "./games/games.css";
+
+const PLATFORM_ICON: Readonly<Record<string, string>> = {
+  web: "tabler:world",
+  windows: "tabler:brand-windows",
+  android: "tabler:brand-android",
+  macos: "tabler:brand-apple",
+  linux: "tabler:brand-ubuntu",
+  ios: "tabler:device-ipad",
+};
+
+export const getStaticPaths = (() => {
+  const faviconModules = import.meta.glob<{ default: ImageMetadata }>(
+    "../res/games/*/favicon.png",
+    { eager: true },
+  );
+  const logoModules = import.meta.glob<{ default: ImageMetadata }>(
+    "../res/games/*/logo.png",
+    { eager: true },
+  );
+  const ogModules = import.meta.glob<{ default: ImageMetadata }>(
+    "../res/games/*/og.png",
+    { eager: true },
+  );
+  const faviconByGameId: Record<string, ImageMetadata> = Object.fromEntries(
+    Object.entries(faviconModules).map(([path, module]) => [
+      path.split("/").at(-2),
+      module.default,
+    ]),
+  );
+  const logoByGameId: Record<string, ImageMetadata> = Object.fromEntries(
+    Object.entries(logoModules).map(([path, module]) => [
+      path.split("/").at(-2),
+      module.default,
+    ]),
+  );
+  const ogByGameId: Record<string, ImageMetadata> = Object.fromEntries(
+    Object.entries(ogModules).map(([path, module]) => [
+      path.split("/").at(-2),
+      module.default,
+    ]),
+  );
+
+  return games
+    .filter(
+      // Hammer Hex redirects to hammerhex.com via public/_redirects.
+      (game) => game.id !== "hammerhex",
+    )
+    .map((game) => ({
+      params: { game: game.id },
+      props: {
+        game,
+        favicon: faviconByGameId[game.id],
+        logo: logoByGameId[game.id],
+        og: ogByGameId[game.id],
+      },
+    }));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { game, favicon, logo, og } = Astro.props;
+const description = game.description || `Play ${game.name}`;
+const pageUrl = `${SITE.hostname}/${game.id}`;
+const ogImage = new URL(og.src, Astro.site).href;
+---
+
+<BaseLayout
+  title={game.name}
+  description={description}
+  og={{
+    url: pageUrl,
+    title: game.name,
+    description,
+    image: ogImage,
+  }}
+  twitter={{
+    card: "summary_large_image",
+    url: pageUrl,
+    title: game.name,
+    description,
+    image: ogImage,
+  }}
+>
+  <Fragment slot="favicons">
+    <link rel="icon" type="image/png" href={favicon.src} />
+  </Fragment>
+  <Fragment slot="head">
+    <JsonLd data={generateGameSchema(game)} />
+  </Fragment>
+
+  <Navbar />
+  <main class="content store-layout">
+    <div class="store-main">
+      <h1 style="margin: 0; padding: 0; display: flex;">
+        <Image src={logo} alt={game.name} class="store-cover" />
+      </h1>
+      <div class="store-description">
+        <GameDescription gameId={game.id} fallback={description} />
+      </div>
+    </div>
+
+    <aside class="store-sidebar">
+      <nav class="store-buttons" aria-label="Game Store Links">
+        {
+          game.itchio && (
+            <Button
+              link={game.itchio}
+              color="#FA5C5C"
+              text="Itch.io"
+              icon="tabler:brand-itch"
+            />
+          )
+        }
+        {
+          game.googleplay && (
+            <Button
+              link={game.googleplay}
+              color="lime"
+              text="Google Play"
+              icon="tabler:brand-google-play"
+            />
+          )
+        }
+        {
+          game.gxgames && (
+            <Button
+              link={game.gxgames}
+              color="#fc1d4e"
+              text="GX Games"
+              icon="tabler:brand-opera"
+            />
+          )
+        }
+        {
+          game.github && (
+            <Button
+              link={game.github}
+              color="cyan"
+              text="GitHub"
+              icon="tabler:brand-github"
+            />
+          )
+        }
+      </nav>
+
+      <div class="store-metadata">
+        <div class="meta-row">
+          <span class="meta-label">Developer</span>
+          <span class="meta-value">Benjamin Halko</span>
+        </div>
+        {
+          game.genre && (
+            <div class="meta-row">
+              <span class="meta-label">Genre</span>
+              <span class="meta-value">{game.genre}</span>
+            </div>
+          )
+        }
+        {
+          game.jamEventName && game.jamEventUrl && (
+            <div class="meta-row">
+              <span class="meta-label">Jam</span>
+              <a
+                class="meta-value meta-link"
+                href={game.jamEventUrl}
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+              >
+                {game.jamEventName}
+              </a>
+            </div>
+          )
+        }
+        {
+          game.platforms && game.platforms.length > 0 && (
+            <div class="meta-row">
+              <span class="meta-label">Platform</span>
+              <span class="meta-value platform-icons">
+                {game.platforms.map((platform) => (
+                  <span
+                    class="platform-icon"
+                    title={platform}
+                    aria-label={platform}
+                    role="img"
+                  >
+                    <Icon name={PLATFORM_ICON[platform]} />
+                  </span>
+                ))}
+              </span>
+            </div>
+          )
+        }
+      </div>
+
+      <footer class="game-footer-links">
+        <Button
+          link={`/${game.id}/privacypolicy`}
+          color="grey"
+          text="Privacy Policy"
+          icon="tabler:shield-lock"
+          style="padding: 8px 16px; font-size: 0.9rem;"
+          newTab={false}
+        />
+      </footer>
+    </aside>
+  </main>
+</BaseLayout>

@@ -28,10 +28,6 @@
     transform-origin: top center;
 }
 
-html[data-vt-navigation] .navbar {
-    animation: none;
-}
-
 @media (prefers-reduced-motion: reduce) {
     .navbar,
     .navbar * {
@@ -76,7 +72,7 @@ html[data-vt-navigation] .navbar {
     text-decoration: none;
     text-shadow: var(--shadowTiny);
     transition: all 400ms var(--bounce);
-    font-family: 'Press Start 2P', system-ui, sans-serif;
+    font-family: system-ui, sans-serif;
     padding: 8px 12px;
     border-radius: 12px;
     white-space: nowrap;

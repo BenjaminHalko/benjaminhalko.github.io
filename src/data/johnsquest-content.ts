@@ -1,0 +1,40 @@
+import gifBossWorld2 from "../pages/johnsquest/res/gifs/boss_world2.gif";
+import gifFallingRocks from "../pages/johnsquest/res/gifs/falling_rocks.gif";
+import gifOpening from "../pages/johnsquest/res/gifs/opening.gif";
+import gifSprings from "../pages/johnsquest/res/gifs/springs.gif";
+import gifSword from "../pages/johnsquest/res/gifs/sword.gif";
+import gifWalking from "../pages/johnsquest/res/gifs/walking.gif";
+
+export const johnsQuestGifs: ReadonlyArray<{
+  src: string;
+  alt: string;
+}> = [
+  { src: gifSprings.src, alt: "John's Quest platforming gameplay" },
+  { src: gifSword.src, alt: "John's Quest sword combat gameplay" },
+  { src: gifBossWorld2.src, alt: "John's Quest fight with Evil Eyes" },
+  { src: gifWalking.src, alt: "John's Quest walking adventure" },
+  { src: gifFallingRocks.src, alt: "John's Quest rocks" },
+  { src: gifOpening.src, alt: "John's Quest opening sequence" },
+];
+
+export const johnsQuestFeatures: ReadonlyArray<{ title: string; desc: string }> = [
+  { title: "Multi-Genre Adventure", desc: "Every level is different, thanks to Evil John" },
+  { title: "Rhythm-based Platforming", desc: "Everything moves in time with the music" },
+  { title: "Sword-based Combat", desc: 'Includes "Bomb-based Combat" as well' },
+  { title: "Mouse-based Movement", desc: "Simply click where you want to go" },
+  { title: "Laser-based Gun", desc: "You shoot lasers... with a gun (that's it)" },
+  { title: "Multi-Phase Boss Battles", desc: "Take on Evil John in deadly fights" },
+  { title: "Humor", desc: "Maybe" },
+  { title: "Play as John", desc: "Arguably the most important feature" },
+];
+
+export const johnsQuestTags = [
+  "2D Platformer",
+  "Action RPG",
+  "Point & Click",
+  "Twin Stick Shooter",
+  "Multi-genre",
+  "Comedy",
+  "Retro",
+  "Adventure",
+];

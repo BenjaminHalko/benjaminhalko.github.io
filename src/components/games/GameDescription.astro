@@ -1,0 +1,35 @@
+---
+import BladesOfDoom from "./BladesOfDoom.astro";
+import HammerHex from "./HammerHex.astro";
+import MakeNewFriends from "./MakeNewFriends.astro";
+import Shapeion from "./Shapeion.astro";
+import Spacehole from "./Spacehole.astro";
+import TwilightTempo from "./TwilightTempo.astro";
+import YouAreABomb from "./YouAreABomb.astro";
+
+export interface Props {
+  gameId: string;
+  fallback: string;
+}
+
+const gameDescriptions: Partial<Record<string, typeof BladesOfDoom>> = {
+  bladesofdoom: BladesOfDoom,
+  hammerhex: HammerHex,
+  makenewfriends: MakeNewFriends,
+  shapeion: Shapeion,
+  spacehole: Spacehole,
+  twilighttempo: TwilightTempo,
+  youareabomb: YouAreABomb,
+};
+
+const { gameId, fallback } = Astro.props;
+const Description = gameDescriptions[gameId];
+---
+
+{
+  Description ? (
+    <div class="user-formatted-content"><Description /></div>
+  ) : (
+    <p>{fallback}</p>
+  )
+}

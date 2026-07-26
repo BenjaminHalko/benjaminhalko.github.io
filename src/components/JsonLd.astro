@@ -1,0 +1,11 @@
+---
+import type { Thing, WithContext } from "schema-dts";
+
+export interface Props {
+  data: WithContext<Thing>;
+}
+
+const { data } = Astro.props;
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(data)} />
