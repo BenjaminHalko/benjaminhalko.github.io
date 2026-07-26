@@ -10,6 +10,7 @@ export interface GameData {
   googleplay?: string;
   gxgames?: string;
   github?: string;
+  trailerYoutubeId?: string;
   useFirebase?: boolean;
   isJamGame?: boolean;
 }
@@ -26,6 +27,7 @@ export const games: GameData[] = [
     itchio: "https://benjamin-halko.itch.io/spacehole",
     googleplay: "https://play.google.com/store/apps/details?id=com.benjaminhalko.spacehole",
     github: "https://github.com/BenjaminHalko/SPACEHOLE",
+    trailerYoutubeId: "bKmKzWqkTo4",
     isJamGame: true,
   },
   {
@@ -37,8 +39,23 @@ export const games: GameData[] = [
     itchio: "https://bluishgreenpro.itch.io/hammer-hex",
     googleplay: "https://play.google.com/store/apps/details?id=com.benjaminhalko.hammerhex",
     gxgames: "https://gx.games/games/ynf9dg/hammer-hex/",
+    trailerYoutubeId: "qrsClNbnSz8",
     useFirebase: true,
     isJamGame: false,
+  },
+  {
+    id: "criticalcore2",
+    name: "Critical Core 2",
+    description: "The core has been flooded and its Deadly Doom™ is back to destroy everything! Use bubbles of power to keep the core from doing something bad.",
+    genre: "Action",
+    platforms: ["web", "windows", "macos", "linux"],
+    jamEventName: "Global Game Jam 2025",
+    jamEventUrl: "https://globalgamejam.org/games/2025/critical-core-2-9",
+    itchio: "https://benjamin-halko.itch.io/critical-core-2",
+    gxgames: "https://gx.games/games/z5ol8m/critical-core-2",
+    github: "https://github.com/BenjaminHalko/Critical-Core-2",
+    trailerYoutubeId: "CywoAcV3K3E",
+    isJamGame: true,
   },
   {
     id: "makenewfriends",
@@ -56,6 +73,18 @@ export const games: GameData[] = [
     isJamGame: true,
   },
   {
+    id: "criticalcore",
+    name: "Critical Core",
+    description: "The core has been overloaded with Deadly Doom™! Collect points to keep it from destroying everything!",
+    genre: "Survival",
+    platforms: ["web", "windows", "linux"],
+    jamEventName: "Ludum Dare 54",
+    jamEventUrl: "https://ldjam.com/events/ludum-dare/54/critical-core",
+    itchio: "https://benjamin-halko.itch.io/critical-core",
+    github: "https://github.com/BenjaminHalko/Critical-Core",
+    isJamGame: true,
+  },
+  {
     id: "bladesofdoom",
     name: "Blades of Doom",
     description: "Don't touch the saw blades or else you will be sad.",
@@ -67,6 +96,7 @@ export const games: GameData[] = [
     googleplay: "https://play.google.com/store/apps/details?id=com.benjaminhalko.bladesofdoom",
     gxgames: "https://gx.games/games/ovtmf7/blades-of-doom/",
     github: "https://github.com/BenjaminHalko/Blades-Of-Doom",
+    trailerYoutubeId: "Bx7KOFc08J0",
     isJamGame: true,
   },
   {
@@ -105,6 +135,7 @@ export const games: GameData[] = [
     googleplay: "https://play.google.com/store/apps/details?id=com.benjaminhalko.twilighttempo",
     gxgames: "https://gx.games/games/r4gpyp/twilight-tempo/",
     github: "https://github.com/BenjaminHalko/Twilight-Tempo",
+    trailerYoutubeId: "5SLv8cgdWA0",
     isJamGame: true,
   },
 ];

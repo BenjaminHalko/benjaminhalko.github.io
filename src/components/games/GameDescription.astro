@@ -1,5 +1,7 @@
 ---
 import BladesOfDoom from "./BladesOfDoom.astro";
+import CriticalCore from "./CriticalCore.astro";
+import CriticalCore2 from "./CriticalCore2.astro";
 import MakeNewFriends from "./MakeNewFriends.astro";
 import Shapeion from "./Shapeion.astro";
 import Spacehole from "./Spacehole.astro";
@@ -13,6 +15,8 @@ export interface Props {
 
 const gameDescriptions: Partial<Record<string, typeof BladesOfDoom>> = {
   bladesofdoom: BladesOfDoom,
+  criticalcore: CriticalCore,
+  criticalcore2: CriticalCore2,
   makenewfriends: MakeNewFriends,
   shapeion: Shapeion,
   spacehole: Spacehole,

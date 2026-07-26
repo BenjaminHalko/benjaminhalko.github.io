@@ -1,0 +1,224 @@
+.carousel {
+    --thumb-w: 108px;
+    --thumb-h: 61px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+}
+
+.carousel-stage {
+    position: relative;
+}
+
+.carousel-track {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    border-radius: var(--radius);
+    border: var(--border);
+    box-shadow: var(--shadowTiny);
+    background: #000000;
+}
+
+.carousel-track::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel-track:focus-visible {
+    outline: 2px solid var(--text-primary);
+    outline-offset: 3px;
+}
+
+.carousel-slide {
+    position: relative;
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    aspect-ratio: 16 / 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.carousel-slide > img,
+.carousel-slide > video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.carousel-slide > lite-youtube {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    border-radius: 0;
+}
+
+.carousel-slide > lite-youtube iframe {
+    border: none;
+}
+
+.carousel-arrow {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    cursor: pointer;
+    color: var(--text-secondary);
+    background: none;
+    border: none;
+    border-radius: 50%;
+    transition: all 250ms var(--curve);
+}
+
+.carousel-arrow svg {
+    width: 28px;
+    height: 28px;
+    stroke: currentColor;
+    fill: none;
+}
+
+.carousel-arrow:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.carousel-arrow:active {
+    transform: scale(0.9);
+}
+
+.carousel-arrow:focus-visible {
+    outline: 2px solid var(--text-primary);
+    outline-offset: 2px;
+}
+
+.carousel-filmstrip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-width: 0;
+    visibility: hidden;
+}
+
+[data-carousel-ready] .carousel-filmstrip {
+    visibility: visible;
+}
+
+.carousel-thumbs {
+    display: flex;
+    flex: 0 1 auto;
+    flex-wrap: nowrap;
+    align-items: center;
+    min-width: 0;
+    gap: 10px;
+    margin: 0;
+    padding: 2px;
+    list-style: none;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+.carousel-thumbs::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel-thumbs > li {
+    flex: none;
+    display: block;
+}
+
+.carousel-thumb {
+    position: relative;
+    display: block;
+    width: var(--thumb-w);
+    padding: 0;
+    cursor: pointer;
+    overflow: hidden;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 0.45;
+    transition: all 250ms var(--curve);
+}
+
+.carousel-thumb img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.carousel-thumb:hover {
+    opacity: 0.8;
+}
+
+.carousel-thumb[aria-current="true"] {
+    opacity: 1;
+    border-color: var(--text-primary);
+}
+
+.carousel-thumb:focus-visible {
+    outline: 2px solid var(--text-primary);
+    outline-offset: 2px;
+}
+
+.carousel-thumb-badge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.carousel-thumb-badge svg {
+    width: 12px;
+    height: 12px;
+    margin-left: 1px;
+    fill: #ffffff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .carousel-track,
+    .carousel-thumbs {
+        scroll-behavior: auto;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .carousel {
+        --thumb-w: 88px;
+        --thumb-h: 50px;
+    }
+
+    .carousel-arrow {
+        flex: none;
+        width: 30px;
+        height: 30px;
+    }
+
+    .carousel-arrow svg {
+        width: 22px;
+        height: 22px;
+    }
+}
