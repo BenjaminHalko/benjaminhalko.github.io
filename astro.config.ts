@@ -17,6 +17,10 @@ export default defineConfig({
     icon(),
     sitemap({ filter: (page) => !page.includes("/privacypolicy") }),
   ],
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: "tap",
+  },
   fonts: [
     {
       name: "Press Start 2P",
