@@ -13,9 +13,8 @@ body {
     margin: 0;
 }
 
-.content {
+main {
     max-width: 800px;
-    width: 100%;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -89,11 +88,6 @@ h1 {
     box-shadow: 6px 6px 0px var(--text-primary);
 }
 
-/* The cover art already carries the title, so these are not painted - but they
-   ARE kept in the rendering tree. Lighthouse reads link text via innerText and
-   ignores aria-label, so this is what makes the card's link text descriptive
-   instead of a bare "Learn More". display:none / visibility:hidden would drop
-   them from innerText and undo that. */
 .featured-game h2,
 .featured-game p {
     position: absolute;
@@ -199,7 +193,7 @@ h1 {
     padding: 30px;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 768px) {
     .logo {
         height: auto;
         gap: 10px;
@@ -215,16 +209,11 @@ h1 {
         font-size: small;
     }
 
-    .logo img {
-        width: 100px;
-        height: 100px;
-    }
-
     .games {
         grid-template-columns: 1fr;
     }
 
     .featured-game {
-        height: 250px;
+        height: 200px;
     }
 }

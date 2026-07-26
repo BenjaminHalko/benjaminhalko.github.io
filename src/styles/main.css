@@ -12,15 +12,15 @@
 
     --curve: cubic-bezier(0.25, 1, 0.5, 1);
     --bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
-    
+
     --bg-color: #050505;
-    --back-color: rgba(30, 30, 30, 0.4); 
+    --back-color: rgba(30, 30, 30, 0.4);
     --border-col: rgba(255, 255, 255, 0.1);
     --border: 1px solid var(--border-col);
     --text-primary: #ffffff;
     --text-secondary: #a1a1aa;
     --link-color: #ffffff;
-    
+
     --shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
     --shadowTiny: 0 4px 12px rgba(0, 0, 0, 0.4);
     --radius: 20px;
