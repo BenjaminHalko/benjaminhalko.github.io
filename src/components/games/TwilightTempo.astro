@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import night from "../../res/games/twilighttempo/night.gif";
 import rhythm from "../../res/games/twilighttempo/rhythm.gif";
 ---
@@ -8,14 +9,14 @@ import rhythm from "../../res/games/twilighttempo/rhythm.gif";
   <br />
 </p>
 <figure>
-  <img src={rhythm.src} alt="Rhythm gameplay" loading="lazy" />
+  <Image src={rhythm} alt="Rhythm gameplay" loading="lazy" />
 </figure>
 <p>
   At night the screen goes dark! You have to listen and memorize the patterns
   to defeat the evil diamonds.
 </p>
 <figure>
-  <img src={night.src} alt="Night gameplay" loading="lazy" />
+  <Image src={night} alt="Night gameplay" loading="lazy" />
 </figure>
 <h2>Made in 2 weeks</h2>
 <p>

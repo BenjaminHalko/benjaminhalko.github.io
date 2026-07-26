@@ -106,7 +106,13 @@ const ogImage = new URL(og.src, Astro.site).href;
   <main class="content store-layout">
     <div class="store-main">
       <h1 style="margin: 0; padding: 0; display: flex;">
-        <Image src={logo} alt={game.name} class="store-cover" />
+        <Image
+          src={logo}
+          alt={game.name}
+          class="store-cover"
+          loading="eager"
+          fetchpriority="high"
+        />
       </h1>
       <div class="store-description">
         <GameDescription gameId={game.id} fallback={description} />

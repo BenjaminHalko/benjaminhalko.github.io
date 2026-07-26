@@ -1,3 +1,4 @@
+import type { ImageMetadata } from "astro";
 import gifBossWorld2 from "../pages/johnsquest/res/gifs/boss_world2.gif";
 import gifFallingRocks from "../pages/johnsquest/res/gifs/falling_rocks.gif";
 import gifOpening from "../pages/johnsquest/res/gifs/opening.gif";
@@ -6,15 +7,17 @@ import gifSword from "../pages/johnsquest/res/gifs/sword.gif";
 import gifWalking from "../pages/johnsquest/res/gifs/walking.gif";
 
 export const johnsQuestGifs: ReadonlyArray<{
-  src: string;
+  image: ImageMetadata;
   alt: string;
+  /** These two compress WORSE as animated webp (+18%/+81%); keep them gif. */
+  format?: "gif";
 }> = [
-  { src: gifSprings.src, alt: "John's Quest platforming gameplay" },
-  { src: gifSword.src, alt: "John's Quest sword combat gameplay" },
-  { src: gifBossWorld2.src, alt: "John's Quest fight with Evil Eyes" },
-  { src: gifWalking.src, alt: "John's Quest walking adventure" },
-  { src: gifFallingRocks.src, alt: "John's Quest rocks" },
-  { src: gifOpening.src, alt: "John's Quest opening sequence" },
+  { image: gifSprings, alt: "John's Quest platforming gameplay" },
+  { image: gifSword, alt: "John's Quest sword combat gameplay" },
+  { image: gifBossWorld2, alt: "John's Quest fight with Evil Eyes", format: "gif" },
+  { image: gifWalking, alt: "John's Quest walking adventure" },
+  { image: gifFallingRocks, alt: "John's Quest rocks" },
+  { image: gifOpening, alt: "John's Quest opening sequence", format: "gif" },
 ];
 
 export const johnsQuestFeatures: ReadonlyArray<{ title: string; desc: string }> = [

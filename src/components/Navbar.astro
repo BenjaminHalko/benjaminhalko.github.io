@@ -30,6 +30,7 @@ const jamGames = games.filter((game) => game.isJamGame);
         src={avatar}
         alt={SITE.author}
         class="nav-avatar"
+        loading="eager"
         decoding="async"
       />
       <span>{SITE.author}</span>
@@ -37,30 +38,30 @@ const jamGames = games.filter((game) => game.isJamGame);
   </div>
   <div class="navbar-center">
     <a href="/johnsquest">John's Quest</a>
-    <div class="nav-dropdown" tabindex="0">
-      <span class="nav-dropdown-trigger">Games ▾</span>
+    <details class="nav-dropdown">
+      <summary class="nav-dropdown-trigger">Games ▾</summary>
       <div class="nav-dropdown-content">
         <span class="nav-dropdown-label">Releases</span>
         <a href="/johnsquest">
-          <img src="/johnsquest/favicon/favicon-32x32.png" alt="" /> John's Quest
+          <Image src={faviconByGameId.johnsquest} alt="" loading="eager" /> John's Quest
         </a>
         <a href="https://hammerhex.com">
-          <Image src={hammerHexFavicon} alt="" /> Hammer Hex
+          <Image src={hammerHexFavicon} alt="" loading="eager" /> Hammer Hex
         </a>
         <a href="https://store.steampowered.com/app/2944340/Unless/">
-          <Image src={unlessFavicon} alt="" /> Unless
+          <Image src={unlessFavicon} alt="" loading="eager" /> Unless
         </a>
         <hr class="nav-divider" />
         <span class="nav-dropdown-label">Jam Games</span>
         {
           jamGames.map((game) => (
             <a href={`/${game.id}`}>
-              <Image src={faviconByGameId[game.id]} alt="" /> {game.name}
+              <Image src={faviconByGameId[game.id]} alt="" loading="eager" /> {game.name}
             </a>
           ))
         }
       </div>
-    </div>
+    </details>
   </div>
   <div class="navbar-right">
     {
