@@ -3,9 +3,11 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "check": "astro check"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.9",
     "@astrojs/sitemap": "^3.7.3",
     "@iconify-json/tabler": "^1.2.37",
     "@types/node": "^24.13.3",
@@ -14,6 +16,6 @@
     "astro-icon": "^1.1.5",
     "schema-dts": "^2.0.0",
     "sharp": "^0.35.3",
-    "typescript": "^7.0.2"
+    "typescript": "^6.0.3"
   }
 }
