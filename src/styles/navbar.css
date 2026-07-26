@@ -294,8 +294,6 @@ html[data-nav-settled] .navbar {
         justify-content: space-between;
         align-items: center;
         padding: 8px 16px;
-        position: relative;
-        top: 0;
     }
 
     .navbar-left a span {
