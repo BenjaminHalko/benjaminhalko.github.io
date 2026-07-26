@@ -1,25 +1,7 @@
 ---
+import { ClientRouter, fade } from "astro:transitions";
+import Navbar from "../components/Navbar.astro";
 import "../styles/main.css";
-
-const speculationRulesJson = JSON.stringify({
-  prerender: [
-    {
-      source: "document",
-      where: {
-        and: [
-          { href_matches: "/*" },
-          {
-            not: {
-              selector_matches:
-                'a[target], a[download], a[rel~="external"], a[data-no-prerender]',
-            },
-          },
-        ],
-      },
-      eagerness: "moderate",
-    },
-  ],
-});
 
 interface OpenGraph {
   readonly url?: string;
@@ -50,18 +32,18 @@ const { title, description, robots, og, twitter } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" transition:animate={fade({ duration: "320ms" })}>
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- A meta tag, not CSS: applies before any stylesheet loads. -->
     <meta name="color-scheme" content="dark" />
-    <script type="speculationrules" is:inline set:html={speculationRulesJson} />
     <slot name="favicons" />
     {robots && <meta name="robots" content={robots} />}
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
+    <ClientRouter />
 
     {og?.type && <meta property="og:type" content={og.type} />}
     {og?.url && <meta property="og:url" content={og.url} />}
@@ -96,6 +78,21 @@ const { title, description, robots, og, twitter } = Astro.props;
     <slot name="head" />
   </head>
   <body>
+    <Navbar />
     <slot />
+    <script>
+      // transition:persist keeps the navbar node, but re-inserting it into the
+      // new document restarts CSS animations. Mark incoming documents so
+      // navbar.css suppresses the drop-in on every navigation after the first
+      // load. Registered once; ClientRouter keeps module scripts alive.
+      interface BeforeSwapEvent extends Event {
+        readonly newDocument: Document;
+      }
+
+      document.addEventListener("astro:before-swap", (event) => {
+        const e = event as BeforeSwapEvent;
+        e.newDocument.documentElement.dataset.navSettled = "";
+      });
+    </script>
   </body>
 </html>

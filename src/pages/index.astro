@@ -2,7 +2,6 @@
 import { Image } from "astro:assets";
 import Button from "../components/Button.astro";
 import JsonLd from "../components/JsonLd.astro";
-import Navbar from "../components/Navbar.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { SITE, SOCIALS } from "../data/site";
 import avatar from "../res/avatar.png";
@@ -56,9 +55,7 @@ import "./home.css";
     <JsonLd data={personSchema} />
     <JsonLd data={websiteSchema} />
   </Fragment>
-
-  <Navbar />
-  <main class="content">
+  <main class="content" data-animated-bg>
     <header class="logo">
       <Image
         onclick="window.toggleSnake()"
@@ -82,8 +79,6 @@ import "./home.css";
       aria-label="View John's Quest"
     >
       <div class="featured-game-content">
-        <h2>John's Quest</h2>
-        <p>You are John Appleby, game historian.</p>
         <span class="cta-button" aria-hidden="true">Learn More</span>
       </div>
     </a>

@@ -4,7 +4,6 @@ import type {
   ImageMetadata,
   InferGetStaticPropsType,
 } from "astro";
-import Navbar from "../../components/Navbar.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { games } from "../../data/games";
 import "../games/games.css";
@@ -39,8 +38,6 @@ const { game, favicon } = Astro.props;
   <Fragment slot="favicons">
     <link rel="icon" type="image/png" href={favicon.src} />
   </Fragment>
-
-  <Navbar />
   <main class="content">
     <section class="container" aria-label="Privacy Policy">
       <h1>{game.name} - Privacy Policy</h1>

@@ -28,6 +28,12 @@
     transform-origin: top center;
 }
 
+/* Set via astro:before-swap in BaseLayout: the persisted navbar is re-inserted
+   on navigation, which would replay the drop-in. */
+html[data-nav-settled] .navbar {
+    animation: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
     .navbar,
     .navbar * {

@@ -3,7 +3,6 @@ import { Font, Image } from "astro:assets";
 import { YouTube } from "astro-embed";
 import { Icon } from "astro-icon/components";
 import JsonLd from "../components/JsonLd.astro";
-import Navbar from "../components/Navbar.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import {
   johnsQuestFeatures as features,
@@ -56,7 +55,6 @@ const ogImage = new URL(cover.src, Astro.site).href;
     <JsonLd data={johnsQuestSchema} />
   </Fragment>
 
-  <Navbar />
   <main>
     <Image
       src={logo}

@@ -9,7 +9,6 @@ import { Icon } from "astro-icon/components";
 import Button from "../components/Button.astro";
 import GameDescription from "../components/games/GameDescription.astro";
 import JsonLd from "../components/JsonLd.astro";
-import Navbar from "../components/Navbar.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { games } from "../data/games";
 import { SITE } from "../data/site";
@@ -104,8 +103,6 @@ const ogImage = new URL(og.src, Astro.site).href;
   <Fragment slot="head">
     <JsonLd data={generateGameSchema(game)} />
   </Fragment>
-
-  <Navbar />
   <main class="content store-layout">
     <div class="store-main">
       <h1 style="margin: 0; padding: 0; display: flex;">

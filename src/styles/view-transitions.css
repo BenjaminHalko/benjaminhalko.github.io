@@ -1,76 +1,52 @@
-/* Cross-document view transitions, no JavaScript.
+/* Page transition, written directly against the View Transition API.
  *
- * Two snapshots participate: `root` (canvas background + navbar) cross-fades,
- * and `page` (<main>) slides over it.
- *
- * Direction comes from the incoming page's own `types` descriptor: forward by
- * default, overridden to `back` in home.css. Browsers without the descriptor
- * match no :active-view-transition-type() rule and get the crossfade below.
+ * Astro's ClientRouter drives navigation and sets
+ * html[data-astro-transition="forward" | "back"]; the visuals live here. The
+ * root fades (fade() in BaseLayout), the persisted navbar rides the root
+ * snapshot, and <main> - named below - slides directionally while its group
+ * morphs height in step.
  */
-
-:root {
-    --page-transition-exit-duration: 160ms;
-    --page-transition-enter-duration: 320ms;
-    --page-transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@view-transition {
-    navigation: auto;
-    types: forward;
-}
 
 main {
     view-transition-name: page;
 }
 
-::view-transition-old(root),
-::view-transition-new(root) {
-    animation-duration: var(--page-transition-enter-duration);
-    animation-timing-function: var(--page-transition-easing);
+/* Deliberate: snapshots stretch to fill the group box while it morphs between
+   page heights. */
+::view-transition-old(page),
+::view-transition-new(page) {
+    height: 100%;
+    mix-blend-mode: normal;
 }
 
-/* Custom animations need the default blending off, or the snapshots blend
-   instead of overlapping. */
 ::view-transition-image-pair(page) {
     isolation: auto;
 }
 
-::view-transition-old(page),
-::view-transition-new(page) {
-    mix-blend-mode: normal;
-    /* Fill the group box so pages of differing height do not letterbox. */
-    height: 100%;
-    overflow: clip;
-}
-
+/* Size/position morph in step with the slide. */
 ::view-transition-group(page) {
-    animation-duration: var(--page-transition-enter-duration);
-    animation-timing-function: var(--page-transition-easing);
+    animation-duration: 320ms;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Fallback when no direction type matched. */
+/* Forward is the unconditioned default and `back` overrides it - the same
+   pattern as Astro's generated animation CSS. Do NOT gate forward behind
+   [data-astro-transition=forward]; the attribute is not guaranteed on forward
+   navigations and the slide silently degrades. */
 ::view-transition-old(page) {
-    animation: var(--page-transition-exit-duration) var(--page-transition-easing) both vt-fade-out;
+    animation: 160ms cubic-bezier(0.4, 0, 0.2, 1) both vt-slide-left-out;
 }
 
 ::view-transition-new(page) {
-    animation: var(--page-transition-enter-duration) var(--page-transition-easing) both vt-fade-in;
+    animation: 320ms cubic-bezier(0.4, 0, 0.2, 1) both vt-slide-right-in;
 }
 
-html:active-view-transition-type(forward)::view-transition-old(page) {
-    animation: var(--page-transition-exit-duration) var(--page-transition-easing) both vt-slide-left-out;
+[data-astro-transition="back"]::view-transition-old(page) {
+    animation: 160ms cubic-bezier(0.4, 0, 0.2, 1) both vt-slide-right-out;
 }
 
-html:active-view-transition-type(forward)::view-transition-new(page) {
-    animation: var(--page-transition-enter-duration) var(--page-transition-easing) both vt-slide-right-in;
-}
-
-html:active-view-transition-type(back)::view-transition-old(page) {
-    animation: var(--page-transition-exit-duration) var(--page-transition-easing) both vt-slide-right-out;
-}
-
-html:active-view-transition-type(back)::view-transition-new(page) {
-    animation: var(--page-transition-enter-duration) var(--page-transition-easing) both vt-slide-left-in;
+[data-astro-transition="back"]::view-transition-new(page) {
+    animation: 320ms cubic-bezier(0.4, 0, 0.2, 1) both vt-slide-left-in;
 }
 
 @keyframes vt-slide-left-out {
@@ -95,21 +71,8 @@ html:active-view-transition-type(back)::view-transition-new(page) {
     to { opacity: 1; transform: translateX(0); }
 }
 
-@keyframes vt-fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes vt-fade-out {
-    from { opacity: 1; }
-    to { opacity: 0; }
-}
-
 @media (prefers-reduced-motion: reduce) {
-    ::view-transition-group(root),
     ::view-transition-group(page),
-    ::view-transition-old(root),
-    ::view-transition-new(root),
     ::view-transition-old(page),
     ::view-transition-new(page) {
         animation-duration: 1ms !important;

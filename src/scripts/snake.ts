@@ -19,8 +19,8 @@ let color = 100;
 let appleColor = (Math.round(color + Math.random() * 300 - 150) + 180) % 360;
 
 // DOM elements
-const logoText = document.getElementById("logoContent")!;
-const originalHtml = logoText.innerHTML;
+let logoText: HTMLElement | null = null;
+let originalHtml = "";
 
 // Expose toggleSnake to window for onclick
 declare global {
@@ -32,15 +32,17 @@ declare global {
 window.toggleSnake = toggleSnake;
 
 function toggleSnake(): void {
+  const activeLogoText = logoText;
+  if (activeLogoText === null) return;
+
   if (snakeTimer !== null) {
     clearTimeout(snakeTimer);
-    logoText.innerHTML = originalHtml;
+    activeLogoText.innerHTML = originalHtml;
     snakeTimer = null;
     snakeState = 0;
     tailLength = 0;
   } else if (snakeState === 3) {
-    clearInterval(snakeTimer!);
-    logoText.innerHTML = originalHtml;
+    activeLogoText.innerHTML = originalHtml;
     snakeTimer = null;
   } else {
     startSnake();
@@ -71,9 +73,12 @@ function startSnake(): void {
 }
 
 function snakeIntro(num: number): void {
+  const activeLogoText = logoText;
+  if (activeLogoText === null) return;
+
   let html = "";
   if (num === GRID_WIDTH + GRID_HEIGHT + 3) {
-    logoText.style.setProperty("--color", `hsl(${color}, 100%, 50%)`);
+    activeLogoText.style.setProperty("--color", `hsl(${color}, 100%, 50%)`);
     html = `
 ● ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ●<br>
 |<span>  _______ __   _ ______ _     _ _______  </span>|<br>
@@ -121,6 +126,9 @@ function snakeIntro(num: number): void {
 }
 
 function snake(): void {
+  const activeLogoText = logoText;
+  if (activeLogoText === null) return;
+
   // Snake Movement
   if (dir !== lastDir) {
     if ((dir + lastDir) % 2 === 0 && lastDir !== -1) {
@@ -172,7 +180,7 @@ function snake(): void {
     tailLength += 1;
     color = appleColor;
     appleColor = (Math.round(color + Math.random() * 300 - 150) + 180) % 360;
-    logoText.style.setProperty("--color", `hsl(${color}, 100%, 70%)`);
+    activeLogoText.style.setProperty("--color", `hsl(${color}, 100%, 70%)`);
 
     for (let i = 0; i < GRID_HEIGHT; i++) {
       for (let j = 0; j < GRID_WIDTH; j++) {
@@ -257,7 +265,10 @@ function drawSnake(explode = -1): void {
 }
 
 function snakeDeath(): void {
-  logoText.style.setProperty(
+  const activeLogoText = logoText;
+  if (activeLogoText === null) return;
+
+  activeLogoText.style.setProperty(
     "--color",
     `hsl(${Math.round(Math.random() * 40)}, 100%, 50%)`,
   );
@@ -276,11 +287,16 @@ function snakeDeath(): void {
 }
 
 function displaySnake(text: string): void {
-  logoText.innerHTML = `<p style='font-family: monospace, monospace; line-height: 20px; font-size: 14px'>${text}</p>`;
+  const activeLogoText = logoText;
+  if (activeLogoText === null) return;
+
+  activeLogoText.innerHTML = `<p style='font-family: monospace, monospace; line-height: 20px; font-size: 14px'>${text}</p>`;
 }
 
 // Event Listeners
 document.addEventListener("keydown", (event: KeyboardEvent) => {
+  if (logoText === null) return;
+
   let key = -1;
   if (event.key === "ArrowDown") key = 2;
   else if (event.key === "ArrowUp") key = 0;
@@ -337,7 +353,8 @@ function playVideo(): void {
 }
 
 function video(): void {
-  if (!videoData) return;
+  const activeLogoText = logoText;
+  if (!videoData || activeLogoText === null) return;
 
   let html = "";
 
@@ -349,7 +366,7 @@ function video(): void {
     if (i !== VIDEO_HEIGHT - 1) html += "<br>";
   }
 
-  logoText.innerHTML = `
+  activeLogoText.innerHTML = `
     <div style="display: flex; font-family: monospace, monospace;">
     <p style="margin-right: 2px; line-height: 21px; text-align: right; color: cyan">||<br>|||<br>||||<br>||<||<br>||||<br>|||<br>||</p>
     <p style='line-height: 10px; font-size: 10px'>${html}</p>
@@ -360,3 +377,27 @@ function video(): void {
   vidIndex += VIDEO_WIDTH * VIDEO_HEIGHT * 7;
   if (vidIndex >= videoData.length) vidIndex = 0;
 }
+
+function setupSnake(): void {
+  const nextLogoText = document.getElementById("logoContent");
+  if (nextLogoText === logoText) return;
+
+  logoText = nextLogoText;
+  originalHtml = nextLogoText?.innerHTML ?? "";
+}
+
+function teardownSnake(): void {
+  if (snakeTimer !== null) clearTimeout(snakeTimer);
+
+  snakeTimer = null;
+  snakeState = 0;
+  tailLength = 0;
+  dir = -1;
+  lastDir = -1;
+  codePos = 0;
+  logoText = null;
+  originalHtml = "";
+}
+
+document.addEventListener("astro:page-load", setupSnake);
+document.addEventListener("astro:before-swap", teardownSnake);

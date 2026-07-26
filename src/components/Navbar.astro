@@ -23,7 +23,7 @@ const unlessFavicon = faviconByGameId.unless;
 const jamGames = games.filter((game) => game.isJamGame);
 ---
 
-<nav class="navbar">
+<nav class="navbar" transition:persist="navbar">
   <div class="navbar-left">
     <a href="/">
       <Image
