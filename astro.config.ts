@@ -7,7 +7,6 @@ export default defineConfig({
   site: SITE.hostname,
   srcDir: "./src",
   publicDir: "./public",
-  // Must match [assets] directory in wrangler.toml.
   outDir: "./build",
   trailingSlash: "never",
   build: {
@@ -28,10 +27,5 @@ export default defineConfig({
       subsets: ["latin"],
       fallbacks: ["cursive"],
     },
-  ],
-  redirects: {
-    "/hammerhex": "https://hammerhex.com",
-    "/google-play/[game]": "/[game]",
-    "/google-play/[game]/privacypolicy": "/[game]/privacypolicy"
-  }
+  ]
 });
