@@ -295,6 +295,10 @@ function displaySnake(text: string): void {
   activeLogoText.innerHTML = `<p style='font-family: monospace, monospace; line-height: 20px; font-size: 14px'>${text}</p>`;
 }
 
+function isSnakeActive(): boolean {
+  return snakeTimer !== null || snakeState === 3;
+}
+
 // Event Listeners
 document.addEventListener("keydown", (event: KeyboardEvent) => {
   if (logoText === null) return;
@@ -304,6 +308,8 @@ document.addEventListener("keydown", (event: KeyboardEvent) => {
   else if (event.key === "ArrowUp") key = 0;
   else if (event.key === "ArrowLeft") key = 3;
   else if (event.key === "ArrowRight") key = 1;
+
+  if (key !== -1 && isSnakeActive()) event.preventDefault();
 
   // Code
   if (key !== -1 && snakeState !== 3) {
