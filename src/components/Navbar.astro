@@ -93,55 +93,15 @@ const jamGames = games.filter((game) => game.isJamGame);
 <script>
   const TOLERANCE = 120;
   const GRACE_DELAY = 150;
-  const GAP = 10;
-  const EDGE = 12;
 
   function setupDropdown(): () => void {
-    const wrapper = document.querySelector(".nav-dropdown");
     const trigger = document.querySelector(".nav-dropdown-trigger");
     const menu = document.getElementById("nav-games-menu");
-    if (
-      !(wrapper instanceof HTMLElement) ||
-      !(trigger instanceof HTMLElement) ||
-      !(menu instanceof HTMLElement)
-    ) {
+    if (!(trigger instanceof HTMLElement) || !(menu instanceof HTMLElement)) {
       return () => {};
     }
 
     let closeTimer: ReturnType<typeof setTimeout> | null = null;
-
-    /* Measured on the wrapper, not the button: the button scales to 1.05 while
-       open, which would drag the menu with it. The CSS translate(-50%) does the
-       centring, so `half` is 0 until the menu has been laid out — which lets the
-       first call run on `beforetoggle`, before the popover ever paints. */
-    const place = (half: number): void => {
-      const rect = wrapper.getBoundingClientRect();
-      const centre = rect.left + rect.width / 2;
-      const min = EDGE + half;
-      const max = window.innerWidth - EDGE - half;
-      menu.style.left = `${Math.max(min, Math.min(centre, max))}px`;
-      menu.style.top = `${rect.bottom + GAP}px`;
-      menu.style.maxHeight = `${window.innerHeight - rect.bottom - GAP - EDGE}px`;
-    };
-
-    const placeClamped = (): void => {
-      place(menu.getBoundingClientRect().width / 2);
-    };
-
-    const isOpening = (event: Event): boolean =>
-      event instanceof ToggleEvent && event.newState === "open";
-
-    const onBeforeToggle = (event: Event): void => {
-      if (isOpening(event)) place(0);
-    };
-
-    const onToggle = (event: Event): void => {
-      if (isOpening(event)) placeClamped();
-    };
-
-    const onReflow = (): void => {
-      if (menu.matches(":popover-open")) placeClamped();
-    };
 
     const cancelClose = (): void => {
       if (closeTimer !== null) clearTimeout(closeTimer);
@@ -179,18 +139,10 @@ const jamGames = games.filter((game) => game.isJamGame);
       }
     };
 
-    menu.addEventListener("beforetoggle", onBeforeToggle);
-    menu.addEventListener("toggle", onToggle);
-    window.addEventListener("scroll", onReflow, { capture: true, passive: true });
-    window.addEventListener("resize", onReflow, { passive: true });
     document.addEventListener("pointermove", onPointerMove, { passive: true });
 
     return () => {
       cancelClose();
-      menu.removeEventListener("beforetoggle", onBeforeToggle);
-      menu.removeEventListener("toggle", onToggle);
-      window.removeEventListener("scroll", onReflow, { capture: true });
-      window.removeEventListener("resize", onReflow);
       document.removeEventListener("pointermove", onPointerMove);
     };
   }

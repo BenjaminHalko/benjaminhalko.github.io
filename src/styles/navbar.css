@@ -141,6 +141,7 @@ html[data-nav-settled] .navbar {
 
 .nav-dropdown {
     display: inline-block;
+    anchor-name: --nav-games;
 }
 
 .nav-dropdown-caret {
@@ -154,14 +155,17 @@ html[data-nav-settled] .navbar {
 }
 
 /* No `display` here: the UA's `[popover]:not(:popover-open) { display: none }`
-   must win while closed, or the menu stays laid out inside the navbar.
-   `left`/`top` are set from JS; centring uses the `translate` property so
-   `transform` stays free for the open/close animation (scale + Y, never X). */
+   must win while closed, or the menu stays laid out inside the navbar. */
 .nav-dropdown-content {
     position: fixed;
-    left: 0;
-    top: 0;
-    translate: -50% 0;
+    position-anchor: --nav-games;
+    top: calc(anchor(bottom) + 10px);
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+    justify-self: anchor-center;
+    align-self: start;
+    width: max-content;
     margin: 0;
     transform: translateY(-10px) scale(0.95);
     opacity: 0;
@@ -174,7 +178,8 @@ html[data-nav-settled] .navbar {
     flex-direction: column;
     gap: 4px;
     min-width: 240px;
-    max-width: calc(100vw - 24px);
+    max-width: stretch;
+    max-height: stretch;
     overflow-y: auto;
     overscroll-behavior: contain;
     scrollbar-width: none;
