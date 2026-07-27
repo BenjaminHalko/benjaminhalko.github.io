@@ -9,6 +9,7 @@ export interface GameData {
   itchio?: string;
   itchioEmbedId?: number;
   googleplay?: string;
+  appstore?: string;
   gxgames?: string;
   github?: string;
   trailerYoutubeId?: string;
@@ -22,12 +23,13 @@ export const games: GameData[] = [
     name: "SPACEHOLE",
     description: "Spaceship Jim is lost in space, surrounded by SPACEHOLES! Luckily you have the power of space acrobatics!",
     genre: "Action",
-    platforms: ["web", "windows", "macos", "android"],
+    platforms: ["web", "windows", "macos", "android", "ios"],
     jamEventName: "Global Game Jam 2026",
     jamEventUrl: "https://globalgamejam.org/games/2026/spacehole-7",
     itchio: "https://benjamin-halko.itch.io/spacehole",
     itchioEmbedId: 16352540,
     googleplay: "https://play.google.com/store/apps/details?id=com.benjaminhalko.spacehole",
+    appstore: "https://apps.apple.com/us/app/spaceholes/id6759129389",
     github: "https://github.com/BenjaminHalko/SPACEHOLE",
     trailerYoutubeId: "bKmKzWqkTo4",
     isJamGame: true,

@@ -1,5 +1,6 @@
 @import "navbar.css";
 @import "view-transitions.css";
+@import "social_colors.css";
 
 :root {
     /* Without this the browser's default canvas is white, which flashes
@@ -146,4 +147,11 @@ a {
     fill: var(--col);
     filter: drop-shadow(0 0 12px var(--col));
     transform: scale(1.1);
+}
+
+.divider {
+    border: none;
+    border-top: var(--border);
+    margin: 4px 0;
+    width: 100%;
 }

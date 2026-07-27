@@ -22,7 +22,7 @@ const PLATFORM_ICON: Readonly<Record<string, string>> = {
   android: "tabler:brand-android",
   macos: "tabler:brand-apple",
   linux: "tabler:brand-ubuntu",
-  ios: "tabler:device-ipad",
+  ios: "tabler:brand-appstore",
 };
 
 export const getStaticPaths = (() => {
@@ -206,7 +206,7 @@ const ogImage = new URL(og.src, Astro.site).href;
                 <Icon name="tabler:player-play" />
                 <span>Play Now</span>
               </button>
-              <hr class="store-divider" />
+              <hr class="divider" />
             </Fragment>
           )
         }
@@ -214,7 +214,7 @@ const ogImage = new URL(og.src, Astro.site).href;
           game.itchio && (
             <Button
               link={game.itchio}
-              color="#FA5C5C"
+              color="var(--brand-itch)"
               text="Itch.io"
               icon="tabler:brand-itch"
             />
@@ -224,9 +224,19 @@ const ogImage = new URL(og.src, Astro.site).href;
           game.googleplay && (
             <Button
               link={game.googleplay}
-              color="lime"
+              color="var(--brand-googleplay)"
               text="Google Play"
               icon="tabler:brand-google-play"
+            />
+          )
+        }
+        {
+          game.appstore && (
+            <Button
+              link={game.appstore}
+              color="var(--brand-appstore)"
+              text="App Store"
+              icon="tabler:brand-appstore"
             />
           )
         }
@@ -234,9 +244,9 @@ const ogImage = new URL(og.src, Astro.site).href;
           game.gxgames && (
             <Button
               link={game.gxgames}
-              color="#fc1d4e"
+              color="var(--brand-gxgames)"
               text="GX Games"
-              icon="tabler:brand-opera"
+              icon="gxgames"
             />
           )
         }
@@ -244,7 +254,7 @@ const ogImage = new URL(og.src, Astro.site).href;
           game.github && (
             <Button
               link={game.github}
-              color="cyan"
+              color="var(--brand-github)"
               text="GitHub"
               icon="tabler:brand-github"
             />

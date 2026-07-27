@@ -41,6 +41,14 @@ for (const item of items) {
   });
   posterUrls.set(item.src, poster.src);
 }
+
+const firstItem = items[0];
+const firstPosterHref =
+  firstItem === undefined || firstItem.kind === "image"
+    ? undefined
+    : firstItem.kind === "youtube"
+      ? `https://i.ytimg.com/vi/${firstItem.youtubeId}/maxresdefault.jpg`
+      : posterUrls.get(firstItem.src);
 ---
 
 {
@@ -51,6 +59,14 @@ for (const item of items) {
       aria-roledescription="carousel"
       aria-label={label}
     >
+      {firstPosterHref !== undefined && (
+        <link
+          rel="preload"
+          as="image"
+          href={firstPosterHref}
+          fetchpriority="high"
+        />
+      )}
       <div class="carousel-stage">
         <ul class="carousel-track" data-carousel-track tabindex="0">
           {items.map((item, index) => (
@@ -86,6 +102,7 @@ for (const item of items) {
                   widths={[480, 800, 1280]}
                   sizes="(max-width: 800px) 100vw, 640px"
                   loading={index === 0 ? "eager" : "lazy"}
+                  fetchpriority={index === 0 ? "high" : undefined}
                   decoding="async"
                 />
               )}

@@ -9,6 +9,7 @@ export function generateGameSchema(
   const sameAs: string[] = [];
   if (game.itchio) sameAs.push(game.itchio);
   if (game.googleplay) sameAs.push(game.googleplay);
+  if (game.appstore) sameAs.push(game.appstore);
   if (game.gxgames) sameAs.push(game.gxgames);
   if (game.github) sameAs.push(game.github);
   if (game.jamEventUrl) sameAs.push(game.jamEventUrl);

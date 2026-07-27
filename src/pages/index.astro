@@ -4,7 +4,7 @@ import Button from "../components/Button.astro";
 import JsonLd from "../components/JsonLd.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { johnsQuestDescription } from "../data/johnsquest-content";
-import { SITE, SOCIALS } from "../data/site";
+import { GAME_SITES, SITE, SOCIALS } from "../data/site";
 import avatar from "../res/avatar.png";
 import hammerHexLogo from "../res/games/hammerhex/logo.png";
 import unlessLogo from "../res/games/unless/logo.png";
@@ -75,6 +75,7 @@ import "../styles/home.css";
         width={130}
         densities={[1, 2]}
         loading="eager"
+        fetchpriority="high"
         decoding="async"
       />
       <div id="logoContent">
@@ -108,6 +109,7 @@ import "../styles/home.css";
           width={280}
           densities={[1, 2]}
           quality={58}
+          loading="eager"
           class="game-logo"
         />
         <p class="coming-soon">Coming Soon</p>
@@ -122,6 +124,7 @@ import "../styles/home.css";
           width={240}
           densities={[1, 2]}
           quality={65}
+          loading="eager"
           class="game-logo"
         />
         <p class="coming-soon">Available on Steam</p>
@@ -134,6 +137,17 @@ import "../styles/home.css";
       aria-label="Social Links"
     >
       <h2 style="width: 100%; text-align: center; margin-top: 0">Links</h2>
+      {
+        GAME_SITES.map((social) => (
+          <Button
+            link={social.link}
+            color={social.color}
+            text={social.text}
+            icon={social.icon}
+          />
+        ))
+      }
+      <hr class="divider" />
       {
         SOCIALS.map((social) => (
           <Button

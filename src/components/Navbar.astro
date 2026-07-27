@@ -4,9 +4,14 @@ import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
 import avatar from "../res/avatar.png";
 import { games } from "../data/games";
-import { SITE, SOCIALS } from "../data/site";
+import { SITE, GAME_SITES, SOCIALS } from "../data/site";
 
-const navSocials = SOCIALS.slice(0, 4);
+const navSocials = [
+    GAME_SITES[0],
+    GAME_SITES[1],
+    SOCIALS[0],
+    SOCIALS[1]
+];
 const faviconModules = import.meta.glob<{ default: ImageMetadata }>(
   "../res/games/*/favicon.png",
   { eager: true },
@@ -202,4 +207,3 @@ const jamGames = games.filter((game) => game.isJamGame);
     cleanup = undefined;
   });
 </script>
-

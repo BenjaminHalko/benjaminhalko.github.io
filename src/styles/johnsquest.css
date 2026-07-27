@@ -211,7 +211,8 @@ section p:last-child {
 }
 
 .store-btn.itch {
-    background: #fa5c5c;
+    /* Darkened from itch.io brand #fa5c5c to meet WCAG AA 4.5:1 contrast with white text */
+    background: #d63c3c;
 }
 
 .store-btn.github {
