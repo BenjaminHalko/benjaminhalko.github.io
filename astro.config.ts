@@ -19,7 +19,7 @@ export default defineConfig({
   ],
   prefetch: {
     prefetchAll: true,
-    defaultStrategy: "tap",
+    defaultStrategy: "viewport",
   },
   fonts: [
     {

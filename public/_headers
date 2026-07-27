@@ -1,33 +1,58 @@
 # Cloudflare Workers Assets defaults every response to
-# `public, max-age=0, must-revalidate`, which forces a conditional request per
-# asset on every navigation. Everything Astro emits under /assets/ carries a
-# content hash in its filename (including assets/fonts/*.woff2), so it can
-# never change identity and is safe to cache forever.
+# `public, max-age=0, must-revalidate` and emits no ETag, so ClientRouter's fetch
+# for the next page is a blocking round trip that re-downloads the whole document
+# on every single link tap, before the transition can even start.
+#
+# The blanket rule below makes pages browser-cacheable. stale-while-revalidate
+# carries the common case of reading a page for longer than max-age before
+# tapping: the cached copy swaps in immediately and refreshes in the background.
+#
+# Matching rules are ADDITIVE - a request matching several of them gets every
+# matching Cache-Control joined with a comma - so each narrower rule detaches the
+# inherited value with `!` before setting its own.
 
+/*
+  Cache-Control: public, max-age=60, stale-while-revalidate=86400
+
+# Everything Astro emits under /assets/ carries a content hash in its filename
+# (including assets/fonts/*.woff2), so it can never change identity and is safe
+# to cache forever.
 /assets/*
+  ! Cache-Control
   Cache-Control: public, max-age=31536000, immutable
 
 /johnsquest/*
+  ! Cache-Control
   Cache-Control: public, max-age=86400
 
 # Unhashed, so they need a TTL short enough to allow replacing them.
 /favicon.ico
+  ! Cache-Control
   Cache-Control: public, max-age=86400
 /favicon-16x16.png
+  ! Cache-Control
   Cache-Control: public, max-age=86400
 /favicon-32x32.png
+  ! Cache-Control
   Cache-Control: public, max-age=86400
 /apple-touch-icon.png
+  ! Cache-Control
   Cache-Control: public, max-age=86400
 /android-chrome-192x192.png
+  ! Cache-Control
   Cache-Control: public, max-age=86400
 /android-chrome-512x512.png
+  ! Cache-Control
   Cache-Control: public, max-age=86400
 /mstile-150x150.png
+  ! Cache-Control
   Cache-Control: public, max-age=86400
 /safari-pinned-tab.svg
+  ! Cache-Control
   Cache-Control: public, max-age=86400
 /site.webmanifest
+  ! Cache-Control
   Cache-Control: public, max-age=86400
 /browserconfig.xml
+  ! Cache-Control
   Cache-Control: public, max-age=86400
