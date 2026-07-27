@@ -173,7 +173,7 @@ const ogImage = new URL(og.src, Astro.site).href;
     <link rel="icon" type="image/png" href={favicon.src} />
   </Fragment>
   <Fragment slot="head">
-    <JsonLd data={generateGameSchema(game)} />
+    <JsonLd data={generateGameSchema(game, ogImage)} />
   </Fragment>
   <main class="content store-layout">
     <div class="store-main">

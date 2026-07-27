@@ -8,7 +8,6 @@ import { SITE, SOCIALS } from "../data/site";
 import avatar from "../res/avatar.png";
 import hammerHexLogo from "../res/games/hammerhex/logo.png";
 import unlessLogo from "../res/games/unless/logo.png";
-import siteLogo from "../res/logo.png";
 import featuredCover from "../res/johnsquest/cover.png";
 import { personSchema } from "../schema/person";
 import { websiteSchema } from "../schema/website";
@@ -22,7 +21,8 @@ import "../styles/home.css";
     url: SITE.hostname,
     title: SITE.author,
     description: SITE.description,
-    image: new URL(siteLogo.src, Astro.site).href,
+    image: `${SITE.hostname}/avatar.jpg`,
+    imageType: "image/jpeg",
   }}
 >
   <Fragment slot="favicons">

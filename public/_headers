@@ -56,10 +56,6 @@
 /browserconfig.xml
   ! Cache-Control
   Cache-Control: public, max-age=86400
-
-# Author portrait referenced by the Person JSON-LD. Kept unhashed in public/ so
-# the URL stays stable across builds - Google discards the association when the
-# image URL churns.
 /avatar.jpg
   ! Cache-Control
   Cache-Control: public, max-age=86400

@@ -1,12 +1,15 @@
 import type { VideoGame, WithContext } from "schema-dts";
 import { SITE, AUTHOR_SAME_AS } from "../data/site";
 
-export const johnsQuestSchema: WithContext<VideoGame> = {
+export const generateJohnsQuestSchema = (
+  image: string,
+): WithContext<VideoGame> => ({
   "@context": "https://schema.org",
   "@type": "VideoGame",
   name: "John's Quest",
   description: "A free 2D platformer RPG on Steam",
   url: `${SITE.hostname}/johnsquest`,
+  image,
   genre: ["Platformer", "RPG", "Adventure"],
   gamePlatform: ["PC", "macOS", "Linux"],
   operatingSystem: ["Windows", "macOS", "Linux"],
@@ -27,4 +30,4 @@ export const johnsQuestSchema: WithContext<VideoGame> = {
     "https://store.steampowered.com/app/4346950/",
     "https://benjamin-halko.itch.io/johnsquest",
   ],
-};
+});

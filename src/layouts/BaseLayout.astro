@@ -39,7 +39,7 @@ const { title, description, robots, og, twitter } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark" />
     <slot name="favicons" />
-    {robots && <meta name="robots" content={robots} />}
+    <meta name="robots" content={robots ?? "max-image-preview:large"} />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
     <ClientRouter />

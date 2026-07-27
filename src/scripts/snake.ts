@@ -1,14 +1,11 @@
-// Snake game easter egg
 import videoUrl from "../res/home/video.txt?url";
 
 export {};
 
-// Constants
 const GRID_WIDTH = 20;
 const GRID_HEIGHT = 7;
 const START_TAIL_LENGTH = 6;
 
-// Game state
 let lastDir = -1;
 let dir = -1;
 let head: [number, number] = [9, 3];
@@ -20,11 +17,9 @@ let snakeTimer: ReturnType<typeof setTimeout> | null = null;
 let color = 100;
 let appleColor = (Math.round(color + Math.random() * 300 - 150) + 180) % 360;
 
-// DOM elements
 let logoText: HTMLElement | null = null;
 let originalHtml = "";
 
-// Expose toggleSnake to window for onclick
 declare global {
   interface Window {
     toggleSnake: () => void;
@@ -131,7 +126,6 @@ function snake(): void {
   const activeLogoText = logoText;
   if (activeLogoText === null) return;
 
-  // Snake Movement
   if (dir !== lastDir) {
     if ((dir + lastDir) % 2 === 0 && lastDir !== -1) {
       dir = lastDir;
@@ -154,7 +148,6 @@ function snake(): void {
   else if (head[1] === -1) head[1] = GRID_HEIGHT - 1;
   grid[head[1]][head[0]][1] = dir % 2;
 
-  // Collision Detection
   if (
     grid[head[1]][head[0]][0] > 0 &&
     head[0] !== apple[0] &&
@@ -167,7 +160,6 @@ function snake(): void {
     return;
   }
 
-  // Apple Detection
   if (head[0] === apple[0] && head[1] === apple[1]) {
     apple = [
       Math.floor(Math.random() * GRID_WIDTH),
@@ -191,10 +183,8 @@ function snake(): void {
     }
   }
 
-  // Tail
   grid[head[1]][head[0]][0] = START_TAIL_LENGTH + tailLength;
 
-  // Draw Grid
   drawSnake();
 
   snakeTimer = setTimeout(snake, Math.max(150 - tailLength * 5, 70));
@@ -210,7 +200,6 @@ function drawSnake(explode = -1): void {
     html += "|<span> ";
     for (let j = 0; j < GRID_WIDTH; j++) {
       if (explode === -1) {
-        // Draw Characters
         if (i === head[1] && j === head[0]) {
           if (dir === 0) html += "▲ ";
           else if (dir === 1) html += "► ";
@@ -299,7 +288,6 @@ function isSnakeActive(): boolean {
   return snakeTimer !== null || snakeState === 3;
 }
 
-// Event Listeners
 document.addEventListener("keydown", (event: KeyboardEvent) => {
   if (logoText === null) return;
 
@@ -311,7 +299,6 @@ document.addEventListener("keydown", (event: KeyboardEvent) => {
 
   if (key !== -1 && isSnakeActive()) event.preventDefault();
 
-  // Code
   if (key !== -1 && snakeState !== 3) {
     if (key === code[codePos]) {
       codePos++;
@@ -340,7 +327,6 @@ document.addEventListener("keydown", (event: KeyboardEvent) => {
   }
 });
 
-// Video easter egg
 const code = [0, 0, 2, 2, 3, 1, 3, 1];
 let codePos = 0;
 let videoData: string | null = null;

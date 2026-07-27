@@ -1,5 +1,3 @@
-// Background animation with floating gradient circles
-
 interface Circle {
   x: number;
   y: number;

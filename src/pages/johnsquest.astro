@@ -14,7 +14,7 @@ import { SITE } from "../data/site";
 import footer from "../res/johnsquest/footer.png";
 import logo from "../res/johnsquest/logo.png";
 import cover from "../res/johnsquest/cover.png";
-import { johnsQuestSchema } from "../schema/johnsquest";
+import { generateJohnsQuestSchema } from "../schema/johnsquest";
 import "../styles/johnsquest.css";
 
 const PAGE_URL = `${SITE.hostname}/johnsquest`;
@@ -51,7 +51,7 @@ const ogImage = new URL(cover.src, Astro.site).href;
   </Fragment>
   <Fragment slot="head">
     <Font cssVariable="--font-press-start-2p" preload />
-    <JsonLd data={johnsQuestSchema} />
+    <JsonLd data={generateJohnsQuestSchema(ogImage)} />
   </Fragment>
 
   <main>

@@ -2,7 +2,10 @@ import type { VideoGame, WithContext } from "schema-dts";
 import { SITE, AUTHOR_SAME_AS } from "../data/site";
 import type { GameData } from "../data/games";
 
-export function generateGameSchema(game: GameData): WithContext<VideoGame> {
+export function generateGameSchema(
+  game: GameData,
+  image: string,
+): WithContext<VideoGame> {
   const sameAs: string[] = [];
   if (game.itchio) sameAs.push(game.itchio);
   if (game.googleplay) sameAs.push(game.googleplay);
@@ -10,7 +13,6 @@ export function generateGameSchema(game: GameData): WithContext<VideoGame> {
   if (game.github) sameAs.push(game.github);
   if (game.jamEventUrl) sameAs.push(game.jamEventUrl);
 
-  // Deduplicate platforms for OS/Platform properties
   const platforms = game.platforms || ["web", "android", "windows"];
   
   const mappedOs = platforms.map(p => {
@@ -30,6 +32,7 @@ export function generateGameSchema(game: GameData): WithContext<VideoGame> {
     name: game.name,
     description: game.description || `Play ${game.name} by ${SITE.author}`,
     url: `${SITE.hostname}/${game.id}`,
+    image,
     genre: game.genre ? [game.genre] : ["Indie Game"],
     gamePlatform: mappedOs.length > 0 ? mappedOs : ["WebBrowser"],
     operatingSystem: mappedOs.length > 0 ? mappedOs : ["Any"],

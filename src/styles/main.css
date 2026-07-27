@@ -1,7 +1,6 @@
 @import "navbar.css";
 @import "view-transitions.css";
 
-/* Global Variables */
 :root {
     /* Without this the browser's default canvas is white, which flashes
        through during cross-document view transitions while `main` is lifted
@@ -27,7 +26,6 @@
     --radius-lg: 28px;
 }
 
-/* Scrollbar & Scrolling */
 * {
     scrollbar-color: #333333 #111111;
 }
@@ -42,7 +40,6 @@
     border-radius: 20px;
 }
 
-/* General */
 body {
     background-color: var(--bg-color);
     color: var(--text-primary);
@@ -61,12 +58,10 @@ html {
     scrollbar-gutter: stable;
 }
 
-/* Links */
 a {
     color: var(--link-color);
 }
 
-/* Container */
 .container {
     position: relative;
     padding: 30px;
@@ -82,7 +77,6 @@ a {
     border-radius: var(--radius-lg);
 }
 
-/* Button */
 .button {
     --col: #ffffff;
     position: relative;

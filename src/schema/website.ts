@@ -6,4 +6,5 @@ export const websiteSchema: WithContext<WebSite> = {
   "@type": "WebSite",
   name: SITE.author,
   url: SITE.hostname,
+  image: `${SITE.hostname}/avatar.jpg`,
 };
