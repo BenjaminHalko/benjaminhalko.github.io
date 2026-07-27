@@ -1,6 +1,10 @@
+/* Animates `translate`/`scale` rather than `transform`, ending at `none`: a
+   `forwards` fill leaving an identity `transform` would still make .navbar a
+   containing block for fixed-position descendants, which shifts the dropdown
+   the moment it leaves the top layer on close. */
 @keyframes nav-drop {
-    0% { transform: translateY(-50px) scale(0.95); opacity: 0; }
-    100% { transform: translateY(0) scale(1); opacity: 1; }
+    0% { translate: 0 -50px; scale: 0.95; opacity: 0; }
+    100% { translate: none; scale: none; opacity: 1; }
 }
 
 .navbar {
@@ -45,8 +49,10 @@ html[data-nav-settled] .navbar {
     .navbar-left a:active,
     .navbar-center > a:hover,
     .navbar-center > a:active,
-    .nav-dropdown:hover .nav-dropdown-trigger,
+    .nav-dropdown-trigger:hover,
     .nav-dropdown-trigger:active,
+    .nav-dropdown:has(.nav-dropdown-content:popover-open) .nav-dropdown-trigger,
+    .nav-dropdown:has(.nav-dropdown-content:popover-open) .nav-dropdown-caret,
     .nav-dropdown-content a:hover,
     .nav-social:hover,
     .nav-social:active,
@@ -55,14 +61,13 @@ html[data-nav-settled] .navbar {
     }
 }
 
-.navbar summary {
-    font-family: inherit;
-    list-style: none;
+.nav-dropdown-trigger {
+    background: none;
+    border: none;
+    font: inherit;
+    color: inherit;
 }
-.navbar summary::-webkit-details-marker {
-    display: none;
-}
-.navbar summary:focus-visible,
+.nav-dropdown-trigger:focus-visible,
 .navbar a:focus-visible {
     outline: 2px solid var(--text-primary, #fff);
     outline-offset: 4px;
@@ -109,7 +114,9 @@ html[data-nav-settled] .navbar {
 }
 
 .navbar-center > a, .nav-dropdown-trigger {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
     color: var(--text-secondary);
     text-decoration: none;
     font-weight: bold;
@@ -121,7 +128,7 @@ html[data-nav-settled] .navbar {
     white-space: nowrap;
 }
 
-.navbar-center > a:hover, .nav-dropdown:hover .nav-dropdown-trigger {
+.navbar-center > a:hover, .nav-dropdown-trigger:hover, .nav-dropdown:has(.nav-dropdown-content:popover-open) .nav-dropdown-trigger {
     color: var(--text-primary);
     background: rgba(255, 255, 255, 0.08);
     transform: scale(1.05);
@@ -133,48 +140,57 @@ html[data-nav-settled] .navbar {
 }
 
 .nav-dropdown {
-    position: relative;
     display: inline-block;
 }
 
+.nav-dropdown-caret {
+    transition: transform 400ms var(--bounce);
+    width: 18px;
+    height: 18px;
+}
+
+.nav-dropdown:has(.nav-dropdown-content:popover-open) .nav-dropdown-caret {
+    transform: rotate(180deg);
+}
+
+/* No `display` here: the UA's `[popover]:not(:popover-open) { display: none }`
+   must win while closed, or the menu stays laid out inside the navbar.
+   `left`/`top` are set from JS; centring uses the `translate` property so
+   `transform` stays free for the open/close animation (scale + Y, never X). */
 .nav-dropdown-content {
-    position: absolute;
-    top: calc(100% + 10px);
-    left: 50%;
-    transform: translateX(-50%) translateY(-10px) scale(0.95);
+    position: fixed;
+    left: 0;
+    top: 0;
+    translate: -50% 0;
+    margin: 0;
+    transform: translateY(-10px) scale(0.95);
     opacity: 0;
-    visibility: hidden;
-    background: rgba(15, 15, 15, 0.95);
-    -webkit-backdrop-filter: blur(40px) saturate(200%);
-    backdrop-filter: blur(40px) saturate(200%);
+    background: var(--back-color);
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
+    backdrop-filter: blur(24px) saturate(150%);
     border: var(--border);
-    border-radius: 16px;
+    border-radius: var(--radius-lg);
     padding: 12px;
-    display: flex;
     flex-direction: column;
     gap: 4px;
     min-width: 240px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-    transition: all 400ms var(--bounce);
-    z-index: 2000;
+    max-width: calc(100vw - 24px);
+    box-sizing: border-box;
+    box-shadow: var(--shadow);
+    transition: opacity 400ms var(--bounce), transform 400ms var(--bounce), overlay 400ms var(--bounce) allow-discrete, display 400ms var(--bounce) allow-discrete;
 }
 
-.nav-dropdown-content::before {
-    content: "";
-    position: absolute;
-    top: -20px;
-    left: 0;
-    width: 100%;
-    height: 20px;
-    background: transparent;
-}
-
-.nav-dropdown:hover .nav-dropdown-content,
-.nav-dropdown:focus-within .nav-dropdown-content,
-.nav-dropdown[open] .nav-dropdown-content {
+.nav-dropdown-content:popover-open {
+    display: flex;
     opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0) scale(1);
+    transform: translateY(0) scale(1);
+}
+
+@starting-style {
+    .nav-dropdown-content:popover-open {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.95);
+    }
 }
 
 .nav-dropdown-label {
@@ -191,12 +207,12 @@ html[data-nav-settled] .navbar {
     display: flex;
     align-items: center;
     gap: 12px;
-    color: #ffffff;
+    color: var(--text-primary);
     text-decoration: none;
     font-weight: bold;
     padding: 10px 12px;
     border-radius: 10px;
-    transition: all 300ms var(--bounce);
+    transition: all 400ms var(--bounce);
     text-align: left;
     text-shadow: none;
     font-size: 0.95rem;
@@ -211,8 +227,8 @@ html[data-nav-settled] .navbar {
 }
 
 .nav-dropdown-content a:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: scale(1.02);
+    background: rgba(255, 255, 255, 0.08);
+    transform: scale(1.05);
 }
 
 .nav-divider {
@@ -302,9 +318,5 @@ html[data-nav-settled] .navbar {
 
     .navbar-center > a {
         display: none;
-    }
-
-    .nav-dropdown {
-        position: static;
     }
 }

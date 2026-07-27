@@ -87,19 +87,10 @@ const { title, description, robots, og, twitter } = Astro.props;
       document.addEventListener("astro:before-swap", (event) => {
         const e = event as BeforeSwapEvent;
         e.newDocument.documentElement.dataset.navSettled = "";
-        document.querySelector(".nav-dropdown")?.removeAttribute("open");
-      });
-
-      document.addEventListener("pointerdown", (event) => {
-        const dropdown = document.querySelector(".nav-dropdown");
-        if (dropdown === null || !dropdown.hasAttribute("open")) return;
-        if (event.target instanceof Node && dropdown.contains(event.target)) {
-          return;
+        const menu = document.getElementById("nav-games-menu");
+        if (menu instanceof HTMLElement && menu.matches(":popover-open")) {
+          menu.hidePopover();
         }
-
-        dropdown.removeAttribute("open");
-        const trigger = dropdown.querySelector(".nav-dropdown-trigger");
-        if (trigger instanceof HTMLElement) trigger.blur();
       });
     </script>
   </body>

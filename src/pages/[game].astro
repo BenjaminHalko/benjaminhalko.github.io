@@ -195,6 +195,22 @@ const ogImage = new URL(og.src, Astro.site).href;
     <aside class="store-sidebar">
       <nav class="store-buttons" aria-label="Game Store Links">
         {
+          game.itchioEmbedId !== undefined && (
+            <Fragment>
+              <button
+                class="button play-now-button"
+                style="--col: #10b981;"
+                data-embed-id={game.itchioEmbedId}
+                aria-label={`Play ${game.name}`}
+              >
+                <Icon name="tabler:player-play" />
+                <span>Play Now</span>
+              </button>
+              <hr class="store-divider" />
+            </Fragment>
+          )
+        }
+        {
           game.itchio && (
             <Button
               link={game.itchio}
@@ -296,5 +312,97 @@ const ogImage = new URL(og.src, Astro.site).href;
         />
       </footer>
     </aside>
+
+    {
+      game.itchioEmbedId !== undefined && (
+        <dialog class="play-dialog" aria-label={`Play ${game.name}`}>
+          <div class="play-dialog-content">
+            <button class="play-dialog-close" aria-label="Close game">
+              <Icon name="tabler:x" />
+            </button>
+            <iframe
+              class="play-dialog-iframe"
+              title={`${game.name} game player`}
+              allow="autoplay; fullscreen *; gamepad; gyroscope; accelerometer; microphone; camera; midi; xr-spatial-tracking"
+            />
+          </div>
+        </dialog>
+      )
+    }
   </main>
+
+  <script>
+    function setupPlayDialog() {
+      const playButton = document.querySelector(".play-now-button");
+      const dialog = document.querySelector(".play-dialog");
+      const closeButton = document.querySelector(".play-dialog-close");
+      const iframe = document.querySelector(".play-dialog-iframe");
+
+      if (
+        !(playButton instanceof HTMLButtonElement) ||
+        !(dialog instanceof HTMLDialogElement) ||
+        !(closeButton instanceof HTMLButtonElement) ||
+        !(iframe instanceof HTMLIFrameElement)
+      ) {
+        return;
+      }
+
+      const embedId = playButton.dataset.embedId;
+      if (!embedId) return;
+
+      const storeButtons = playButton.closest(".store-buttons");
+
+      const openDialog = () => {
+        iframe.src = `https://itch.io/embed-upload/${embedId}?color=000000`;
+        storeButtons?.classList.add("is-playing");
+        dialog.showModal();
+      };
+
+      const closeDialog = () => {
+        dialog.close();
+      };
+
+      /* Every teardown lives here, not in closeDialog: Escape and light-dismiss
+         close a <dialog> natively without routing through our handler, which
+         would otherwise leave the game running and audible. */
+      const handleClose = () => {
+        iframe.src = "";
+        storeButtons?.classList.remove("is-playing");
+        playButton.focus();
+      };
+
+      dialog.addEventListener("close", handleClose);
+
+      playButton.addEventListener("click", openDialog);
+      closeButton.addEventListener("click", closeDialog);
+
+      const handleBackdropClick = (event: MouseEvent) => {
+        if (event.target === dialog) closeDialog();
+      };
+      dialog.addEventListener("click", handleBackdropClick);
+
+      const handleResize = () => {
+        if (window.innerWidth <= 800 && dialog.open) {
+          closeDialog();
+        }
+      };
+      window.addEventListener("resize", handleResize);
+
+      const cleanup = () => {
+        playButton.removeEventListener("click", openDialog);
+        closeButton.removeEventListener("click", closeDialog);
+        window.removeEventListener("resize", handleResize);
+        dialog.removeEventListener("close", handleClose);
+        dialog.removeEventListener("click", handleBackdropClick);
+        if (dialog.open) {
+          closeDialog();
+        }
+        document.removeEventListener("astro:before-swap", cleanup);
+      };
+
+      document.addEventListener("astro:before-swap", cleanup);
+    }
+
+    document.addEventListener("astro:page-load", setupPlayDialog);
+  </script>
 </BaseLayout>

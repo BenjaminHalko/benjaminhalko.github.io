@@ -40,9 +40,15 @@ const jamGames = games.filter((game) => game.isJamGame);
   </div>
   <div class="navbar-center">
     <a href="/johnsquest">John's Quest</a>
-    <details class="nav-dropdown">
-      <summary class="nav-dropdown-trigger">Games ▾</summary>
-      <div class="nav-dropdown-content">
+    <div class="nav-dropdown">
+      <button
+        type="button"
+        class="nav-dropdown-trigger"
+        popovertarget="nav-games-menu"
+      >
+        Games <Icon name="tabler:chevron-down" class="nav-dropdown-caret" />
+      </button>
+      <div class="nav-dropdown-content" id="nav-games-menu" popover>
         <span class="nav-dropdown-label">Releases</span>
         <a href="/johnsquest">
           <Image src={faviconByGameId.johnsquest} alt="" loading="eager" /> John's Quest
@@ -63,7 +69,7 @@ const jamGames = games.filter((game) => game.isJamGame);
           ))
         }
       </div>
-    </details>
+    </div>
   </div>
   <div class="navbar-right">
     {
@@ -80,3 +86,122 @@ const jamGames = games.filter((game) => game.isJamGame);
     }
   </div>
 </nav>
+
+<script>
+  const TOLERANCE = 120;
+  const GRACE_DELAY = 150;
+  const GAP = 10;
+  const EDGE = 12;
+
+  function setupDropdown(): () => void {
+    const wrapper = document.querySelector(".nav-dropdown");
+    const trigger = document.querySelector(".nav-dropdown-trigger");
+    const menu = document.getElementById("nav-games-menu");
+    if (
+      !(wrapper instanceof HTMLElement) ||
+      !(trigger instanceof HTMLElement) ||
+      !(menu instanceof HTMLElement)
+    ) {
+      return () => {};
+    }
+
+    let closeTimer: ReturnType<typeof setTimeout> | null = null;
+
+    /* Measured on the wrapper, not the button: the button scales to 1.05 while
+       open, which would drag the menu with it. The CSS translate(-50%) does the
+       centring, so `half` is 0 until the menu has been laid out — which lets the
+       first call run on `beforetoggle`, before the popover ever paints. */
+    const place = (half: number): void => {
+      const rect = wrapper.getBoundingClientRect();
+      const centre = rect.left + rect.width / 2;
+      const min = EDGE + half;
+      const max = window.innerWidth - EDGE - half;
+      menu.style.left = `${Math.max(min, Math.min(centre, max))}px`;
+      menu.style.top = `${rect.bottom + GAP}px`;
+    };
+
+    const placeClamped = (): void => {
+      place(menu.getBoundingClientRect().width / 2);
+    };
+
+    const isOpening = (event: Event): boolean =>
+      event instanceof ToggleEvent && event.newState === "open";
+
+    const onBeforeToggle = (event: Event): void => {
+      if (isOpening(event)) place(0);
+    };
+
+    const onToggle = (event: Event): void => {
+      if (isOpening(event)) placeClamped();
+    };
+
+    const onReflow = (): void => {
+      if (menu.matches(":popover-open")) placeClamped();
+    };
+
+    const cancelClose = (): void => {
+      if (closeTimer !== null) clearTimeout(closeTimer);
+      closeTimer = null;
+    };
+
+    const close = (): void => {
+      cancelClose();
+      if (menu.matches(":popover-open")) menu.hidePopover();
+    };
+
+    const onPointerMove = (event: PointerEvent): void => {
+      if (!menu.matches(":popover-open")) {
+        cancelClose();
+        return;
+      }
+
+      const a = trigger.getBoundingClientRect();
+      const b = menu.getBoundingClientRect();
+      const dx = Math.max(
+        Math.min(a.left, b.left) - event.clientX,
+        0,
+        event.clientX - Math.max(a.right, b.right),
+      );
+      const dy = Math.max(
+        Math.min(a.top, b.top) - event.clientY,
+        0,
+        event.clientY - Math.max(a.bottom, b.bottom),
+      );
+
+      if (Math.hypot(dx, dy) > TOLERANCE) {
+        if (closeTimer === null) closeTimer = setTimeout(close, GRACE_DELAY);
+      } else {
+        cancelClose();
+      }
+    };
+
+    menu.addEventListener("beforetoggle", onBeforeToggle);
+    menu.addEventListener("toggle", onToggle);
+    window.addEventListener("scroll", onReflow, { capture: true, passive: true });
+    window.addEventListener("resize", onReflow, { passive: true });
+    document.addEventListener("pointermove", onPointerMove, { passive: true });
+
+    return () => {
+      cancelClose();
+      menu.removeEventListener("beforetoggle", onBeforeToggle);
+      menu.removeEventListener("toggle", onToggle);
+      window.removeEventListener("scroll", onReflow, { capture: true });
+      window.removeEventListener("resize", onReflow);
+      document.removeEventListener("pointermove", onPointerMove);
+    };
+  }
+
+  let cleanup: (() => void) | undefined;
+
+  document.addEventListener("astro:page-load", () => {
+    cleanup?.();
+    cleanup = setupDropdown();
+  });
+
+  document.addEventListener("astro:before-swap", () => {
+    cleanup?.();
+    cleanup = undefined;
+  });
+</script>
+
+

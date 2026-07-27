@@ -7,6 +7,7 @@ export interface GameData {
   jamEventName?: string;
   jamEventUrl?: string;
   itchio?: string;
+  itchioEmbedId?: number;
   googleplay?: string;
   gxgames?: string;
   github?: string;
@@ -25,6 +26,7 @@ export const games: GameData[] = [
     jamEventName: "Global Game Jam 2026",
     jamEventUrl: "https://globalgamejam.org/games/2026/spacehole-7",
     itchio: "https://benjamin-halko.itch.io/spacehole",
+    itchioEmbedId: 16352540,
     googleplay: "https://play.google.com/store/apps/details?id=com.benjaminhalko.spacehole",
     github: "https://github.com/BenjaminHalko/SPACEHOLE",
     trailerYoutubeId: "bKmKzWqkTo4",
@@ -37,6 +39,7 @@ export const games: GameData[] = [
     genre: "Platformer",
     platforms: ["web", "windows", "linux", "macos", "android"],
     itchio: "https://bluishgreenpro.itch.io/hammer-hex",
+    itchioEmbedId: 11312033,
     googleplay: "https://play.google.com/store/apps/details?id=com.benjaminhalko.hammerhex",
     gxgames: "https://gx.games/games/ynf9dg/hammer-hex/",
     trailerYoutubeId: "qrsClNbnSz8",
@@ -52,6 +55,7 @@ export const games: GameData[] = [
     jamEventName: "Global Game Jam 2025",
     jamEventUrl: "https://globalgamejam.org/games/2025/critical-core-2-9",
     itchio: "https://benjamin-halko.itch.io/critical-core-2",
+    itchioEmbedId: 12747024,
     gxgames: "https://gx.games/games/z5ol8m/critical-core-2",
     github: "https://github.com/BenjaminHalko/Critical-Core-2",
     trailerYoutubeId: "CywoAcV3K3E",
@@ -66,6 +70,7 @@ export const games: GameData[] = [
     jamEventName: "Ludum Dare 55",
     jamEventUrl: "https://ldjam.com/events/ludum-dare/55/make-new-friends",
     itchio: "https://benjamin-halko.itch.io/make-new-friends",
+    itchioEmbedId: 10282237,
     googleplay: "https://play.google.com/store/apps/details?id=com.benjaminhalko.makenewfriends",
     gxgames: "https://gx.games/games/v408fd/make-new-friends/",
     github: "https://github.com/BenjaminHalko/Make-New-Friends",
@@ -81,6 +86,7 @@ export const games: GameData[] = [
     jamEventName: "Ludum Dare 54",
     jamEventUrl: "https://ldjam.com/events/ludum-dare/54/critical-core",
     itchio: "https://benjamin-halko.itch.io/critical-core",
+    itchioEmbedId: 8911416,
     github: "https://github.com/BenjaminHalko/Critical-Core",
     isJamGame: true,
   },
@@ -93,6 +99,7 @@ export const games: GameData[] = [
     jamEventName: "Ludum Dare 51",
     jamEventUrl: "https://ldjam.com/events/ludum-dare/51/blades-of-doom",
     itchio: "https://benjamin-halko.itch.io/blades-of-doom",
+    itchioEmbedId: 8631132,
     googleplay: "https://play.google.com/store/apps/details?id=com.benjaminhalko.bladesofdoom",
     gxgames: "https://gx.games/games/ovtmf7/blades-of-doom/",
     github: "https://github.com/BenjaminHalko/Blades-Of-Doom",
@@ -106,6 +113,7 @@ export const games: GameData[] = [
     genre: "Action",
     platforms: ["web", "windows", "linux", "android"],
     itchio: "https://benjamin-halko.itch.io/shapeion",
+    itchioEmbedId: 8504643,
     googleplay: "https://play.google.com/store/apps/details?id=com.benjaminhalko.shapeion",
     gxgames: "https://gx.games/games/3tyac9/shapeion/",
     github: "https://github.com/BenjaminHalko/Shapeion",
@@ -120,6 +128,7 @@ export const games: GameData[] = [
     jamEventName: "Ludum Dare 50",
     jamEventUrl: "https://ldjam.com/events/ludum-dare/50/you-are-a-bomb",
     itchio: "https://benjamin-halko.itch.io/you-are-a-bomb",
+    itchioEmbedId: 6092851,
     googleplay: "https://play.google.com/store/apps/details?id=com.benjaminhalko.youareabomb",
     gxgames: "https://gx.games/games/249rmr/you-are-a-bomb/",
     github: "https://github.com/BenjaminHalko/You-Are-A-Bomb",
@@ -132,6 +141,7 @@ export const games: GameData[] = [
     genre: "Rhythm",
     platforms: ["web", "windows", "linux", "android"],
     itchio: "https://benjamin-halko.itch.io/twilight-tempo",
+    itchioEmbedId: 5617214,
     googleplay: "https://play.google.com/store/apps/details?id=com.benjaminhalko.twilighttempo",
     gxgames: "https://gx.games/games/r4gpyp/twilight-tempo/",
     github: "https://github.com/BenjaminHalko/Twilight-Tempo",
