@@ -116,6 +116,7 @@ const jamGames = games.filter((game) => game.isJamGame);
       const max = window.innerWidth - EDGE - half;
       menu.style.left = `${Math.max(min, Math.min(centre, max))}px`;
       menu.style.top = `${rect.bottom + GAP}px`;
+      menu.style.maxHeight = `${window.innerHeight - rect.bottom - GAP - EDGE}px`;
     };
 
     const placeClamped = (): void => {

@@ -175,9 +175,16 @@ html[data-nav-settled] .navbar {
     gap: 4px;
     min-width: 240px;
     max-width: calc(100vw - 24px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
     box-sizing: border-box;
     box-shadow: var(--shadow);
     transition: opacity 400ms var(--bounce), transform 400ms var(--bounce), overlay 400ms var(--bounce) allow-discrete, display 400ms var(--bounce) allow-discrete;
+}
+
+.nav-dropdown-content::-webkit-scrollbar {
+    display: none;
 }
 
 .nav-dropdown-content:popover-open {
