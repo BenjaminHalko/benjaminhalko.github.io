@@ -15,14 +15,22 @@ export function generateGameSchema(
 
   const platforms = game.platforms || ["web", "android", "windows"];
   
-  const mappedOs = platforms.map(p => {
-      if (p === 'windows') return 'Windows';
-      if (p === 'macos') return 'macOS';
-      if (p === 'linux') return 'Linux';
-      if (p === 'android') return 'Android';
-      if (p === 'ios') return 'iOS';
-      return null;
-  }).filter(Boolean) as string[];
+  const mappedOs = platforms.flatMap((platform) => {
+    switch (platform) {
+      case "windows":
+        return ["Windows"];
+      case "macos":
+        return ["macOS"];
+      case "linux":
+        return ["Linux"];
+      case "android":
+        return ["Android"];
+      case "ios":
+        return ["iOS"];
+      default:
+        return [];
+    }
+  });
 
   if (mappedOs.length === 0) mappedOs.push("WebBrowser");
 
@@ -34,8 +42,8 @@ export function generateGameSchema(
     url: `${SITE.hostname}/${game.id}`,
     image,
     genre: game.genre ? [game.genre] : ["Indie Game"],
-    gamePlatform: mappedOs.length > 0 ? mappedOs : ["WebBrowser"],
-    operatingSystem: mappedOs.length > 0 ? mappedOs : ["Any"],
+    gamePlatform: mappedOs,
+    operatingSystem: mappedOs,
     applicationCategory: "Game",
     offers: {
       "@type": "Offer",

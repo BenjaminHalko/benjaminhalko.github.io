@@ -18,8 +18,6 @@ const faviconByGameId: Record<string, ImageMetadata> = Object.fromEntries(
   ]),
 );
 
-const hammerHexFavicon = faviconByGameId.hammerhex;
-const unlessFavicon = faviconByGameId.unless;
 const jamGames = games.filter((game) => game.isJamGame);
 ---
 
@@ -54,10 +52,10 @@ const jamGames = games.filter((game) => game.isJamGame);
           <Image src={faviconByGameId.johnsquest} alt="" loading="eager" /> John's Quest
         </a>
         <a href="https://hammerhex.com">
-          <Image src={hammerHexFavicon} alt="" loading="eager" /> Hammer Hex
+          <Image src={faviconByGameId.hammerhex} alt="" loading="eager" /> Hammer Hex
         </a>
         <a href="https://store.steampowered.com/app/2944340/Unless/">
-          <Image src={unlessFavicon} alt="" loading="eager" /> Unless
+          <Image src={faviconByGameId.unless} alt="" loading="eager" /> Unless
         </a>
         <hr class="nav-divider" />
         <span class="nav-dropdown-label">Jam Games</span>
@@ -203,5 +201,4 @@ const jamGames = games.filter((game) => game.isJamGame);
     cleanup = undefined;
   });
 </script>
-
 
