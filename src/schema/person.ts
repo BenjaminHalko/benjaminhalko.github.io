@@ -6,6 +6,9 @@ export const personSchema: WithContext<Person> = {
   "@type": "Person",
   name: SITE.author,
   url: SITE.hostname,
+  // Served from public/ rather than the hashed asset pipeline: this URL must
+  // stay identical across builds for Google to keep the image tied to the entity.
+  image: `${SITE.hostname}/avatar.jpg`,
   sameAs: [...AUTHOR_SAME_AS],
   jobTitle: "Indie Game Developer",
   knowsAbout: ["Game Development", "2D Platformers", "GameMaker"],
