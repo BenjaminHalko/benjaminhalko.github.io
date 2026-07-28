@@ -160,13 +160,7 @@ const ogImage = new URL(og.src, Astro.site).href;
     title: game.name,
     description,
     image: ogImage,
-  }}
-  twitter={{
     card: "summary_large_image",
-    url: pageUrl,
-    title: game.name,
-    description,
-    image: ogImage,
   }}
 >
   <Fragment slot="favicons">

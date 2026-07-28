@@ -4,31 +4,21 @@ import Navbar from "../components/Navbar.astro";
 import "../styles/main.css";
 
 interface OpenGraph {
-  readonly url?: string;
-  readonly title?: string;
-  readonly description?: string;
-  readonly image?: string;
-  readonly imageType?: string;
-  readonly type?: string;
-}
-
-interface TwitterCard {
-  readonly card?: string;
-  readonly url?: string;
-  readonly title?: string;
-  readonly description?: string;
-  readonly image?: string;
+  readonly url: string;
+  readonly title: string;
+  readonly description: string;
+  readonly image: string;
+  readonly card: string;
 }
 
 export interface Props {
   readonly title: string;
   readonly description?: string;
   readonly robots?: string;
-  readonly og?: OpenGraph;
-  readonly twitter?: TwitterCard;
+  readonly og: OpenGraph;
 }
 
-const { title, description, robots, og, twitter } = Astro.props;
+const { title, description, robots, og } = Astro.props;
 ---
 
 <!doctype html>
@@ -44,36 +34,16 @@ const { title, description, robots, og, twitter } = Astro.props;
     {description && <meta name="description" content={description} />}
     <ClientRouter />
 
-    {og?.type && <meta property="og:type" content={og.type} />}
-    {og?.url && <meta property="og:url" content={og.url} />}
-    {og?.title && <meta property="og:title" content={og.title} />}
-    {
-      og?.description && (
-        <meta property="og:description" content={og.description} />
-      )
-    }
-    {og?.image && <meta property="og:image" content={og.image} />}
-    {
-      og?.imageType && (
-        <meta property="og:image:type" content={og.imageType} />
-      )
-    }
-
-    {
-      twitter?.card && <meta name="twitter:card" content={twitter.card} />
-    }
-    {twitter?.url && <meta name="twitter:url" content={twitter.url} />}
-    {
-      twitter?.title && <meta name="twitter:title" content={twitter.title} />
-    }
-    {
-      twitter?.description && (
-        <meta name="twitter:description" content={twitter.description} />
-      )
-    }
-    {
-      twitter?.image && <meta name="twitter:image" content={twitter.image} />
-    }
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={og.url} />
+    <meta property="og:title" content={og.title} />
+    <meta property="og:description" content={og.description} />
+    <meta property="og:image" content={og.image} />
+    <meta name="twitter:card" content={og.card} />
+    <meta name="twitter:url" content={og.url} />
+    <meta name="twitter:title" content={og.title} />
+    <meta name="twitter:description" content={og.description} />
+    <meta name="twitter:image" content={og.image} />
     <slot name="head" />
   </head>
   <body>

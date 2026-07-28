@@ -25,19 +25,11 @@ const ogImage = new URL(cover.src, Astro.site).href;
   title="John's Quest - Press Kit"
   description={DESCRIPTION}
   og={{
-    type: "website",
     url: PAGE_URL,
     title: "John's Quest",
     description: DESCRIPTION,
     image: ogImage,
-    imageType: "image/png",
-  }}
-  twitter={{
-    card: "summary_large_image",
-    url: PAGE_URL,
-    title: "John's Quest",
-    description: DESCRIPTION,
-    image: ogImage,
+    card: "summary_large_image"
   }}
 >
   <Fragment slot="favicons">
