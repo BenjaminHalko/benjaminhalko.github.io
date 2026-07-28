@@ -43,6 +43,7 @@ export function generateGameSchema(
     url: `${SITE.hostname}/${game.id}`,
     image,
     genre: game.genre ? [game.genre] : ["Indie Game"],
+    ...(game.year ? { datePublished: String(game.year) } : {}),
     gamePlatform: mappedOs,
     operatingSystem: mappedOs,
     applicationCategory: "Game",

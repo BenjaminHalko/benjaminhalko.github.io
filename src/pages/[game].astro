@@ -268,10 +268,26 @@ const ogImage = new URL(og.src, Astro.site).href;
           <span class="meta-value">Benjamin Halko</span>
         </div>
         {
+          game.year && (
+            <div class="meta-row">
+              <span class="meta-label">Year</span>
+              <span class="meta-value">{game.year}</span>
+            </div>
+          )
+        }
+        {
           game.genre && (
             <div class="meta-row">
               <span class="meta-label">Genre</span>
               <span class="meta-value">{game.genre}</span>
+            </div>
+          )
+        }
+        {
+          game.engine && (
+            <div class="meta-row">
+              <span class="meta-label">Engine</span>
+              <span class="meta-value">{game.engine}</span>
             </div>
           )
         }
