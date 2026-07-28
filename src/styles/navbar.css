@@ -288,7 +288,7 @@ html[data-nav-settled] .navbar {
 .nav-social svg {
     width: 20px;
     height: 20px;
-    fill: var(--text-primary);
+    color: var(--text-primary);
     transition: all 400ms var(--bounce);
 }
 
@@ -309,7 +309,7 @@ html[data-nav-settled] .navbar {
 }
 
 .nav-social:hover svg {
-    fill: var(--col);
+    color: var(--col);
     filter: drop-shadow(0 0 8px var(--col));
     transform: scale(1.1);
 }

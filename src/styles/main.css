@@ -1,13 +1,9 @@
 @import "navbar.css";
+@import "button.css";
 @import "view-transitions.css";
 @import "social_colors.css";
 
 :root {
-    /* Without this the browser's default canvas is white, which flashes
-       through during cross-document view transitions while `main` is lifted
-       into the ::view-transition overlay. Set here rather than as a background
-       on `html`, because background.ts relies on body-background propagation
-       to keep the z-index:-1 gradient canvas visible. */
     color-scheme: dark;
 
     --curve: cubic-bezier(0.25, 1, 0.5, 1);
@@ -76,77 +72,6 @@ a {
     box-shadow: var(--shadow);
     border: var(--border);
     border-radius: var(--radius-lg);
-}
-
-.button {
-    --col: #ffffff;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background: rgba(255, 255, 255, 0.04);
-    -webkit-backdrop-filter: blur(16px) saturate(150%);
-    backdrop-filter: blur(16px) saturate(150%);
-    box-shadow: var(--shadowTiny);
-    border: var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-
-    gap: 10px;
-
-    padding: 12px 30px;
-    text-decoration: none;
-    color: var(--text-primary);
-    transition: all 400ms var(--curve);
-    font-size: 16px;
-    line-height: 1.2;
-}
-
-.button::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0%;
-    height: 0%;
-    background: var(--col);
-    opacity: 0;
-    filter: blur(20px);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: all 400ms var(--curve);
-    z-index: -1;
-}
-
-.button svg {
-    fill: var(--text-primary);
-    height: var(--svgSize, 24px);
-    width: var(--svgSize, 24px);
-    transition: all 400ms var(--curve);
-}
-
-.button:hover {
-    transform: translateY(-4px);
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
-}
-
-.button:active {
-    transform: scale(0.96);
-    box-shadow: var(--shadowTiny);
-}
-
-.button:hover::before {
-    width: 150%;
-    height: 150%;
-    opacity: 0.15;
-}
-
-.button:hover svg {
-    fill: var(--col);
-    filter: drop-shadow(0 0 12px var(--col));
-    transform: scale(1.1);
 }
 
 .divider {
