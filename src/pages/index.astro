@@ -137,27 +137,31 @@ import "../styles/home.css";
       aria-label="Social Links"
     >
       <h2 style="width: 100%; text-align: center; margin-top: 0">Links</h2>
-      {
-        GAME_SITES.map((social) => (
-          <Button
-            link={social.link}
-            color={social.color}
-            text={social.text}
-            icon={social.icon}
-          />
-        ))
-      }
+      <div class="social-group">
+        {
+          GAME_SITES.map((social) => (
+            <Button
+              link={social.link}
+              color={social.color}
+              text={social.text}
+              icon={social.icon}
+            />
+          ))
+        }
+      </div>
       <hr class="divider" />
-      {
-        SOCIALS.map((social) => (
-          <Button
-            link={social.link}
-            color={social.color}
-            text={social.text}
-            icon={social.icon}
-          />
-        ))
-      }
+      <div class="social-group">
+        {
+          SOCIALS.map((social) => (
+            <Button
+              link={social.link}
+              color={social.color}
+              text={social.text}
+              icon={social.icon}
+            />
+          ))
+        }
+      </div>
     </section>
   </main>
 
