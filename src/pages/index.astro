@@ -12,6 +12,9 @@ import featuredCover from "../res/johnsquest/cover.png";
 import { personSchema } from "../schema/person";
 import { websiteSchema } from "../schema/website";
 import "../styles/home.css";
+
+const downSouthDescription =
+  "DownSouth is a moral-dilemma platformer RPG where your choices affect your sanity, and your sanity affects how you play.";
 ---
 
 <BaseLayout
@@ -86,13 +89,25 @@ import "../styles/home.css";
 
     <a
       href="/johnsquest"
-      class="featured-game"
+      class="featured-game featured-johnsquest"
       style="margin-bottom: 20px"
     >
       <div class="featured-game-content">
         <h2>John's Quest</h2>
         <p>{johnsQuestDescription}</p>
         <span class="cta-button">Learn More</span>
+      </div>
+    </a>
+
+    <a
+      href="https://troopsushi.itch.io/downsouth"
+      class="featured-game featured-downsouth"
+      style="margin-bottom: 20px"
+    >
+      <div class="featured-game-content">
+        <h2>DownSouth</h2>
+        <p>{downSouthDescription}</p>
+        <span class="cta-button">Play the Demo</span>
       </div>
     </a>
 
